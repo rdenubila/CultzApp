@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Cultz</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=0.5, minimum-scale=0.5, maximum-scale=0.5 " />
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1 " />
 
 <link href="styles.css" rel="stylesheet" type="text/css" />
 <link href="fonts/style.css" rel="stylesheet" type="text/css" />
@@ -19,6 +19,16 @@
 
 
 <script src="scripts.js"></script>
+
+<script src="monaca.viewport.js"></script>
+
+<script>
+	var iOS = ( navigator.userAgent.match(/(iPad|iPhone|iPod)/g) ? true : false );
+	var Android = ( navigator.userAgent.match(/(Android)/g) ? true : false );
+	if(Android){
+		monaca.viewport({width : 640});
+	}
+</script>
 
 
 </head>
