@@ -33,6 +33,7 @@
     <feature name="http://api.phonegap.com/1.0/network"/>
 
     <gap:plugin name="org.apache.cordova.inappbrowser" version="0.5.2" />
+    <gap:plugin name="nl.kw.cordova.androidviewport" version="0.0.5" />
 
 
 </widget>
