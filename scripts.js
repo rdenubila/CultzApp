@@ -8,6 +8,11 @@ var swiperRoleta;
 
 $( document ).ready(function() {
 
+	itens = $("#swiperRoleta .swiper-wrapper").html();
+	for(i=0; i<20; i++){
+		$("#swiperRoleta .swiper-wrapper").append(itens);
+	}
+
 	$("#swiperInstrucao .swiper-wrapper").load("instrucoes.html", function() {
 		
 	});
@@ -136,10 +141,7 @@ function initRoleta(){
 
 	roletaGirada = false;
 
-	itens = $("#swiperRoleta .swiper-wrapper").html();
-	for(i=0; i<20; i++){
-		$("#swiperRoleta .swiper-wrapper").append(itens);
-	}
+	
 
 	swiperRoleta = new Swiper('#swiperRoleta', {
 		direction: 'vertical',
