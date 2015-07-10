@@ -175,7 +175,7 @@ function girarRoleta(direcao){
 
 	if(!roletaGirada){
 		$(".roleta .setas").hide();
-		i = Math.round(Math.random()*45);
+		i = 10+Math.round(Math.random()*35);
 		swiperRoleta.slideTo( 50 + (i*direcao) , 1000);
 		roletaGirada = true;
 	}
