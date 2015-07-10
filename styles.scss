@@ -1,0 +1,1229 @@
+@charset "utf-8";
+@import "compass/css3";
+
+$bg: #f1ead6;
+
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+	font-size: 28px;
+	font-weight: 300;
+	background: $bg;
+}
+
+.clear {
+	clear: both;
+}
+
+.centraliza {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	@include transform(translate(-50%, -50%));
+}
+
+
+.btn_seta {
+	background: url(images/btn_seta_azul.png) no-repeat right center;
+	padding-right: 50px;
+	font-size: 30px;
+	line-height: 63px;
+	color: #0f8299;
+	display: block;
+	text-decoration: none;
+	font-weight: bold;
+	text-align: right;
+	margin: 15px 0;
+	text-transform: uppercase;
+}
+
+.btn_seta.laranja {
+	color: #eb7820;
+	background-image: url("images/btn_seta_laranja.png")
+}
+
+.btn_seta.roxo {
+	color: #9b428e;
+	background-image: url("images/btn_seta_roxo.png")
+}
+
+
+#home {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: url(images/logo_home.png) center center no-repeat;
+	background-size: 80% auto;
+
+	//display: none;
+}
+
+#instrucao {
+
+	display: none;
+
+	.btns {
+		position: absolute;
+		right: 37px;
+		bottom: 20px;
+	}
+
+	.box {
+		width: 527px;
+		bottom: 100px;
+		top: 75px;
+		left: 50%;
+		margin-left: -(527px / 2);
+		position: absolute;
+		background: url(images/bg_instrucao.png) bottom center no-repeat;
+		color: white;
+	}
+	
+	.alerta {
+		width: 158px;
+		height: 158px;
+		display: block;
+		background: url(images/ico_alert.png) center center no-repeat;
+		position: absolute;
+		margin-left: -30px;
+		margin-top: -30px;
+	}
+
+	h2 {
+		font-size: 38px;
+		margin-left: 150px;
+	}
+
+	#swiperInstrucao {
+		//background: red;
+		width: 85%;
+		height: calc(100% - 400px);
+		margin: 0 auto;
+
+		.swiper-slide {
+			overflow-y: scroll;
+			-webkit-overflow-scrolling: touch;
+		}
+	}
+
+	#swiperInstrucaoPag {
+		width: 100%;
+		text-align: center;
+		margin-top: 10px;
+
+		.swiper-pagination-bullet {
+			@include box-sizing(border-box);
+			width: 40px; 
+			height: 40px;
+			border: solid 8px white;
+			border-radius: 0px;
+			opacity: 1;
+			background-color: transparent;
+			margin: 10px;
+		}
+
+		.swiper-pagination-bullet-active {
+			background-color: #e57928;
+		}
+	}
+}
+
+.topo_escuro {
+	width: 625px;
+	height: 147px;
+	background: url(images/topo_escuro.png) no-repeat left top;
+	color: #FFF;
+	font-size: 25px;
+
+	padding: 20px;
+	top: 0px;
+
+	position: fixed;
+	z-index: 500;
+
+	p {
+		margin: 0;
+		line-height: 37px;
+	}
+}
+
+.topo_laranja {
+	width: 626px;
+	height: 243px;
+
+	background: url(images/topo_laranja.png) no-repeat left top;
+	color: #FFF;
+
+	position: fixed;
+	z-index: 400;
+
+	top: 29px;
+}
+
+.topo_vermelho {
+	background: url(images/topo_vermelho.png) no-repeat left top;
+}
+
+.separador {
+	margin: 32px auto;
+	width: 100%;
+	height: 3px;
+	background: url(images/separador.png) repeat-x center center;
+}
+
+#login {
+
+	display: none;
+
+	.ico_login {
+		width: 136px;
+		height: 165px;
+		display: block;
+		background: url(images/ico_login.png) center center no-repeat;
+		position: absolute;
+	}
+
+	
+	.topo_escuro {
+		p {
+			margin-left: 170px;
+		}
+	}
+
+	.conteudo {
+		
+		width: 560px;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		margin-left: -(560px/2);
+		margin-top: -( (942px-187px) / 2);
+	}
+
+
+	.btn_face {
+		background: url(images/btn_login_face.png) no-repeat center center;
+		height: 212px;
+		width: 458px;
+		color: #0f8299;
+		display: block;
+		text-decoration: none;
+		font-weight: bold;
+		text-align: right;
+		margin: 15px 0;
+		text-transform: uppercase;
+	}
+
+	.bg_login {
+		@include box-sizing(border-box);
+		width: 424px;
+		height: 459px;
+		background: url(images/bg_login.png) no-repeat center center;
+		margin: 0 0 0 35px;
+		text-align: center;
+
+		padding-top: 45px;
+
+		p {
+			margin: 0 0 27px 0;
+		}
+
+		.tf {
+			background: transparent url("images/login_tf_1.png") no-repeat center center;
+			border: none;
+			font-size: 45px;
+			text-align: center;
+			width: 363px;
+			height: 73px;
+			line-height: 73px;
+			margin: 0 auto;
+			font-weight: bold;
+		}
+
+		.btns {
+			padding: 0 20px;
+			text-align: left;
+		}
+
+		.btn_esqueci {
+			background: url(images/btn_login_esqueci.png) no-repeat left center;
+			padding-left: 60px;
+			font-size: 25px;
+			line-height: 46px;
+			color: #181815;
+			display: inline-block;
+			text-decoration: none;
+			font-weight: bold;
+			text-align: left;
+			text-transform: uppercase;
+		}
+
+		.btn_entrar {
+			background: url(images/btn_seta_azul_escuro.png) no-repeat left center;
+			padding-left: 35px;
+			font-size: 30px;
+			line-height: 49px;
+			color: #181815;
+			display: inline-block;
+			text-decoration: none;
+			font-weight: bold;
+			text-align: left;
+			text-transform: uppercase;
+			float: right;
+			margin-top: 25px;
+			margin-right: 20px;
+		}
+	}
+
+	.info_amigo {
+
+		margin-top: -20px;
+
+		.txt {
+			float: left;
+			width: 345px;
+			text-align: right;
+			color: #9b428e;
+			font-size: 20px;
+			font-weight: bold;
+			padding-right: 45px;
+			p {
+				margin-right: 48px;
+			}
+		}
+
+		.logo {
+			float: left;
+			width: 146px;
+			height: 175px;
+
+			background: url(images/logo_amigo_da_cultura.png) no-repeat left center;
+		}
+	}
+}
+
+
+#topo_fixo {
+
+	display: none;
+
+	.foto_perfil {
+		width: 136px;
+		height: 165px;
+		display: block;
+		background: url(images/bg_foto_perfil.png) center center no-repeat;
+		position: absolute;
+
+		.foto {
+			background: url("https://scontent-mia1-1.xx.fbcdn.net/hphotos-xpa1/v/t1.0-9/11242071_835956393149312_7178190722483071505_n.jpg?oh=f962645b902693e50c0bd576cb3faf70&oe=5612744D") center center;
+			background-size: cover;
+			-webkit-mask-image: url(images/mascara_foto.svg);
+			-webkit-mask-size: 100% 100%;
+			//clip-path: polygon(596.6px,603.2px -1.3px,498.7px -1.3px,0px 596.6px,0px);
+			width: 135px;
+			height: 136px;
+		}
+	}
+
+	.topo_escuro {
+		p {
+			margin-left: 170px;
+			font-size: 18px;
+		}
+
+		.estrelas {
+			margin: 0;
+			margin: 10px 0 0 170px;
+			padding: 0;
+			list-style: none;
+
+			li {
+				margin: 0;
+				padding: 0;
+				display: inline-block;
+				width: 33px;
+				height: 31px;
+				background: url(images/estrela_amarela.png);
+
+				&.preta {
+					background: url(images/estrela_preta.png);
+				}
+			}
+		}
+
+		.pontos {
+			position: absolute;
+			right: 100px;
+			top: 30px;
+			font-size: 76px;
+			font-weight: bold;
+			
+			img {
+				vertical-align: 16px;
+			}
+		}
+	}
+
+	.menu_topo {
+		margin: 130px 0 0 206px;
+		padding: 0;
+		list-style: none;
+		color: #FFF;
+		font-size: 60px;
+
+		li {
+			margin: 0 25px;
+			padding: 0;
+			float: left;
+
+			a {
+				color: #FFF;
+				text-decoration: none;
+
+				&:hover, .sel {
+					color: #21313d;
+				}
+			}
+
+			&.add_user {
+			}
+
+			&.pin {
+				padding-top: 10px;
+			}
+
+			&.stats {
+				padding-top: 12px;
+				font-size: 80px;
+			}
+		}
+	}
+
+}
+
+
+#topo_circuito {
+
+	display: none;
+
+	.foto_perfil {
+		width: 136px;
+		height: 165px;
+		display: block;
+		background: url(images/bg_foto_perfil.png) center center no-repeat;
+		position: absolute;
+
+		.foto {
+			background: url("https://scontent-mia1-1.xx.fbcdn.net/hphotos-xpa1/v/t1.0-9/11242071_835956393149312_7178190722483071505_n.jpg?oh=f962645b902693e50c0bd576cb3faf70&oe=5612744D") center center;
+			background-size: cover;
+			-webkit-mask-image: url(images/mascara_foto.svg);
+			-webkit-mask-size: 100% 100%;
+			//clip-path: polygon(596.6px,603.2px -1.3px,498.7px -1.3px,0px 596.6px,0px);
+			width: 135px;
+			height: 136px;
+		}
+	}
+
+	.foto_perfil.amigo {
+		background-image: url("images/bg_foto_amigo.png");
+		right: 60px;
+		top: 15px;
+
+		.foto {
+			background-image: url("https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-xfa1/v/t1.0-9/11666223_1024554470902743_1956633168595839533_n.jpg?oh=764a411e0ae8cd061fad0d6b6a10751b&oe=5626FD35&__gda__=1445091518_6f5220195ddf75d1ba6df17693851937");
+		}
+	}
+
+	.nome_amigo {
+		position: absolute;
+		right: 230px;
+		width: 150px;
+		top: 15px;
+	}
+
+	.topo_escuro {
+		p {
+			margin-left: 170px;
+			font-size: 18px;
+		}
+
+		
+	}
+
+	
+	.topo_vermelho {
+		@include box-sizing(border-box);
+		text-align: center;
+		padding-top: 115px;
+		font-weight: bold;
+		font-size: 20px;
+
+		p {
+			margin: 0;
+		}
+
+		h2 {
+			margin: 0;
+			font-size: 51px;
+		}
+
+	}
+
+}
+
+.area_conteudo_topo {
+	position: fixed;
+	top: 272px;
+	bottom: 0px;
+	left: 0;
+	right: 0;
+
+	overflow-y: scroll;
+	-webkit-overflow-scrolling: touch;
+
+}
+
+#andamento {
+
+	display: none;
+
+	.btn_novo_jogo {
+		width: 613px;
+		height: 147px;
+		background: url(images/btn_novo_jogo.png) no-repeat center center;
+		display: block;
+		margin: 35px auto;
+		text-transform: uppercase;
+		text-align: center;
+		color: #FFF;
+		font-size: 60px;
+		font-weight: bold;
+		text-decoration: none;
+		line-height: 150px;
+	}
+
+	.titulo {
+		text-transform: uppercase;
+		font-size: 22px;
+		padding: 15px 30px;
+		background: url(images/bg_titulo_andamento.png) repeat-y center center;
+		background-size: 100% auto;
+		font-weight: bold;
+		color: #FFF;
+	}
+
+	.jogos_andamento {
+		margin: 1px 0;
+		padding: 0;
+		list-style: none;
+
+		//background: red;
+		height: calc(100% - 451px );
+
+		overflow-y: scroll;
+		-webkit-overflow-scrolling: touch;
+
+		li {
+			padding: 30px;
+			background-color: #FFF;
+			margin: 1px 0;
+			font-size: 20px;
+			color: #b2b2b1;
+
+			.pontuacao {
+				font-size: 60px;
+				line-height: 95px;
+				color: #6f6f6e;
+				width: 180px;
+				text-align: center;
+				float: right;
+				font-weight: bold;
+				border-left: dotted 2px #6f6f6e;
+				padding-left: 30px;
+			}
+
+			.foto {
+				width: 85px;
+				height: 85px;
+				border: solid 5px #6f6f6e;
+
+				background: url("https://scontent-mia1-1.xx.fbcdn.net/hphotos-xpa1/v/t1.0-9/11242071_835956393149312_7178190722483071505_n.jpg?oh=f962645b902693e50c0bd576cb3faf70&oe=5612744D") center center;
+				background-size: cover;
+				margin-right: 30px;
+				float: left;
+			}
+
+			h2 {
+				font-size: 25px;
+				color: #6f6f6e;
+				margin: 0;
+			}
+
+			p {
+				margin: 5px 0 0 0;
+			}
+
+			.destaque {
+				color: red;
+				font-weight: bold;
+			}
+
+		}
+	}
+
+	.rodape {
+		width: 90%;
+		margin: 0 auto;
+		text-align: right;
+	}
+}
+
+#novo_jogo {
+
+	display: none;
+
+	.conteudo {
+		width: 90%;
+		margin: 0 auto;
+		text-align: center;
+		height: calc(100% -  202px);
+	}
+
+	h2 {
+		font-size: 30px;
+		color: #c25217;
+	}
+
+	a {
+		color: #6f6f6e;
+	}
+
+	.btn_cor {
+		width: 482px;
+		height: 136px;
+		background: url(images/btn_laranja.png) no-repeat center center;
+		display: block;
+		margin: 55px auto;
+		text-transform: uppercase;
+		text-align: center;
+		color: #FFF;
+		font-size: 40px;
+		font-weight: bold;
+		text-decoration: none;
+		line-height: 136px;
+	}
+
+	.btn_vermelho {
+		width: 467px;
+		height: 150px;
+		background-image: url("images/btn_vermelho.png");
+	}
+
+	.rodape {
+		width: 90%;
+		margin: 0 auto;
+		text-align: right;
+	}
+
+}
+
+
+#add_amigos {
+
+	display: none;
+
+	padding-top: 30px;
+	@include box-sizing(border-box);
+
+	.guias {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		font-size: 24px;
+		font-weight: bold;
+		height: 68px;
+
+		li {
+			margin: 0;
+			padding: 0;
+			display: inline-block;
+			float: left;
+			width: 50%;
+			background: #21313d;
+			
+
+			a {
+				
+				color: #FFF;
+				display: block;
+				text-decoration: none;
+				padding: 20px;
+			}
+
+			&.sel {
+				background: white;
+				a { color: #181815; }
+			}
+		}
+	}
+
+	
+	.lista {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		font-size: 24px;
+		background: white;		
+		padding-top: 30px;
+
+		height: calc(100% - 183px);
+		//background-color: red;
+
+		display: none;
+
+		overflow-y: scroll;
+		-webkit-overflow-scrolling: touch;
+
+		li {
+			margin: 0;
+			padding: 0px 30px 30px 30px;
+		}
+
+		.check {
+			float: right;
+			font-size: 50px;
+		}
+
+		.item {
+			border-bottom: solid 1px #6f6f6e;
+			padding-bottom: 30px;
+		}
+
+		.foto {
+			width: 85px;
+			height: 85px;
+			//border: solid 5px #6f6f6e;
+
+			background: url("https://scontent-mia1-1.xx.fbcdn.net/hphotos-xpa1/v/t1.0-9/11242071_835956393149312_7178190722483071505_n.jpg?oh=f962645b902693e50c0bd576cb3faf70&oe=5612744D") center center;
+			background-size: cover;
+			margin-right: 30px;
+			float: left;
+		}
+
+		h2 {
+			font-size: 25px;
+			color: #6f6f6e;
+			margin: 0;
+		}
+	}
+
+
+	.btns {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		font-size: 40px;
+		font-weight: bold;
+
+		li {
+			margin: 0;
+			padding: 0;
+			float: left;
+			width: 50%;
+			background: url(images/alfinete_azul.png) repeat-y center center;
+			background-size: 100% auto;
+			text-align: center;
+			text-transform: uppercase;
+			
+
+			a {
+				color: #FFF;
+				display: block;
+				text-decoration: none;
+				padding: 20px;
+			}
+
+			&.amarelo {
+				background-image: url("images/alfinete_amarelo.png")
+			}
+		}
+	}
+
+
+}
+
+
+#sel_tema, #jogo {
+	.ico_temas {
+		margin: 0 30px;
+		padding: 0;
+
+		&.amigo {
+			float: right;
+		}
+
+		li {
+			display: inline-block;
+		}
+
+		.ico {
+			width: 45px;
+			height: 45px;
+			background: no-repeat center center;
+		}
+
+		.ico-cinema { background-image: url("images/ico_cinema_on.png") }
+		.ico-teatro { background-image: url("images/ico_teatro_on.png") }
+		.ico-musica { background-image: url("images/ico_musica_on.png") }
+		.ico-pintura { background-image: url("images/ico_pintura_on.png") }
+		.ico-evento { background-image: url("images/ico_evento_on.png") }
+
+		.ico-cinema.off { background-image: url("images/ico_cinema_off.png") }
+		.ico-teatro.off { background-image: url("images/ico_teatro_off.png") }
+		.ico-musica.off { background-image: url("images/ico_musica_off.png") }
+		.ico-pintura.off { background-image: url("images/ico_pintura_off.png") }
+		.ico-evento.off { background-image: url("images/ico_evento_off.png") }
+	}
+}
+
+#sel_tema {
+
+	display: none;
+
+	@include box-sizing(border-box);
+	padding-top: 30px;
+
+	.roleta {
+		width: 464px;
+		height: 667px;
+		background: url("images/bg_roleta.png") center center;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		margin-left: -(464px / 2);
+		margin-top: -(667px / 2);
+		
+		.overlay {
+			width: 278px;
+			height: 419px;
+			position: absolute;
+			left: 102px;
+			top: 51px;
+			
+			z-index: 10
+		}
+
+		.sombra_cima, .sombra_baixo {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			background: url("images/roleta_sombra_cima.png") repeat-x top center;
+		}
+
+		.sombra_baixo {
+			background: url("images/roleta_sombra_baixo.png") repeat-x bottom center;
+		}
+
+		.setas {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			z-index: 10;
+			background: url("images/roleta_setas.png") no-repeat center center;
+		}
+		
+
+		.janela {
+			width: 278px;
+			height: 419px;
+			background: #c25217;
+			position: absolute;
+			left: 102px;
+			top: 51px;
+
+			.swiper-slide {
+				width: 278px;
+				height: 278px;
+				background: no-repeat center center;
+				background-size: 70% auto;
+
+				&.cinema {
+					background-color: #f7f4da;
+					background-image: url("images/temas/cinema.svg");
+				}
+
+				&.musica {
+					background-color: #80b6c1;
+					background-image: url("images/temas/musica.svg");
+				}
+
+				&.teatro {
+					background-color: #9e1d3e;
+					background-image: url("images/temas/teatro.svg");
+				}
+
+				&.pintura {
+					background-color: #d88553;
+					background-image: url("images/temas/pintura.svg");
+				}
+
+				&.eventos {
+					background-color: #2a353e;
+					background-image: url("images/temas/evento.svg");
+				}
+
+
+			}
+		}
+	}
+
+	.btn_roleta {
+		position: absolute;
+		bottom: 30px;
+		right: 30px;
+	}
+
+	.info_roleta {
+		font-size: 24px;
+		font-weight: bold;
+		color: #6f6f6e;
+
+		position: absolute;
+		bottom: 30px;
+		left: 30px;
+	}
+
+}
+
+#jogo {
+
+	display: none;
+
+	@include box-sizing(border-box);
+	padding-top: 30px;
+
+	.box_jogo {
+		width: 616px;
+		margin: 60px auto 0 auto;
+		height: calc(100% - 120px);
+	}
+
+	.topo {
+		width: 616px;
+		height: 36px;
+		background: url("images/bg_jogo_top.png");
+		position: relative;
+	}
+
+	.meio {
+		min-height: 150px;
+
+		@include box-sizing(border-box);
+
+		overflow-y: scroll;
+		-webkit-overflow-scrolling: touch;
+
+		width: 616px;
+		background: url("images/bg_jogo_middle.png") no-repeat center center;
+		background-size: 616px 100%;
+
+		height: calc(100% - 110px);
+
+	}
+
+	.baixo {
+		width: 616px;
+		height: 74px;
+		background: url("images/bg_jogo_bottom.png");
+	}
+
+	.ico_atual {
+		width: 123px;
+		height: 123px;
+		background: #c25217 no-repeat center center;
+		background-size: 60% auto;
+		position: absolute;
+		z-index: 10;
+		border-radius: 50%;
+
+		margin: -45px 0 0 15px;
+
+		&.cinema {
+			background-color: #f7f4da;
+			background-image: url("images/temas/cinema.svg");
+		}
+
+		&.musica {
+			background-color: #80b6c1;
+			background-image: url("images/temas/musica.svg");
+		}
+
+		&.teatro {
+			background-color: #9e1d3e;
+			background-image: url("images/temas/teatro.svg");
+		}
+
+		&.pintura {
+			background-color: #d88553;
+			background-image: url("images/temas/pintura.svg");
+		}
+
+		&.eventos {
+			background-color: #2a353e;
+			background-image: url("images/temas/evento.svg");
+		}
+	}
+
+	.tempo {
+		width: 475px;
+		height: 58px;
+		background: #83bbc7;
+		position: absolute;
+		right: 0px;
+		mask: url(images/mascara_tempo.png);
+		-webkit-mask: url(images/mascara_tempo.png);
+		margin-top: -30px;
+
+		.cor {
+			width: 100%;
+			height: 100%;
+			background: #9e1d3f url("images/alfinete_tempo.png") repeat-y right center;
+			margin-left: -100%;
+		}
+
+	}
+
+	h2 {
+		font-size: 25px;
+		font-weight: bold;
+		margin: 15px 20px 25px 155px;
+	}
+
+	.resposta {
+		@include box-sizing(border-box);
+		display: block;
+		width: 535px;
+		padding: 30px;
+		font-size: 25px;
+		color: #9d9c9c;
+		text-decoration: none;
+		text-align: center;
+		background: rgba(white, .8);
+		border: solid 2px rgba(#b38a5a, .8);
+		margin: 15px auto;
+
+		&.certa {
+			background: url("images/alfinete_verde.png") center center;
+			background-size: 100% 100%;
+			color: #fff;
+		}
+
+		&.errada {
+			background: url("images/alfinete_vermelho.png") center center;
+			background-size: 100% 100%;
+			color: #fff;
+		}
+	}
+
+}
+
+#overlay {
+
+	display: none;
+
+	overflow-y: scroll;
+	-webkit-overflow-scrolling: touch;
+
+	background: rgba(black, .8);
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	z-index: 600;
+
+	text-align: center;
+	font-size: 30px;
+
+	.banner {
+		margin: 35px 0;
+		text-align: center;
+	}
+
+	.ico-tema {
+		width: 175px;
+		height: 175px;
+
+		background: #c25217 no-repeat center center;
+		background-size: 60% auto;
+		position: absolute;
+		z-index: 10;
+		border-radius: 50%;
+		
+		top: 50%;
+		left: 50%;
+		margin: -87.5px 0 0 -87.5px;
+
+		&.grande {
+			width: 250px;
+			height: 250px;
+			margin: -125px 0 0 -125px;
+		}
+
+		&.cinema {
+			background-color: #f7f4da;
+			background-image: url("images/temas/cinema.svg");
+		}
+
+		&.musica {
+			background-color: #80b6c1;
+			background-image: url("images/temas/musica.svg");
+		}
+
+		&.teatro {
+			background-color: #9e1d3e;
+			background-image: url("images/temas/teatro.svg");
+		}
+
+		&.pintura {
+			background-color: #d88553;
+			background-image: url("images/temas/pintura.svg");
+		}
+
+		&.eventos {
+			background-color: #2a353e;
+			background-image: url("images/temas/evento.svg");
+		}
+	}
+
+	.area_indicador {
+		height: 365px;
+		position: relative;
+		background: url("images/separador.png") repeat-x bottom center;
+		width: 90%;
+		margin: 0 auto;
+
+		.placar {
+			width: 100%;
+			font-size: 52px;
+			font-weight: bold;
+			color: #FFF;
+
+			position: absolute;
+			top: 50%;
+			@include transform(translate(0%, -50%));
+
+		}
+
+		.foto_perfil {
+			width: 136px;
+			height: 165px;
+			display: block;
+			background: url(images/bg_foto_perfil.png) center center no-repeat;
+			position: absolute;
+
+			.foto {
+				background: url("https://scontent-mia1-1.xx.fbcdn.net/hphotos-xpa1/v/t1.0-9/11242071_835956393149312_7178190722483071505_n.jpg?oh=f962645b902693e50c0bd576cb3faf70&oe=5612744D") center center;
+				background-size: cover;
+				-webkit-mask-image: url(images/mascara_foto.svg);
+				-webkit-mask-size: 100% 100%;
+				//clip-path: polygon(596.6px,603.2px -1.3px,498.7px -1.3px,0px 596.6px,0px);
+				width: 135px;
+				height: 136px;
+			}
+		}
+
+		.foto_perfil.amigo {
+			background-image: url("images/bg_foto_amigo.png");
+			right: 0px;
+
+			.foto {
+				background-image: url("https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-xfa1/v/t1.0-9/11666223_1024554470902743_1956633168595839533_n.jpg?oh=764a411e0ae8cd061fad0d6b6a10751b&oe=5626FD35&__gda__=1445091518_6f5220195ddf75d1ba6df17693851937");
+			}
+		}
+
+		.parcial {
+			width: 245px;
+			height: 245px;
+
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			margin: -140px 0 0 -122px;
+
+			
+
+			.item {
+				width: 213px;
+				height: 124px;
+				background: url(images/marcador_vazio.png) no-repeat center center;
+				position: absolute;
+			}
+
+			.item-certo {
+				background-image: url("images/marcador_verde.png");
+			}
+
+			.item-errado {
+				background-image: url("images/marcador_vermelho.png");
+			}
+
+			.item-1 {
+				left: 50%;
+				margin-left: -106.5px;
+			}
+
+			.item-2 {
+				@include transform(rotate(121deg));
+				margin: 93px 0 0 70px;
+			}
+
+			.item-3 {
+				@include transform(rotate(240deg));
+				margin: 91px 0 0 -37px;
+			}
+		}
+	}
+
+	p {
+		color: #FFF;
+		.amarela {
+			color: #f39200;
+		}
+	}
+
+	h2 {
+		font-size: 30px;
+		color: #b6c805;
+		text-transform: uppercase;
+
+		&.laranja {
+			color: #f39200;
+		}
+	}
+
+	.faixa {
+		width: 613px;
+		height: 147px;
+		background: url(images/faixa_verde.png) no-repeat center center;
+		margin: 35px auto;
+		text-transform: uppercase;
+		text-align: center;
+		color: #FFF;
+		font-size: 60px;
+		font-weight: bold;
+		text-decoration: none;
+		line-height: 150px;
+	}
+
+	.faixa-vermelha { background-image: url("images/faixa_vermelha.png"); }
+	.faixa-amarela { background-image: url("images/faixa_amarelo.png"); }
+	.faixa-laranja { background-image: url("images/faixa_laranja.png"); }
+
+}
+
+#acertou, #errou, #acertou_tudo, #ganhou_cultz, #ganhou_circuito, #ganhou_cultz_circuito, #empate, #giro_cultz, #ganhou_giro, #errou_giro {
+	display: none;
+}

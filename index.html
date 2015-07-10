@@ -1,0 +1,612 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Cultz</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1 " />
+
+<link href="styles.css" rel="stylesheet" type="text/css" />
+<link href="fonts/style.css" rel="stylesheet" type="text/css" />
+
+<script src="js/jquery-1.11.3.min.js"></script>
+
+<script src="js/jquery.touchSwipe.min.js"></script>
+<script src="js/swiper.jquery.min.js"></script>
+<link href="js/swiper.min.css" rel="stylesheet" type="text/css" />
+
+
+
+<script src="scripts.js"></script>
+
+
+</head>
+
+<body>
+
+	<div id="home"></div>
+
+	<div id="instrucao">
+		<div class="box">
+
+			<i class="alerta"></i>
+			<h2>Instruções do jogo em 3 passos</h2>
+			
+			<div id="swiperInstrucao" class="swiper-container">
+				<div class="swiper-wrapper">
+		        </div>
+	        </div>
+	        <div id="swiperInstrucaoPag"></div>
+
+        </div>
+
+        <div class="btns">
+        	<a href="javascript: trocaTela('login');" class="btn_seta laranja">Pular</a>
+        	<a href="javascript: trocaTela('login');" class="btn_seta">Iniciar</a>
+        </div>
+		
+	</div> <!-- FIM INSTRUCAO -->
+
+	<div id="login">
+
+		<div class="topo_escuro">
+			<i class="ico_login"></i>
+			<p>Faça login utilizando <br />uma das opções:</p>
+		</div>
+
+		<div class="conteudo">
+			<a href="javascript: trocaTela('andamento');" class="btn_face"></a>
+
+			<div class="separador"></div>
+
+			<div class="bg_login">
+				<p><input type="text" class="tf" placeholder="USUÁRIO" /></p>
+				<p><input type="text" class="tf" placeholder="SENHA" /></p>
+				<p class="btns">
+					<a href="#" class="btn_esqueci">Esqueci</a>
+					<a href="javascript: trocaTela('andamento');" class="btn_entrar">Entrar</a>
+				</p>
+			</div>
+
+			<div class="info_amigo">
+				<div class="txt">
+					<p>
+					Venha ser um<br>
+					amigo da cultura,<br>
+					A Economia Criativa<br>
+					sem limites!
+					</p>
+					<a href="#" class="btn_seta roxo">Cadastre-se</a>
+				</div>
+				<div class="logo"></div>
+			</div>
+
+		</div>
+	</div> <!-- FIM LOGIN -->
+
+
+	<div id="topo_fixo">
+		<div class="topo_escuro">
+
+			<i class="foto_perfil"><div class="foto"></div></i>
+
+			<p>danizette@gmail.com</p>
+
+			<ul class="estrelas">
+				<li class="amarela"></li>
+				<li class="amarela"></li>
+				<li class="amarela"></li>
+				<li class="preta"></li>
+				<li class="preta"></li>
+			</ul>
+	
+			<div class="pontos"><span>15</span><img src="images/ico_cultz.png" height="38" width="38"></div>
+
+		</div> <!-- FIM TOP ESCURO -->
+
+		<div class="topo_laranja">
+			<ul class="menu_topo">
+				<li class="add_user"><a href="javascript: trocaTela('andamento');"><i class="icon-user_add"></i></a></li>
+				<li class="pin"><a href="#"><i class="icon-pin"></i></a></li>
+				<li class="stats"><a href="#"><i class="icon-stats"></i></a></li>
+			</ul>
+		</div> <!-- FIM LARANJA -->
+
+	</div> <!-- FIM TOPO FIXO -->
+
+
+	<div id="topo_circuito">
+		<div class="topo_escuro">
+
+			<i class="foto_perfil"><div class="foto"></div></i>
+			<p>Eu</p>
+
+			<i class="foto_perfil amigo"><div class="foto"></div></i>
+			<p class="nome_amigo">Nome do Amigo</p>
+
+
+		</div> <!-- FIM TOP ESCURO -->
+
+		<div class="topo_laranja topo_vermelho">
+			<p>Circuito: 11 de 15</p>
+			<h2>08 x 11</h2>
+		</div> <!-- FIM LARANJA -->
+
+	</div> <!-- FIM TOPO FIXO -->
+
+
+	<div id="andamento" class="area_conteudo_topo">
+
+		<a class="btn_novo_jogo" href="javascript: trocaTela('novo_jogo');">Iniciar jogo</a>
+
+		<div class="titulo">jogos em andamento</div>
+		<ul class="jogos_andamento">
+
+			<li>
+				<div class="foto"></div>
+				<div class="pontuacao">10x20</div>
+
+				<h2>Nome da pessoa</h2>
+				<p class="destaque">Sua vez</p>
+				<p>72 h</p>
+				<div class="clear"></div>
+			</li>
+
+			<li>
+				<div class="foto"></div>
+				<div class="pontuacao">1 x 0</div>
+
+				<h2>Nome da pessoa</h2>
+				<p class="destaque">Sua vez</p>
+				<p>72 h</p>
+				<div class="clear"></div>
+			</li>
+
+			<li>
+				<div class="foto"></div>
+				<div class="pontuacao">1 x 0</div>
+
+				<h2>Nome da pessoa</h2>
+				<p class="destaque">Sua vez</p>
+				<p>72 h</p>
+				<div class="clear"></div>
+			</li>
+
+			<li>
+				<div class="foto"></div>
+				<div class="pontuacao">1 x 0</div>
+
+				<h2>Nome da pessoa</h2>
+				<p class="destaque">Sua vez</p>
+				<p>72 h</p>
+				<div class="clear"></div>
+			</li>
+
+		</ul>
+		
+		<div class="rodape">
+			<div class="separador"></div>
+			<a href="#"><img src="images/btn_info.png" height="110" width="177"></a>
+		</div>
+
+	</div> <!-- FIM ANDAMENTO -->
+
+
+
+	<div id="novo_jogo" class="area_conteudo_topo">
+
+		<div class="conteudo">
+
+			<h2>Convide quantos amigos quiser, <br />Para jogar é preciso ter “Vidas”</h2>
+			<p><a href="#">Para mais vidas clique aqui</a></p>
+
+			<div class="separador"></div>
+
+			<a href="javascript: trocaTela('add_amigos');" class="btn_cor">Convide um amigo</a>
+			<a href="#" class="btn_cor btn_vermelho">Aleatório</a>
+
+		</div> <!-- FIM COTNEUDO -->
+		
+		
+		<div class="rodape">
+			<div class="separador"></div>
+			<a href="#"><img src="images/btn_info.png" height="110" width="177"></a>
+		</div>
+
+	</div> <!-- FIM ANDAMENTO -->
+
+	<div id="add_amigos" class="area_conteudo_topo">
+
+		<ul class="guias">
+			<li><a href="#lista_fb">Facebook</a></li>
+			<li><a href="#lista_ac">Amigos da Cultura</a></li>
+		</ul>
+
+		<ul id="lista_fb" class="lista">
+
+			<li>
+				<div class="item" onclick="toggleCheck(this);">
+					<div class="check"> <i class="icon-uncheck"></i> </div>
+					<div class="foto"></div>
+					<h2>Nome da Pessoa</h2>
+					<div class="clear"></div>
+				</div>
+			</li>
+
+			<li>
+				<div class="item" onclick="toggleCheck(this);">
+					<div class="check"> <i class="icon-uncheck"></i> </div>
+					<div class="foto"></div>
+					<h2>Nome da Pessoa</h2>
+					<div class="clear"></div>
+				</div>
+			</li>
+
+			<li>
+				<div class="item" onclick="toggleCheck(this);">
+					<div class="check"> <i class="icon-uncheck"></i> </div>
+					<div class="foto"></div>
+					<h2>Nome da Pessoa</h2>
+					<div class="clear"></div>
+				</div>
+			</li>
+
+			<li>
+				<div class="item" onclick="toggleCheck(this);">
+					<div class="check"> <i class="icon-uncheck"></i> </div>
+					<div class="foto"></div>
+					<h2>Nome da Pessoa</h2>
+					<div class="clear"></div>
+				</div>
+			</li>
+
+		</ul>
+
+		<ul id="lista_ac" class="lista">
+
+			<li>
+				<div class="item" onclick="toggleCheck(this);">
+					<div class="check"> <i class="icon-uncheck"></i> </div>
+					<div class="foto"></div>
+					<h2>Nome da Pessoa</h2>
+					<div class="clear"></div>
+				</div>
+			</li>
+
+		</ul>
+
+
+		<ul class="btns">
+			<li><a href="javascript: trocaTela('andamento');">Voltar</a></li>
+			<li class="amarelo"><a href="javascript: trocaTela('andamento');">Convidar</a></li>
+		</ul>
+
+	</div> <!-- FIM ADD AMIGOS -->
+
+	<div id="sel_tema" class="area_conteudo_topo">
+		
+		<ul class="ico_temas amigo">
+			<li class="ico ico-cinema"></li>
+			<li class="ico ico-teatro"></li>
+			<li class="ico ico-musica"></li>
+			<li class="ico ico-pintura"></li>
+			<li class="ico ico-evento"></li>
+		</ul>
+
+		<ul class="ico_temas">
+			<li class="ico ico-cinema off"></li>
+			<li class="ico ico-teatro off"></li>
+			<li class="ico ico-musica off"></li>
+			<li class="ico ico-pintura off"></li>
+			<li class="ico ico-evento off"></li>
+		</ul>
+
+		<div class="roleta">
+			<div id="swiperRoleta" class="janela swiper-container">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide cinema" data-tipo="cinema"></div>
+					<div class="swiper-slide musica" data-tipo="musica"></div>
+					<div class="swiper-slide teatro" data-tipo="teatro"></div>
+					<div class="swiper-slide pintura" data-tipo="pintura"></div>
+					<div class="swiper-slide eventos" data-tipo="eventos"></div>
+				</div>
+			</div>
+
+			<div class="overlay">
+				<div class="sombra_cima"></div>
+				<div class="sombra_baixo"></div>
+				<div class="setas"></div>
+			</div>
+
+		</div>
+
+		<a href="javascript: girarRoleta(1); void(0);" class="btn_roleta"><img src="images/btn_roleta.png" height="148" width="148"></a>
+
+		<p class="info_roleta">Gire a roleta com o dedo<br>ou clique no botão ao lado</p>
+
+	</div> <!-- FIM SEL TEMA -->
+
+	<div id="jogo" class="area_conteudo_topo">
+
+		<ul class="ico_temas amigo">
+			<li class="ico ico-cinema"></li>
+			<li class="ico ico-teatro"></li>
+			<li class="ico ico-musica"></li>
+			<li class="ico ico-pintura"></li>
+			<li class="ico ico-evento"></li>
+		</ul>
+
+		<ul class="ico_temas">
+			<li class="ico ico-cinema off"></li>
+			<li class="ico ico-teatro off"></li>
+			<li class="ico ico-musica off"></li>
+			<li class="ico ico-pintura off"></li>
+			<li class="ico ico-evento off"></li>
+		</ul>
+
+		<div class="box_jogo">
+			<div class="topo">
+				<div class="ico_atual musica"></div>
+				<div class="tempo"><div class="cor"></div></div>
+			</div>
+			<div class="meio">
+				
+				<h2>Lorem ipsum dolor sit amet, adipiscing, Quisque suscipit leo vitae rhoncus. Sed rhoncus ultrices turpis?</h2>
+
+				<a href="" class="resposta" data-certa="false">Proin ac mauris semper felis faucibus efficitur.</a>
+				<a href="" class="resposta" data-certa="true">Proin ac mauris semper felis faucibus efficitur.</a>
+				<a href="" class="resposta" data-certa="false">Proin ac mauris semper felis faucibus efficitur.</a>
+				<a href="" class="resposta" data-certa="false">Proin ac mauris semper felis faucibus efficitur.</a>
+
+			</div>
+			<div class="baixo"></div>
+		</div>
+
+	</div> <!-- FIM JOGO -->
+
+
+	<div id="overlay">
+		<div class="banner"><img src="images/banner.png" height="160" width="565"></div>
+
+		<div class="msgs" id="acertou">
+
+			<div class="area_indicador">
+				<div class="parcial">
+					<div class="item item-1 item-certo"></div>
+					<div class="item item-2 item-errado"></div>
+					<div class="item item-3"></div>
+					<div class="ico-tema cinema"></div>
+				</div>
+			</div>
+		
+			<div class="faixa faixa-verde">
+				Acertou
+			</div>
+
+			<h2>Parabéns, você acaba de ganhar<br>uma MEDALHA deste tema.</h2>
+
+			<p>Continue jogando.<br>
+			Lembre-se que é preciso acertar <br>
+			as 15 perguntas para ganhar <br>
+			1 CULTZ</p>
+
+		</div> <!-- FIM ACERTOU -->
+
+		<div class="msgs" id="errou">
+
+			<div class="area_indicador">
+				<div class="parcial">
+					<div class="item item-1 item-certo"></div>
+					<div class="item item-2 item-errado"></div>
+					<div class="item item-3"></div>
+					<div class="ico-tema cinema"></div>
+				</div>
+			</div>
+		
+			<div class="faixa faixa-vermelha">
+				Errou
+			</div>
+
+
+			<p>Aguarde o seu adversário jogar<br>
+			ele terá 72h antes de expirar<br>
+			este circuito de perguntas.</p>
+
+		</div> <!-- FIM ACERTOU -->
+		
+		<div class="msgs" id="acertou_tudo">
+			
+			<div class="area_indicador">
+				<div class="ico-tema cinema grande"></div>	
+			</div>
+		
+			<div class="faixa faixa-verde">
+				Acertou
+			</div>
+
+			<h2>Parabéns, você acaba de ganhar<br>uma MEDALHA deste tema.</h2>
+
+			<p>Você acertou 3 respostas seguidas<br>
+			portanto, é a vez do seu adversário<br>
+			jogar caso ele erre, não responda<br>
+			a tempo ou também acerte 3 perguntas<br>
+			seguidas você poderá jogar novamente.<br>
+			Ele terá 72horas antes do jogo expirar.</p>
+
+		</div> <!-- FIM ACERTOU TUDO -->
+
+		<div class="msgs" id="ganhou_cultz">
+			
+			<div class="area_indicador">
+				<div class="centraliza">
+					<img src="images/circuito_cultz.png" height="300" width="364">
+				</div>
+			</div>
+		
+			<div class="faixa faixa-verde">
+				1 Cultz
+			</div>
+
+			<h2>Parabéns, você acertou todas<br>
+			as perguntas do circuito!<br>
+			Ganhou 5 Medalhas que valem<br>
+			1 CULTZ</h2>
+
+			<p>Desafie os seus amigos<br>
+			para ganhar mais CULTZ</p>
+
+		</div> <!-- FIM ACERTOU TUDO -->
+
+		<div class="msgs" id="ganhou_cultz_circuito">
+			
+			<div class="area_indicador">
+				<div class="centraliza">
+					<img src="images/circuito_cultz_moeda.png" height="172" width="289">
+				</div>
+			</div>
+		
+			<div class="faixa faixa-verde">
+				1 Cultz
+			</div>
+
+			<h2>Parabéns, você acertou todas<br>
+			as perguntas do circuito!<br>
+			Ganhou 5 Medalhas que valem<br>
+			1 CULTZ</h2>
+
+			<p>Desafie os seus amigos<br>
+			para ganhar mais CULTZ</p>
+
+		</div> <!-- FIM ACERTOU 5 CIRCUITOS -->
+
+
+		<div class="msgs" id="ganhou_circuito">
+
+			<div class="area_indicador">
+				
+				<div class="placar">
+
+					<div class="foto_perfil"><div class="foto"></div></div>
+					<div class="foto_perfil amigo"><div class="foto"></div></div>
+
+					<p>12 x 09</p>
+
+				</div>
+
+			</div>
+		
+			<div class="faixa faixa-verde">
+				GANHOU
+			</div>
+
+			<h2>Parabéns, você venceu <br>
+			cinco circuitos de perguntas<br>
+			em menos de 24h !<br>
+			isso vale mais 1 CULTZ</h2>
+
+			<p>Desafie os seus amigos<br>
+			para ganhar mais CULTZ</p>
+
+		</div> <!-- FIM GANHOU CIRCUITO -->
+
+
+		<div class="msgs" id="empate">
+
+			<div class="area_indicador">
+				
+				<div class="placar">
+
+					<div class="foto_perfil"><div class="foto"></div></div>
+					<div class="foto_perfil amigo"><div class="foto"></div></div>
+
+					<p>12 x 12</p>
+
+				</div>
+
+			</div>
+		
+			<div class="faixa faixa-amarela">
+				EMPATE
+			</div>
+
+			<p>Você e seu adversário acertaram<br>
+			todas as perguntas deste circuito.<br>
+			Vai ganhar aquele que responder<br>
+			corretamente a primeira  <br>
+			<span class="amarela">pergunta surpresa</span><br>
+			Confira os locais participantes<br>
+			e dê um giro pela cidade.</p>
+
+		</div> <!-- FIM EMPATE -->
+
+		
+		<div class="msgs" id="giro_cultz">
+			
+			<div class="area_indicador">
+				<div class="centraliza">
+					<img src="images/ico_giro_cultz.png" height="269" width="294">
+				</div>
+			</div>
+		
+			<div class="faixa faixa-laranja">
+				GIRO CULTZ
+			</div>
+
+			<p>Está preparado?<br>
+			Você terá 15 segundos para<br>
+			responder uma pergunta sobre<br>
+			essa região onde está passando.</p>
+
+		</div> <!-- FIM GIRO CULTZ -->
+
+
+		<div class="msgs" id="ganhou_giro">
+			
+			<div class="area_indicador">
+				<div class="centraliza">
+					<img src="images/giro_cultz_moeda.png" height="294" width="364">
+				</div>
+			</div>
+		
+			<div class="faixa faixa-verde">
+				1 Cultz
+			</div>
+
+			<h2>Você acertou o GIRO CULTZ<br>
+			e ganhou 1 (um) CULTZ.</h2>
+
+			<p>Desafie os seus amigos<br>
+			para ganhar mais CULTZ</p>
+
+		</div> <!-- GANHOU GIRO CULTZ -->
+
+
+		<div class="msgs" id="errou_giro">
+			
+			<div class="area_indicador">
+				<div class="centraliza">
+					<img src="images/giro_cultz_erro.png" height="269" width="294">
+				</div>
+			</div>
+		
+			<div class="faixa faixa-vermelha">
+				Errou
+			</div>
+
+			<h2 class="laranja">que pena Você errou <br>este Giro Cultz</h2>
+
+			<p>Mas não desanime!<br>
+			Confira outros locais participantes<br>
+			e dê um giro pela cidade.</p>
+
+		</div> <!-- GANHOU GIRO CULTZ -->
+
+
+
+
+	</div> <!-- FIM OVERLAY -->
+
+
+</body>
+</html>

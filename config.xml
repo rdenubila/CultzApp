@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <widget xmlns   = "http://www.w3.org/ns/widgets"
+        xmlns:gap   = "http://phonegap.com/ns/1.0"
+        id          = "br.lazuli.cultz"
+        versionCode = "1" 
+        version     = "0.1" >
+
+
+    <name>Cultz</name>
+
+    <description>
+        App Cultz
+    </description>
+
+    <author href="http://www.lazulistudio.com.br" email="">
+        Lazuli Studio
+    </author>
+
+
+    <icon src="icon.png" />
+
+
+    <preference name="orientation" value="portrait" />
+    <preference name="prerendered-icon" value="true" />
+
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="webviewbounce" value="false" />
+
+    <gap:plugin name="com.phonegap.plugin.statusbar" version="1.1.0" />
+    <preference name="StatusBarBackgroundColor" value="#000000" />
+
+    <preference name="permissions" value="none"/>
+    <feature name="http://api.phonegap.com/1.0/network"/>
+
+    <gap:plugin name="org.apache.cordova.inappbrowser" version="0.5.2" />
+
+
+</widget>
