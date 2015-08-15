@@ -1,5 +1,27 @@
 apiURL = "http://localhost/Cultz/sistema/";
 
+
+window.fbAsyncInit = function() {
+	FB.init({
+		appId      : '1908908612666620',
+		xfbml      : true,
+		version    : 'v2.4'
+	});
+
+	initFB = true;
+	checkInit();
+
+};
+
+(function(d, s, id){
+	var js, fjs = d.getElementsByTagName(s)[0];
+	if (d.getElementById(id)) {return;}
+	js = d.createElement(s); js.id = id;
+	js.src = "//connect.facebook.net/en_US/sdk.js";
+	fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+
 //localStorage.removeItem("user");
 
 function statusChangeCallback(response) {
@@ -20,20 +42,7 @@ function getUserData(){
 	});
 }
 
-function login(response){
-	$.getJSON( apiURL+"login.php", response).done(function( data ) {
-		console.log("----- USUARIO LOGADO ------")
-		console.log(data);
 
-		userLogado = data;
-		localStorage.user = JSON.stringify( data );
-
-		loginComplete();
-
-		trocaTela('andamento');
-		$("#loading").fadeOut("fast");
-	});
-}
 
 function checkLoginState() {
 	
@@ -61,15 +70,3 @@ function getFriendsFB(){
 }
 
 
-function getFriendsBD(response){
-	datas = response.data;
-
-	arr = new Array();
-	for(i=0; i<datas.length; i++){
-		d = datas[i];
-		arr.push(d.id);
-	}
-
-	AmigosLoadFB(arr.join(","));
-	
-}

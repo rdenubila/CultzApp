@@ -35,5 +35,10 @@
     <gap:plugin name="org.apache.cordova.inappbrowser" version="0.5.2" />
     <gap:plugin name="nl.kw.cordova.androidviewport" version="0.0.5" />
 
+    <gap:plugin name="com.phonegap.plugins.facebookconnect" version="0.9.0">
+        <param name="APP_ID" value="1908908612666620" />
+        <param name="APP_NAME" value="Cultz" />
+    </gap:plugin>
+
 
 </widget>
