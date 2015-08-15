@@ -23,6 +23,21 @@ function statusChangeCallback(response) {
 }
 
 
+function getUserData(){
+	facebookConnectPlugin.api('/me?fields=id,name,email', [], function(response) {
+		login( response );
+	}, function (response) { alert(JSON.stringify(response)) });
+}
+
+function getFriendsFB(){
+	$("#loading").fadeIn("fast");
+
+	facebookConnectPlugin.api('me/friends?fields=id&limit=999', ["user_friends"], function(response) {
+		getFriendsBD( response );
+	}, function (response) { alert(JSON.stringify(response)) });
+}
+
+
 function checkLoginState() {
 	
 	$("#loading").fadeIn("fast");
