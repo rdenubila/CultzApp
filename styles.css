@@ -45,23 +45,63 @@ body {
   color: #9b428e;
   background-image: url("images/btn_seta_roxo.png"); }
 
-/* line 53, styles.scss */
+@keyframes roda {
+  0% {
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg); }
+  50% {
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg); }
+  100% {
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg); } }
+/* line 59, styles.scss */
+#loading {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 999;
+  display: none; }
+  /* line 67, styles.scss */
+  #loading .logo {
+    width: 30vw;
+    height: 30vw;
+    background: url("images/loading.png") no-repeat center center;
+    background-size: contain;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -15vw 0 0 -15vw;
+    animation-name: roda;
+    animation-duration: 2s;
+    animation-iteration-count: infinite; }
+
+/* line 85, styles.scss */
 #home {
   position: absolute;
   width: 100%;
   height: 100%;
   background: url(images/logo_home.png) center center no-repeat;
-  background-size: 80% auto; }
+  background-size: 80% auto;
+  z-index: 9999;
+  background-color: #f1ead6; }
 
-/* line 63, styles.scss */
+/* line 97, styles.scss */
 #instrucao {
   display: none; }
-  /* line 67, styles.scss */
+  /* line 101, styles.scss */
   #instrucao .btns {
     position: absolute;
     right: 37px;
     bottom: 20px; }
-  /* line 73, styles.scss */
+  /* line 107, styles.scss */
   #instrucao .box {
     width: 527px;
     bottom: 100px;
@@ -71,7 +111,7 @@ body {
     position: absolute;
     background: url(images/bg_instrucao.png) bottom center no-repeat;
     color: white; }
-  /* line 84, styles.scss */
+  /* line 118, styles.scss */
   #instrucao .alerta {
     width: 158px;
     height: 158px;
@@ -80,25 +120,25 @@ body {
     position: absolute;
     margin-left: -30px;
     margin-top: -30px; }
-  /* line 94, styles.scss */
+  /* line 128, styles.scss */
   #instrucao h2 {
     font-size: 38px;
     margin-left: 150px; }
-  /* line 99, styles.scss */
+  /* line 133, styles.scss */
   #instrucao #swiperInstrucao {
     width: 85%;
     height: calc(100% - 400px);
     margin: 0 auto; }
-    /* line 105, styles.scss */
+    /* line 139, styles.scss */
     #instrucao #swiperInstrucao .swiper-slide {
       overflow-y: scroll;
       -webkit-overflow-scrolling: touch; }
-  /* line 111, styles.scss */
+  /* line 145, styles.scss */
   #instrucao #swiperInstrucaoPag {
     width: 100%;
     text-align: center;
     margin-top: 10px; }
-    /* line 116, styles.scss */
+    /* line 150, styles.scss */
     #instrucao #swiperInstrucaoPag .swiper-pagination-bullet {
       -moz-box-sizing: border-box;
       -webkit-box-sizing: border-box;
@@ -110,11 +150,11 @@ body {
       opacity: 1;
       background-color: transparent;
       margin: 10px; }
-    /* line 127, styles.scss */
+    /* line 161, styles.scss */
     #instrucao #swiperInstrucaoPag .swiper-pagination-bullet-active {
       background-color: #e57928; }
 
-/* line 133, styles.scss */
+/* line 167, styles.scss */
 .topo_escuro {
   width: 625px;
   height: 147px;
@@ -125,12 +165,12 @@ body {
   top: 0px;
   position: fixed;
   z-index: 500; }
-  /* line 146, styles.scss */
+  /* line 180, styles.scss */
   .topo_escuro p {
     margin: 0;
     line-height: 37px; }
 
-/* line 152, styles.scss */
+/* line 186, styles.scss */
 .topo_laranja {
   width: 626px;
   height: 243px;
@@ -140,31 +180,31 @@ body {
   z-index: 400;
   top: 29px; }
 
-/* line 165, styles.scss */
+/* line 199, styles.scss */
 .topo_vermelho {
   background: url(images/topo_vermelho.png) no-repeat left top; }
 
-/* line 169, styles.scss */
+/* line 203, styles.scss */
 .separador {
   margin: 32px auto;
   width: 100%;
   height: 3px;
   background: url(images/separador.png) repeat-x center center; }
 
-/* line 176, styles.scss */
+/* line 210, styles.scss */
 #login {
   display: none; }
-  /* line 180, styles.scss */
+  /* line 214, styles.scss */
   #login .ico_login {
     width: 136px;
     height: 165px;
     display: block;
     background: url(images/ico_login.png) center center no-repeat;
     position: absolute; }
-  /* line 190, styles.scss */
+  /* line 224, styles.scss */
   #login .topo_escuro p {
     margin-left: 170px; }
-  /* line 195, styles.scss */
+  /* line 229, styles.scss */
   #login .conteudo {
     width: 560px;
     position: absolute;
@@ -172,7 +212,7 @@ body {
     top: 50%;
     margin-left: -280px;
     margin-top: -377.5px; }
-  /* line 206, styles.scss */
+  /* line 240, styles.scss */
   #login .btn_face {
     background: url(images/btn_login_face.png) no-repeat center center;
     height: 212px;
@@ -184,7 +224,7 @@ body {
     text-align: right;
     margin: 15px 0;
     text-transform: uppercase; }
-  /* line 219, styles.scss */
+  /* line 253, styles.scss */
   #login .bg_login {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -195,10 +235,10 @@ body {
     margin: 0 0 0 35px;
     text-align: center;
     padding-top: 45px; }
-    /* line 229, styles.scss */
+    /* line 263, styles.scss */
     #login .bg_login p {
       margin: 0 0 27px 0; }
-    /* line 233, styles.scss */
+    /* line 267, styles.scss */
     #login .bg_login .tf {
       background: transparent url("images/login_tf_1.png") no-repeat center center;
       border: none;
@@ -209,11 +249,11 @@ body {
       line-height: 73px;
       margin: 0 auto;
       font-weight: bold; }
-    /* line 245, styles.scss */
+    /* line 279, styles.scss */
     #login .bg_login .btns {
       padding: 0 20px;
       text-align: left; }
-    /* line 250, styles.scss */
+    /* line 284, styles.scss */
     #login .bg_login .btn_esqueci {
       background: url(images/btn_login_esqueci.png) no-repeat left center;
       padding-left: 60px;
@@ -225,7 +265,7 @@ body {
       font-weight: bold;
       text-align: left;
       text-transform: uppercase; }
-    /* line 263, styles.scss */
+    /* line 297, styles.scss */
     #login .bg_login .btn_entrar {
       background: url(images/btn_seta_azul_escuro.png) no-repeat left center;
       padding-left: 35px;
@@ -240,10 +280,10 @@ body {
       float: right;
       margin-top: 25px;
       margin-right: 20px; }
-  /* line 280, styles.scss */
+  /* line 314, styles.scss */
   #login .info_amigo {
     margin-top: -20px; }
-    /* line 284, styles.scss */
+    /* line 318, styles.scss */
     #login .info_amigo .txt {
       float: left;
       width: 345px;
@@ -252,45 +292,45 @@ body {
       font-size: 20px;
       font-weight: bold;
       padding-right: 45px; }
-      /* line 292, styles.scss */
+      /* line 326, styles.scss */
       #login .info_amigo .txt p {
         margin-right: 48px; }
-    /* line 297, styles.scss */
+    /* line 331, styles.scss */
     #login .info_amigo .logo {
       float: left;
       width: 146px;
       height: 175px;
       background: url(images/logo_amigo_da_cultura.png) no-repeat left center; }
 
-/* line 308, styles.scss */
+/* line 342, styles.scss */
 #topo_fixo {
   display: none; }
-  /* line 312, styles.scss */
+  /* line 346, styles.scss */
   #topo_fixo .foto_perfil {
     width: 136px;
     height: 165px;
     display: block;
     background: url(images/bg_foto_perfil.png) center center no-repeat;
     position: absolute; }
-    /* line 319, styles.scss */
+    /* line 353, styles.scss */
     #topo_fixo .foto_perfil .foto {
-      background: url("https://scontent-mia1-1.xx.fbcdn.net/hphotos-xpa1/v/t1.0-9/11242071_835956393149312_7178190722483071505_n.jpg?oh=f962645b902693e50c0bd576cb3faf70&oe=5612744D") center center;
+      background: center center;
       background-size: cover;
       -webkit-mask-image: url(images/mascara_foto.svg);
       -webkit-mask-size: 100% 100%;
       width: 135px;
       height: 136px; }
-  /* line 331, styles.scss */
+  /* line 365, styles.scss */
   #topo_fixo .topo_escuro p {
     margin-left: 170px;
     font-size: 18px; }
-  /* line 336, styles.scss */
+  /* line 370, styles.scss */
   #topo_fixo .topo_escuro .estrelas {
     margin: 0;
     margin: 10px 0 0 170px;
     padding: 0;
     list-style: none; }
-    /* line 342, styles.scss */
+    /* line 376, styles.scss */
     #topo_fixo .topo_escuro .estrelas li {
       margin: 0;
       padding: 0;
@@ -298,83 +338,80 @@ body {
       width: 33px;
       height: 31px;
       background: url(images/estrela_amarela.png); }
-      /* line 350, styles.scss */
+      /* line 384, styles.scss */
       #topo_fixo .topo_escuro .estrelas li.preta {
         background: url(images/estrela_preta.png); }
-  /* line 356, styles.scss */
+  /* line 390, styles.scss */
   #topo_fixo .topo_escuro .pontos {
     position: absolute;
     right: 100px;
     top: 30px;
     font-size: 76px;
     font-weight: bold; }
-    /* line 363, styles.scss */
+    /* line 397, styles.scss */
     #topo_fixo .topo_escuro .pontos img {
       vertical-align: 16px; }
-  /* line 369, styles.scss */
+  /* line 403, styles.scss */
   #topo_fixo .menu_topo {
     margin: 130px 0 0 206px;
     padding: 0;
     list-style: none;
     color: #FFF;
     font-size: 60px; }
-    /* line 376, styles.scss */
+    /* line 410, styles.scss */
     #topo_fixo .menu_topo li {
       margin: 0 25px;
       padding: 0;
       float: left; }
-      /* line 381, styles.scss */
+      /* line 415, styles.scss */
       #topo_fixo .menu_topo li a {
         color: #FFF;
         text-decoration: none; }
-        /* line 385, styles.scss */
+        /* line 419, styles.scss */
         #topo_fixo .menu_topo li a:hover, #topo_fixo .menu_topo li a .sel {
           color: #21313d; }
-      /* line 393, styles.scss */
+      /* line 427, styles.scss */
       #topo_fixo .menu_topo li.pin {
         padding-top: 10px; }
-      /* line 397, styles.scss */
+      /* line 431, styles.scss */
       #topo_fixo .menu_topo li.stats {
         padding-top: 12px;
         font-size: 80px; }
 
-/* line 407, styles.scss */
+/* line 441, styles.scss */
 #topo_circuito {
   display: none; }
-  /* line 411, styles.scss */
+  /* line 445, styles.scss */
   #topo_circuito .foto_perfil {
     width: 136px;
     height: 165px;
     display: block;
     background: url(images/bg_foto_perfil.png) center center no-repeat;
     position: absolute; }
-    /* line 418, styles.scss */
+    /* line 452, styles.scss */
     #topo_circuito .foto_perfil .foto {
-      background: url("https://scontent-mia1-1.xx.fbcdn.net/hphotos-xpa1/v/t1.0-9/11242071_835956393149312_7178190722483071505_n.jpg?oh=f962645b902693e50c0bd576cb3faf70&oe=5612744D") center center;
+      background: center center;
       background-size: cover;
       -webkit-mask-image: url(images/mascara_foto.svg);
       -webkit-mask-size: 100% 100%;
       width: 135px;
       height: 136px; }
-  /* line 429, styles.scss */
+  /* line 463, styles.scss */
   #topo_circuito .foto_perfil.amigo {
     background-image: url("images/bg_foto_amigo.png");
     right: 60px;
     top: 15px; }
-    /* line 434, styles.scss */
-    #topo_circuito .foto_perfil.amigo .foto {
-      background-image: url("https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-xfa1/v/t1.0-9/11666223_1024554470902743_1956633168595839533_n.jpg?oh=764a411e0ae8cd061fad0d6b6a10751b&oe=5626FD35&__gda__=1445091518_6f5220195ddf75d1ba6df17693851937"); }
-  /* line 439, styles.scss */
+  /* line 473, styles.scss */
   #topo_circuito .nome_amigo {
     position: absolute;
-    right: 230px;
+    right: 200px;
     width: 150px;
-    top: 15px; }
-  /* line 447, styles.scss */
+    top: 70px; }
+  /* line 481, styles.scss */
   #topo_circuito .topo_escuro p {
     margin-left: 170px;
     font-size: 18px; }
-  /* line 456, styles.scss */
+  /* line 490, styles.scss */
   #topo_circuito .topo_vermelho {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -383,15 +420,15 @@ body {
     padding-top: 115px;
     font-weight: bold;
     font-size: 20px; }
-    /* line 463, styles.scss */
+    /* line 497, styles.scss */
     #topo_circuito .topo_vermelho p {
       margin: 0; }
-    /* line 467, styles.scss */
+    /* line 501, styles.scss */
     #topo_circuito .topo_vermelho h2 {
       margin: 0;
       font-size: 51px; }
 
-/* line 476, styles.scss */
+/* line 510, styles.scss */
 .area_conteudo_topo {
   position: fixed;
   top: 272px;
@@ -401,10 +438,10 @@ body {
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch; }
 
-/* line 488, styles.scss */
+/* line 522, styles.scss */
 #andamento {
   display: none; }
-  /* line 492, styles.scss */
+  /* line 526, styles.scss */
   #andamento .btn_novo_jogo {
     width: 613px;
     height: 147px;
@@ -418,7 +455,7 @@ body {
     font-weight: bold;
     text-decoration: none;
     line-height: 150px; }
-  /* line 507, styles.scss */
+  /* line 541, styles.scss */
   #andamento .titulo {
     text-transform: uppercase;
     font-size: 22px;
@@ -427,7 +464,7 @@ body {
     background-size: 100% auto;
     font-weight: bold;
     color: #FFF; }
-  /* line 517, styles.scss */
+  /* line 551, styles.scss */
   #andamento .jogos_andamento {
     margin: 1px 0;
     padding: 0;
@@ -435,14 +472,14 @@ body {
     height: calc(100% - 451px );
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch; }
-    /* line 528, styles.scss */
+    /* line 562, styles.scss */
     #andamento .jogos_andamento li {
       padding: 30px;
       background-color: #FFF;
       margin: 1px 0;
       font-size: 20px;
       color: #b2b2b1; }
-      /* line 535, styles.scss */
+      /* line 569, styles.scss */
       #andamento .jogos_andamento li .pontuacao {
         font-size: 60px;
         line-height: 95px;
@@ -453,50 +490,50 @@ body {
         font-weight: bold;
         border-left: dotted 2px #6f6f6e;
         padding-left: 30px; }
-      /* line 547, styles.scss */
+      /* line 581, styles.scss */
       #andamento .jogos_andamento li .foto {
         width: 85px;
         height: 85px;
         border: solid 5px #6f6f6e;
-        background: url("https://scontent-mia1-1.xx.fbcdn.net/hphotos-xpa1/v/t1.0-9/11242071_835956393149312_7178190722483071505_n.jpg?oh=f962645b902693e50c0bd576cb3faf70&oe=5612744D") center center;
+        background: center center;
         background-size: cover;
         margin-right: 30px;
         float: left; }
-      /* line 558, styles.scss */
+      /* line 592, styles.scss */
       #andamento .jogos_andamento li h2 {
         font-size: 25px;
         color: #6f6f6e;
         margin: 0; }
-      /* line 564, styles.scss */
+      /* line 598, styles.scss */
       #andamento .jogos_andamento li p {
         margin: 5px 0 0 0; }
-      /* line 568, styles.scss */
+      /* line 602, styles.scss */
       #andamento .jogos_andamento li .destaque {
         color: red;
         font-weight: bold; }
-  /* line 576, styles.scss */
+  /* line 610, styles.scss */
   #andamento .rodape {
     width: 90%;
     margin: 0 auto;
     text-align: right; }
 
-/* line 583, styles.scss */
+/* line 617, styles.scss */
 #novo_jogo {
   display: none; }
-  /* line 587, styles.scss */
+  /* line 621, styles.scss */
   #novo_jogo .conteudo {
     width: 90%;
     margin: 0 auto;
     text-align: center;
     height: calc(100% -  202px); }
-  /* line 594, styles.scss */
+  /* line 628, styles.scss */
   #novo_jogo h2 {
     font-size: 30px;
     color: #c25217; }
-  /* line 599, styles.scss */
+  /* line 633, styles.scss */
   #novo_jogo a {
     color: #6f6f6e; }
-  /* line 603, styles.scss */
+  /* line 637, styles.scss */
   #novo_jogo .btn_cor {
     width: 482px;
     height: 136px;
@@ -510,25 +547,25 @@ body {
     font-weight: bold;
     text-decoration: none;
     line-height: 136px; }
-  /* line 618, styles.scss */
+  /* line 652, styles.scss */
   #novo_jogo .btn_vermelho {
     width: 467px;
     height: 150px;
     background-image: url("images/btn_vermelho.png"); }
-  /* line 624, styles.scss */
+  /* line 658, styles.scss */
   #novo_jogo .rodape {
     width: 90%;
     margin: 0 auto;
     text-align: right; }
 
-/* line 633, styles.scss */
+/* line 667, styles.scss */
 #add_amigos {
   display: none;
   padding-top: 30px;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box; }
-  /* line 640, styles.scss */
+  /* line 674, styles.scss */
   #add_amigos .guias {
     margin: 0;
     padding: 0;
@@ -536,7 +573,7 @@ body {
     font-size: 24px;
     font-weight: bold;
     height: 68px; }
-    /* line 648, styles.scss */
+    /* line 682, styles.scss */
     #add_amigos .guias li {
       margin: 0;
       padding: 0;
@@ -544,19 +581,19 @@ body {
       float: left;
       width: 50%;
       background: #21313d; }
-      /* line 657, styles.scss */
+      /* line 691, styles.scss */
       #add_amigos .guias li a {
         color: #FFF;
         display: block;
         text-decoration: none;
         padding: 20px; }
-      /* line 665, styles.scss */
+      /* line 699, styles.scss */
       #add_amigos .guias li.sel {
         background: white; }
-        /* line 667, styles.scss */
+        /* line 701, styles.scss */
         #add_amigos .guias li.sel a {
           color: #181815; }
-  /* line 673, styles.scss */
+  /* line 707, styles.scss */
   #add_amigos .lista {
     margin: 0;
     padding: 0;
@@ -568,39 +605,45 @@ body {
     display: none;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch; }
-    /* line 689, styles.scss */
+    /* line 723, styles.scss */
     #add_amigos .lista li {
       margin: 0;
       padding: 0px 30px 30px 30px; }
-    /* line 694, styles.scss */
+    /* line 728, styles.scss */
     #add_amigos .lista .check {
       float: right;
       font-size: 50px; }
-    /* line 699, styles.scss */
+    /* line 733, styles.scss */
     #add_amigos .lista .item {
       border-bottom: solid 1px #6f6f6e;
       padding-bottom: 30px; }
-    /* line 704, styles.scss */
+    /* line 738, styles.scss */
     #add_amigos .lista .foto {
       width: 85px;
       height: 85px;
-      background: url("https://scontent-mia1-1.xx.fbcdn.net/hphotos-xpa1/v/t1.0-9/11242071_835956393149312_7178190722483071505_n.jpg?oh=f962645b902693e50c0bd576cb3faf70&oe=5612744D") center center;
+      background: center center;
       background-size: cover;
       margin-right: 30px;
       float: left; }
-    /* line 715, styles.scss */
+    /* line 749, styles.scss */
     #add_amigos .lista h2 {
       font-size: 25px;
       color: #6f6f6e;
       margin: 0; }
-  /* line 723, styles.scss */
+    /* line 755, styles.scss */
+    #add_amigos .lista .aviso {
+      text-align: center;
+      font-size: 25px;
+      color: #6f6f6e;
+      font-style: italic; }
+  /* line 764, styles.scss */
   #add_amigos .btns {
     margin: 0;
     padding: 0;
     list-style: none;
     font-size: 40px;
     font-weight: bold; }
-    /* line 730, styles.scss */
+    /* line 771, styles.scss */
     #add_amigos .btns li {
       margin: 0;
       padding: 0;
@@ -610,70 +653,238 @@ body {
       background-size: 100% auto;
       text-align: center;
       text-transform: uppercase; }
-      /* line 741, styles.scss */
+      /* line 782, styles.scss */
       #add_amigos .btns li a {
         color: #FFF;
         display: block;
         text-decoration: none;
         padding: 20px; }
-      /* line 748, styles.scss */
+      /* line 789, styles.scss */
       #add_amigos .btns li.amarelo {
         background-image: url("images/alfinete_amarelo.png"); }
 
-/* line 759, styles.scss */
+/* line 799, styles.scss */
+.telas_guias {
+  display: none;
+  padding-top: 30px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; }
+  /* line 806, styles.scss */
+  .telas_guias .guias {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 24px;
+    font-weight: bold;
+    height: 68px; }
+    /* line 814, styles.scss */
+    .telas_guias .guias li {
+      margin: 0;
+      padding: 0;
+      display: inline-block;
+      float: left;
+      width: 50%; }
+      /* line 823, styles.scss */
+      .telas_guias .guias li a {
+        color: #FFF;
+        display: block;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-bottom: solid 10px #f1ead6;
+        text-align: center; }
+      /* line 833, styles.scss */
+      .telas_guias .guias li.sel {
+        border-bottom: solid 10px white; }
+        /* line 835, styles.scss */
+        .telas_guias .guias li.sel a {
+          color: #181815; }
+  /* line 841, styles.scss */
+  .telas_guias .swiper-container {
+    background: white;
+    width: 100%;
+    height: calc(100% - 68px ); }
+    /* line 847, styles.scss */
+    .telas_guias .swiper-container .swiper-wrapper, .telas_guias .swiper-container .swiper-slide {
+      width: 100%;
+      height: 100%; }
+    /* line 852, styles.scss */
+    .telas_guias .swiper-container .swiper-slide {
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch; }
+    /* line 857, styles.scss */
+    .telas_guias .swiper-container .lista {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-size: 24px; }
+      /* line 863, styles.scss */
+      .telas_guias .swiper-container .lista li {
+        margin: 0;
+        padding: 30px 15px;
+        color: #181815;
+        border-bottom: solid 1px #dadad9; }
+        /* line 870, styles.scss */
+        .telas_guias .swiper-container .lista li hr {
+          border: none;
+          border-bottom: solid 1px #dadad9; }
+        /* line 875, styles.scss */
+        .telas_guias .swiper-container .lista li .seta {
+          width: 50px;
+          height: 80px;
+          float: left;
+          position: relative;
+          -moz-transition: all 0.5s ease;
+          -o-transition: all 0.5s ease;
+          -webkit-transition: all 0.5s ease;
+          transition: all 0.5s ease; }
+          /* line 883, styles.scss */
+          .telas_guias .swiper-container .lista li .seta img {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -13px;
+            margin-top: -20px; }
+          /* line 891, styles.scss */
+          .telas_guias .swiper-container .lista li .seta.open {
+            -moz-transform: rotate(90deg);
+            -ms-transform: rotate(90deg);
+            -webkit-transform: rotate(90deg);
+            transform: rotate(90deg); }
+        /* line 896, styles.scss */
+        .telas_guias .swiper-container .lista li .foto {
+          width: 80px;
+          height: 80px;
+          background: #CCC;
+          float: left;
+          margin-right: 20px; }
+        /* line 904, styles.scss */
+        .telas_guias .swiper-container .lista li .info {
+          float: left;
+          width: calc(100% - 315px); }
+          /* line 908, styles.scss */
+          .telas_guias .swiper-container .lista li .info h2 {
+            font-size: 24px;
+            margin: 0; }
+          /* line 913, styles.scss */
+          .telas_guias .swiper-container .lista li .info p {
+            margin: 0;
+            font-size: 18px; }
+            /* line 917, styles.scss */
+            .telas_guias .swiper-container .lista li .info p.endereco {
+              color: #6f6f6e; }
+            /* line 921, styles.scss */
+            .telas_guias .swiper-container .lista li .info p.premiacao {
+              font-weight: bold;
+              color: #b6c805; }
+        /* line 929, styles.scss */
+        .telas_guias .swiper-container .lista li.est_info .foto {
+          width: 200px;
+          height: 200px; }
+        /* line 934, styles.scss */
+        .telas_guias .swiper-container .lista li.est_info .info {
+          width: calc(100% - 230px); }
+          /* line 938, styles.scss */
+          .telas_guias .swiper-container .lista li.est_info .info h2 {
+            font-size: 28px; }
+          /* line 942, styles.scss */
+          .telas_guias .swiper-container .lista li.est_info .info .endereco {
+            font-size: 21px; }
+          /* line 946, styles.scss */
+          .telas_guias .swiper-container .lista li.est_info .info .premiacao {
+            font-size: 39px;
+            margin-top: 15px; }
+        /* line 954, styles.scss */
+        .telas_guias .swiper-container .lista li .icos {
+          text-align: right;
+          width: 165px;
+          float: left; }
+          /* line 959, styles.scss */
+          .telas_guias .swiper-container .lista li .icos a {
+            display: inline-block;
+            margin: 0 8px; }
+        /* line 965, styles.scss */
+        .telas_guias .swiper-container .lista li .programacao {
+          display: none;
+          padding-top: 15px;
+          margin-left: 150px; }
+        /* line 972, styles.scss */
+        .telas_guias .swiper-container .lista li .texto {
+          padding: 20px; }
+        /* line 979, styles.scss */
+        .telas_guias .swiper-container .lista li.stats .txt_valor {
+          color: #b6c805;
+          font-size: 48px;
+          font-weight: bold;
+          margin: 0;
+          float: right; }
+          /* line 986, styles.scss */
+          .telas_guias .swiper-container .lista li.stats .txt_valor.negativo {
+            color: #dd8d8d; }
+        /* line 991, styles.scss */
+        .telas_guias .swiper-container .lista li.stats .txt_info {
+          font-size: 24px;
+          font-weight: bold;
+          margin: 0; }
+        /* line 997, styles.scss */
+        .telas_guias .swiper-container .lista li.stats .txt_data {
+          margin: 0;
+          color: #b6c805; }
+
+/* line 1016, styles.scss */
 #sel_tema .ico_temas, #jogo .ico_temas {
   margin: 0 30px;
   padding: 0; }
-  /* line 763, styles.scss */
+  /* line 1020, styles.scss */
   #sel_tema .ico_temas.amigo, #jogo .ico_temas.amigo {
     float: right; }
-  /* line 767, styles.scss */
+  /* line 1024, styles.scss */
   #sel_tema .ico_temas li, #jogo .ico_temas li {
     display: inline-block; }
-  /* line 771, styles.scss */
+  /* line 1028, styles.scss */
   #sel_tema .ico_temas .ico, #jogo .ico_temas .ico {
     width: 45px;
     height: 45px;
     background: no-repeat center center; }
-  /* line 777, styles.scss */
-  #sel_tema .ico_temas .ico-cinema, #jogo .ico_temas .ico-cinema {
+  /* line 1034, styles.scss */
+  #sel_tema .ico_temas .ico-cinema.on, #jogo .ico_temas .ico-cinema.on {
     background-image: url("images/ico_cinema_on.png"); }
-  /* line 778, styles.scss */
-  #sel_tema .ico_temas .ico-teatro, #jogo .ico_temas .ico-teatro {
+  /* line 1035, styles.scss */
+  #sel_tema .ico_temas .ico-teatro.on, #jogo .ico_temas .ico-teatro.on {
     background-image: url("images/ico_teatro_on.png"); }
-  /* line 779, styles.scss */
-  #sel_tema .ico_temas .ico-musica, #jogo .ico_temas .ico-musica {
+  /* line 1036, styles.scss */
+  #sel_tema .ico_temas .ico-musica.on, #jogo .ico_temas .ico-musica.on {
     background-image: url("images/ico_musica_on.png"); }
-  /* line 780, styles.scss */
-  #sel_tema .ico_temas .ico-pintura, #jogo .ico_temas .ico-pintura {
+  /* line 1037, styles.scss */
+  #sel_tema .ico_temas .ico-pintura.on, #jogo .ico_temas .ico-pintura.on {
     background-image: url("images/ico_pintura_on.png"); }
-  /* line 781, styles.scss */
-  #sel_tema .ico_temas .ico-evento, #jogo .ico_temas .ico-evento {
+  /* line 1038, styles.scss */
+  #sel_tema .ico_temas .ico-evento.on, #jogo .ico_temas .ico-evento.on {
     background-image: url("images/ico_evento_on.png"); }
-  /* line 783, styles.scss */
-  #sel_tema .ico_temas .ico-cinema.off, #jogo .ico_temas .ico-cinema.off {
+  /* line 1040, styles.scss */
+  #sel_tema .ico_temas .ico-cinema, #jogo .ico_temas .ico-cinema {
     background-image: url("images/ico_cinema_off.png"); }
-  /* line 784, styles.scss */
-  #sel_tema .ico_temas .ico-teatro.off, #jogo .ico_temas .ico-teatro.off {
+  /* line 1041, styles.scss */
+  #sel_tema .ico_temas .ico-teatro, #jogo .ico_temas .ico-teatro {
     background-image: url("images/ico_teatro_off.png"); }
-  /* line 785, styles.scss */
-  #sel_tema .ico_temas .ico-musica.off, #jogo .ico_temas .ico-musica.off {
+  /* line 1042, styles.scss */
+  #sel_tema .ico_temas .ico-musica, #jogo .ico_temas .ico-musica {
     background-image: url("images/ico_musica_off.png"); }
-  /* line 786, styles.scss */
-  #sel_tema .ico_temas .ico-pintura.off, #jogo .ico_temas .ico-pintura.off {
+  /* line 1043, styles.scss */
+  #sel_tema .ico_temas .ico-pintura, #jogo .ico_temas .ico-pintura {
     background-image: url("images/ico_pintura_off.png"); }
-  /* line 787, styles.scss */
-  #sel_tema .ico_temas .ico-evento.off, #jogo .ico_temas .ico-evento.off {
+  /* line 1044, styles.scss */
+  #sel_tema .ico_temas .ico-evento, #jogo .ico_temas .ico-evento {
     background-image: url("images/ico_evento_off.png"); }
 
-/* line 791, styles.scss */
+/* line 1048, styles.scss */
 #sel_tema {
   display: none;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   padding-top: 30px; }
-  /* line 798, styles.scss */
+  /* line 1055, styles.scss */
   #sel_tema .roleta {
     width: 464px;
     height: 667px;
@@ -683,7 +894,7 @@ body {
     left: 50%;
     margin-left: -232px;
     margin-top: -333.5px; }
-    /* line 808, styles.scss */
+    /* line 1065, styles.scss */
     #sel_tema .roleta .overlay {
       width: 278px;
       height: 419px;
@@ -691,23 +902,23 @@ body {
       left: 102px;
       top: 51px;
       z-index: 10; }
-    /* line 818, styles.scss */
+    /* line 1075, styles.scss */
     #sel_tema .roleta .sombra_cima, #sel_tema .roleta .sombra_baixo {
       position: absolute;
       width: 100%;
       height: 100%;
       background: url("images/roleta_sombra_cima.png") repeat-x top center; }
-    /* line 825, styles.scss */
+    /* line 1082, styles.scss */
     #sel_tema .roleta .sombra_baixo {
       background: url("images/roleta_sombra_baixo.png") repeat-x bottom center; }
-    /* line 829, styles.scss */
+    /* line 1086, styles.scss */
     #sel_tema .roleta .setas {
       position: absolute;
       width: 100%;
       height: 100%;
       z-index: 10;
       background: url("images/roleta_setas.png") no-repeat center center; }
-    /* line 838, styles.scss */
+    /* line 1095, styles.scss */
     #sel_tema .roleta .janela {
       width: 278px;
       height: 419px;
@@ -715,38 +926,38 @@ body {
       position: absolute;
       left: 102px;
       top: 51px; }
-      /* line 846, styles.scss */
+      /* line 1103, styles.scss */
       #sel_tema .roleta .janela .swiper-slide {
         width: 278px;
         height: 278px;
         background: no-repeat center center;
         background-size: 70% auto; }
-        /* line 852, styles.scss */
+        /* line 1109, styles.scss */
         #sel_tema .roleta .janela .swiper-slide.cinema {
           background-color: #f7f4da;
           background-image: url("images/temas/cinema.svg"); }
-        /* line 857, styles.scss */
+        /* line 1114, styles.scss */
         #sel_tema .roleta .janela .swiper-slide.musica {
           background-color: #80b6c1;
           background-image: url("images/temas/musica.svg"); }
-        /* line 862, styles.scss */
+        /* line 1119, styles.scss */
         #sel_tema .roleta .janela .swiper-slide.teatro {
           background-color: #9e1d3e;
           background-image: url("images/temas/teatro.svg"); }
-        /* line 867, styles.scss */
+        /* line 1124, styles.scss */
         #sel_tema .roleta .janela .swiper-slide.pintura {
           background-color: #d88553;
           background-image: url("images/temas/pintura.svg"); }
-        /* line 872, styles.scss */
+        /* line 1129, styles.scss */
         #sel_tema .roleta .janela .swiper-slide.eventos {
           background-color: #2a353e;
           background-image: url("images/temas/evento.svg"); }
-  /* line 882, styles.scss */
+  /* line 1139, styles.scss */
   #sel_tema .btn_roleta {
     position: absolute;
     bottom: 30px;
     right: 30px; }
-  /* line 888, styles.scss */
+  /* line 1145, styles.scss */
   #sel_tema .info_roleta {
     font-size: 24px;
     font-weight: bold;
@@ -755,25 +966,25 @@ body {
     bottom: 30px;
     left: 30px; }
 
-/* line 900, styles.scss */
+/* line 1157, styles.scss */
 #jogo {
   display: none;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   padding-top: 30px; }
-  /* line 907, styles.scss */
+  /* line 1164, styles.scss */
   #jogo .box_jogo {
     width: 616px;
     margin: 60px auto 0 auto;
     height: calc(100% - 120px); }
-  /* line 913, styles.scss */
+  /* line 1170, styles.scss */
   #jogo .topo {
     width: 616px;
     height: 36px;
     background: url("images/bg_jogo_top.png");
     position: relative; }
-  /* line 920, styles.scss */
+  /* line 1177, styles.scss */
   #jogo .meio {
     min-height: 150px;
     -moz-box-sizing: border-box;
@@ -785,12 +996,12 @@ body {
     background: url("images/bg_jogo_middle.png") no-repeat center center;
     background-size: 616px 100%;
     height: calc(100% - 110px); }
-  /* line 936, styles.scss */
+  /* line 1193, styles.scss */
   #jogo .baixo {
     width: 616px;
     height: 74px;
     background: url("images/bg_jogo_bottom.png"); }
-  /* line 942, styles.scss */
+  /* line 1199, styles.scss */
   #jogo .ico_atual {
     width: 123px;
     height: 123px;
@@ -800,27 +1011,27 @@ body {
     z-index: 10;
     border-radius: 50%;
     margin: -45px 0 0 15px; }
-    /* line 953, styles.scss */
+    /* line 1210, styles.scss */
     #jogo .ico_atual.cinema {
       background-color: #f7f4da;
       background-image: url("images/temas/cinema.svg"); }
-    /* line 958, styles.scss */
+    /* line 1215, styles.scss */
     #jogo .ico_atual.musica {
       background-color: #80b6c1;
       background-image: url("images/temas/musica.svg"); }
-    /* line 963, styles.scss */
+    /* line 1220, styles.scss */
     #jogo .ico_atual.teatro {
       background-color: #9e1d3e;
       background-image: url("images/temas/teatro.svg"); }
-    /* line 968, styles.scss */
+    /* line 1225, styles.scss */
     #jogo .ico_atual.pintura {
       background-color: #d88553;
       background-image: url("images/temas/pintura.svg"); }
-    /* line 973, styles.scss */
-    #jogo .ico_atual.eventos {
+    /* line 1230, styles.scss */
+    #jogo .ico_atual.eventos, #jogo .ico_atual.evento {
       background-color: #2a353e;
       background-image: url("images/temas/evento.svg"); }
-  /* line 979, styles.scss */
+  /* line 1236, styles.scss */
   #jogo .tempo {
     width: 475px;
     height: 58px;
@@ -830,18 +1041,18 @@ body {
     mask: url(images/mascara_tempo.png);
     -webkit-mask: url(images/mascara_tempo.png);
     margin-top: -30px; }
-    /* line 989, styles.scss */
+    /* line 1246, styles.scss */
     #jogo .tempo .cor {
       width: 100%;
       height: 100%;
       background: #9e1d3f url("images/alfinete_tempo.png") repeat-y right center;
       margin-left: -100%; }
-  /* line 998, styles.scss */
+  /* line 1255, styles.scss */
   #jogo h2 {
     font-size: 25px;
     font-weight: bold;
     margin: 15px 20px 25px 155px; }
-  /* line 1004, styles.scss */
+  /* line 1261, styles.scss */
   #jogo .resposta {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -856,18 +1067,18 @@ body {
     background: rgba(255, 255, 255, 0.8);
     border: solid 2px rgba(179, 138, 90, 0.8);
     margin: 15px auto; }
-    /* line 1017, styles.scss */
+    /* line 1274, styles.scss */
     #jogo .resposta.certa {
       background: url("images/alfinete_verde.png") center center;
       background-size: 100% 100%;
       color: #fff; }
-    /* line 1023, styles.scss */
+    /* line 1280, styles.scss */
     #jogo .resposta.errada {
       background: url("images/alfinete_vermelho.png") center center;
       background-size: 100% 100%;
       color: #fff; }
 
-/* line 1032, styles.scss */
+/* line 1289, styles.scss */
 #overlay {
   display: none;
   overflow-y: scroll;
@@ -881,11 +1092,11 @@ body {
   z-index: 600;
   text-align: center;
   font-size: 30px; }
-  /* line 1050, styles.scss */
+  /* line 1307, styles.scss */
   #overlay .banner {
     margin: 35px 0;
     text-align: center; }
-  /* line 1055, styles.scss */
+  /* line 1312, styles.scss */
   #overlay .ico-tema {
     width: 175px;
     height: 175px;
@@ -897,39 +1108,39 @@ body {
     top: 50%;
     left: 50%;
     margin: -87.5px 0 0 -87.5px; }
-    /* line 1069, styles.scss */
+    /* line 1326, styles.scss */
     #overlay .ico-tema.grande {
       width: 250px;
       height: 250px;
       margin: -125px 0 0 -125px; }
-    /* line 1075, styles.scss */
+    /* line 1332, styles.scss */
     #overlay .ico-tema.cinema {
       background-color: #f7f4da;
       background-image: url("images/temas/cinema.svg"); }
-    /* line 1080, styles.scss */
+    /* line 1337, styles.scss */
     #overlay .ico-tema.musica {
       background-color: #80b6c1;
       background-image: url("images/temas/musica.svg"); }
-    /* line 1085, styles.scss */
+    /* line 1342, styles.scss */
     #overlay .ico-tema.teatro {
       background-color: #9e1d3e;
       background-image: url("images/temas/teatro.svg"); }
-    /* line 1090, styles.scss */
+    /* line 1347, styles.scss */
     #overlay .ico-tema.pintura {
       background-color: #d88553;
       background-image: url("images/temas/pintura.svg"); }
-    /* line 1095, styles.scss */
-    #overlay .ico-tema.eventos {
+    /* line 1352, styles.scss */
+    #overlay .ico-tema.eventos, #overlay .ico-tema.evento {
       background-color: #2a353e;
       background-image: url("images/temas/evento.svg"); }
-  /* line 1101, styles.scss */
+  /* line 1358, styles.scss */
   #overlay .area_indicador {
     height: 365px;
     position: relative;
     background: url("images/separador.png") repeat-x bottom center;
     width: 90%;
     margin: 0 auto; }
-    /* line 1108, styles.scss */
+    /* line 1365, styles.scss */
     #overlay .area_indicador .placar {
       width: 100%;
       font-size: 52px;
@@ -941,29 +1152,26 @@ body {
       -ms-transform: translate(0%, -50%);
       -webkit-transform: translate(0%, -50%);
       transform: translate(0%, -50%); }
-    /* line 1120, styles.scss */
+    /* line 1377, styles.scss */
     #overlay .area_indicador .foto_perfil {
       width: 136px;
       height: 165px;
       display: block;
       background: url(images/bg_foto_perfil.png) center center no-repeat;
       position: absolute; }
-      /* line 1127, styles.scss */
+      /* line 1384, styles.scss */
       #overlay .area_indicador .foto_perfil .foto {
-        background: url("https://scontent-mia1-1.xx.fbcdn.net/hphotos-xpa1/v/t1.0-9/11242071_835956393149312_7178190722483071505_n.jpg?oh=f962645b902693e50c0bd576cb3faf70&oe=5612744D") center center;
+        background: center center;
         background-size: cover;
         -webkit-mask-image: url(images/mascara_foto.svg);
         -webkit-mask-size: 100% 100%;
         width: 135px;
         height: 136px; }
-    /* line 1138, styles.scss */
+    /* line 1395, styles.scss */
     #overlay .area_indicador .foto_perfil.amigo {
       background-image: url("images/bg_foto_amigo.png");
       right: 0px; }
-      /* line 1142, styles.scss */
-      #overlay .area_indicador .foto_perfil.amigo .foto {
-        background-image: url("https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-xfa1/v/t1.0-9/11666223_1024554470902743_1956633168595839533_n.jpg?oh=764a411e0ae8cd061fad0d6b6a10751b&oe=5626FD35&__gda__=1445091518_6f5220195ddf75d1ba6df17693851937"); }
-    /* line 1147, styles.scss */
+    /* line 1404, styles.scss */
     #overlay .area_indicador .parcial {
       width: 245px;
       height: 245px;
@@ -971,51 +1179,51 @@ body {
       left: 50%;
       top: 50%;
       margin: -140px 0 0 -122px; }
-      /* line 1158, styles.scss */
+      /* line 1415, styles.scss */
       #overlay .area_indicador .parcial .item {
         width: 213px;
         height: 124px;
         background: url(images/marcador_vazio.png) no-repeat center center;
         position: absolute; }
-      /* line 1165, styles.scss */
+      /* line 1422, styles.scss */
       #overlay .area_indicador .parcial .item-certo {
         background-image: url("images/marcador_verde.png"); }
-      /* line 1169, styles.scss */
+      /* line 1426, styles.scss */
       #overlay .area_indicador .parcial .item-errado {
         background-image: url("images/marcador_vermelho.png"); }
-      /* line 1173, styles.scss */
+      /* line 1430, styles.scss */
       #overlay .area_indicador .parcial .item-1 {
         left: 50%;
         margin-left: -106.5px; }
-      /* line 1178, styles.scss */
+      /* line 1435, styles.scss */
       #overlay .area_indicador .parcial .item-2 {
         -moz-transform: rotate(121deg);
         -ms-transform: rotate(121deg);
         -webkit-transform: rotate(121deg);
         transform: rotate(121deg);
         margin: 93px 0 0 70px; }
-      /* line 1183, styles.scss */
+      /* line 1440, styles.scss */
       #overlay .area_indicador .parcial .item-3 {
         -moz-transform: rotate(240deg);
         -ms-transform: rotate(240deg);
         -webkit-transform: rotate(240deg);
         transform: rotate(240deg);
         margin: 91px 0 0 -37px; }
-  /* line 1190, styles.scss */
+  /* line 1447, styles.scss */
   #overlay p {
     color: #FFF; }
-    /* line 1192, styles.scss */
+    /* line 1449, styles.scss */
     #overlay p .amarela {
       color: #f39200; }
-  /* line 1197, styles.scss */
+  /* line 1454, styles.scss */
   #overlay h2 {
     font-size: 30px;
     color: #b6c805;
     text-transform: uppercase; }
-    /* line 1202, styles.scss */
+    /* line 1459, styles.scss */
     #overlay h2.laranja {
       color: #f39200; }
-  /* line 1207, styles.scss */
+  /* line 1464, styles.scss */
   #overlay .faixa {
     width: 613px;
     height: 147px;
@@ -1028,16 +1236,16 @@ body {
     font-weight: bold;
     text-decoration: none;
     line-height: 150px; }
-  /* line 1221, styles.scss */
+  /* line 1478, styles.scss */
   #overlay .faixa-vermelha {
     background-image: url("images/faixa_vermelha.png"); }
-  /* line 1222, styles.scss */
+  /* line 1479, styles.scss */
   #overlay .faixa-amarela {
     background-image: url("images/faixa_amarelo.png"); }
-  /* line 1223, styles.scss */
+  /* line 1480, styles.scss */
   #overlay .faixa-laranja {
     background-image: url("images/faixa_laranja.png"); }
 
-/* line 1227, styles.scss */
-#acertou, #errou, #acertou_tudo, #ganhou_cultz, #ganhou_circuito, #ganhou_cultz_circuito, #empate, #giro_cultz, #ganhou_giro, #errou_giro {
+/* line 1484, styles.scss */
+#acertou, #errou, #acertou_tudo, #ganhou_cultz, #ganhou_5_circuitos, #ganhou_cultz_circuito, #empate, #giro_cultz, #ganhou_giro, #errou_giro, #estabelecimento_info, #estatisticas {
   display: none; }

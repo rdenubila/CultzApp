@@ -5,13 +5,14 @@ if( $(window).width()<640 ){
 
 var swiperInstrucao;
 var swiperRoleta;
+var swiperEstabelecimentos;
+
+var userLogado;
+
+var initReady = false;
+var initFB = false;
 
 $( document ).ready(function() {
-
-	itens = $("#swiperRoleta .swiper-wrapper").html();
-	for(i=0; i<20; i++){
-		$("#swiperRoleta .swiper-wrapper").append(itens);
-	}
 
 	$("#swiperInstrucao .swiper-wrapper").load("instrucoes.html", function() {
 		
@@ -20,16 +21,35 @@ $( document ).ready(function() {
 	$("#overlay").on('click', function(event) {
 		fechaOverlay();
 	});
-    
-    initAndamento();
-	initAddAmigos();
 
-	initApp();
+
+	//GUIAS
+	$(".guias_resize").each(function(index, el) {
+		qtd = $(this).find('li').length;
+		$(this).find('li').width( 100/qtd+"%" );
+	});
+    
+    //initAndamento();
+	//initAddAmigos();
+
+	//initApp();
+	initReady = true;
+	checkInit();
 
 });
 
+function checkInit(){
+	if(initReady && initFB){
+		initApp();
+	}
+}
+
 function initApp(){
-	trocaTela("instrucao");
+	if (localStorage.user) {
+		checkLoginState();
+	} else {
+		trocaTela("instrucao");
+	}
 }
 
 var telaAtual = "home";
@@ -45,6 +65,21 @@ function trocaTela(novaTela){
 		$("#topo_fixo").fadeOut();
 	}
 
+	if(novaTela=="add_amigos"){
+		initAddAmigos();
+	}
+
+	if(novaTela=="andamento"){
+		loadCults();
+		LoadRounds();
+	}
+
+	if(novaTela=="estatisticas"){
+		loadStats();
+	}
+
+	
+
 	$("#"+telaAtual).delay(telaAtual=="home" ? 1000 : 0).fadeOut('fast', function() {
 		$("#"+novaTela).fadeIn("fast", function(){
 
@@ -57,6 +92,16 @@ function trocaTela(novaTela){
 				});
 			}
 
+			if(telaAtual=="estabelecimento_info"){
+				swiperEstInfo = new Swiper('#swiperEstInfo', {
+					onSlideChangeEnd: function(s){
+						$("#estabelecimento_info .guias .sel").removeClass('sel');
+						$("#estabelecimento_info .guias li").eq(s.activeIndex).addClass('sel');
+					}
+				});
+			}
+			
+
 			if(telaAtual=="sel_tema"){
 				initRoleta();
 			}
@@ -64,6 +109,12 @@ function trocaTela(novaTela){
 			if(telaAtual=="jogo"){
 				initPergunta();
 			}
+
+			if(telaAtual=="estabelecimentos"){
+				initEstabelecimentos();
+			}
+
+			
 
 		});
 	});
@@ -74,6 +125,14 @@ function trocaTela(novaTela){
 
 var ultimaTelaOverlay;
 function mostraOverlay(id, d){
+
+	switch(id){
+		case "errou": finalizaCircuito(false); break;
+		case "acertou_tudo": finalizaCircuito(true); break;
+		case "ganhou_cultz": finalizaCircuito(true); addCultz("Acertou todas as perguntas do circuito", 1); break;
+		case "ganhou_cultz_circuito": finalizaCircuito(true); addCultz("Acertou todas as perguntas do circuito", 1); break;
+		case "ganhou_5_circuitos": addCultz("Ganhou 5 circuitos", 1); finalizaCircuito(true); break;
+	}
 
 	$("#overlay .msgs").hide();
 	$("#overlay #"+id).show();
@@ -90,14 +149,18 @@ function fechaOverlay(){
 
 	switch(ultimaTelaOverlay){
 		case "acertou":
-		case "acertou_tudo":
 			initPergunta();
 			break;
-		case "errou":
-		case "ganhou_cultz":
+		default:
 			trocaTela("andamento");
 			break;
 	}
+}
+
+function loginComplete(){
+	$("#topo_fixo .foto").css('background-image', 'url('+userLogado.foto+')');
+
+	$("#topo_fixo .nome").html(userLogado.nome);
 }
 
 function initAndamento(){
@@ -123,6 +186,11 @@ function toggleCheck(obj){
 
 function initAddAmigos(){
 
+	$("#lista_fb").html("");
+	$("#lista_ac").html("");
+
+	getFriendsFB();
+
 	$("#add_amigos .guias a").on('click', function(event) {
 		event.preventDefault();
 		$("#add_amigos .guias .sel").removeAttr('class');
@@ -135,13 +203,226 @@ function initAddAmigos(){
 
 }
 
+function AmigosLoadFB(ids){
+
+	$("#lista_fb").html("");
+	$("#lista_ac").html("");
+
+	$.getJSON( apiURL+"getFriends.php", {id: userLogado.id, ids: ids, tipo: 'fb'}).done(function( data ) {
+		console.log("----- FRIENDS ------")
+		console.log(data);
+
+		for(i=0; i<data.length; i++){
+			d = data[i];
+
+			html = '<li>';
+			html += '	<div class="item" data-id="'+d.id+'" onclick="toggleCheck(this);">';
+			html += '		<div class="check"> <i class="icon-uncheck"></i> </div>';
+			
+			if(d.foto!=""){
+				html += '		<div class="foto" style="background-image: url(\''+d.foto+'\')"></div>';
+			} else {
+				html += '		<div class="foto" style="background-image: url(images/profile.png)"></div>';
+			}
+
+
+			html += '		<h2>'+d.nome+'</h2>';
+			html += '		<div class="clear"></div>';
+			html += '	</div>';
+			html += '</li>';
+
+			if(d.id_fb==""){
+				$("#lista_ac").append(html);
+			} else {
+				$("#lista_fb").append(html);
+			}
+		}
+
+
+		if($("#lista_fb").html()==""){
+			$("#lista_fb").html("<li><p class='aviso'>Você não tem nenhum amigo para convidar.</p></li>")
+		}
+
+		if($("#lista_ac").html()==""){
+			$("#lista_ac").html("<li><p class='aviso'>Você não tem nenhum amigo para convidar.</p></li>")
+		}
+
+
+
+		$("#loading").fadeOut("fast");
+
+	});
+
+}
+
+function convidaAmigos(){
+
+	if($("#add_amigos .icon-check").length==0){
+		alert("Selecione pelo menos um amigo para convidar");
+	} else {
+
+		ids = new Array();
+
+		$("#add_amigos .icon-check").each(function(index, el) {
+			ids.push( $(this).parent().parent().data('id') );
+		});
+
+		enviaConvite(ids.join(','));
+
+	}
+}
+
+function enviaConvite(ids){
+
+	$("#loading").fadeIn("fast");
+
+	$.getJSON( apiURL+"setInvite.php", {id: userLogado.id, ids: ids } ).done(function( data ) {
+
+		$("#loading").fadeOut("fast");
+		if(data.result == true){
+			if(data.qtd==0){
+				alert("Não há nenhum usuário para convidar. Convide seus amigos!");
+			}
+			trocaTela('andamento');
+		} else {
+			alert(data.error);
+		}
+
+	}).fail(function( jqxhr, textStatus, error ) {
+		var err = textStatus + ", " + error;
+		console.log( "Request Failed: " + err );
+	});
+}
+
+
+function LoadRounds(){
+
+	$("#jogos_andamento").html("");
+
+	$.getJSON( apiURL+"getRounds.php", {id: userLogado.id}).done(function( data ) {
+		console.log("----- ROUNDS ------")
+		console.log(data);
+
+
+		for(i=0; i<data.length; i++){
+			d = data[i];
+
+			if(d.vez==userLogado.id){
+				html = '<li onclick="selJogo('+d.id+')">';
+			} else {
+				html = '<li onclick="vezAdversario()">';
+			}
+
+			if(d.foto!=""){
+				html += '		<div class="foto" style="background-image: url(\''+d.foto+'\')"></div>';
+			} else {
+				html += '		<div class="foto" style="background-image: url(images/profile.png)"></div>';
+			}
+
+			html += '	<div class="pontuacao">'+d.placar1+'x'+d.placar2+'</div>';
+
+			html += '	<h2>'+d.nome+'</h2>';
+
+			if(d.vez==userLogado.id){
+				html += '	<p class="destaque">Sua vez</p>';
+			} else {
+				html += '	<p class="destaque">Vez do seu adversário</p>';
+			}
+
+			html += '	<p>72 h</p>';
+			html += '	<div class="clear"></div>';
+
+			html += '</li>';
+
+			
+			$("#jogos_andamento").append(html);
+			
+		}
+
+	});
+}
+
+function vezAdversario(){
+	alert("Aguarde seu adversário jogar!");
+}
+
+var roundAtual;
+var iUser;
+function selJogo(idRound){
+
+	$.getJSON( apiURL+"getRound.php", {id_user: userLogado.id, id: idRound}).done(function( data ) {
+		console.log("----- ROUND ------")
+		console.log(data);
+
+		roundAtual = data;
+
+		$("#circuito_foto1, .circuito_foto1").css('background-image', 'url('+roundAtual.user1.foto+')');
+		$("#circuito_nome1, .circuito_nome1").html(roundAtual.user1.nome);
+
+		$("#circuito_foto2, .circuito_foto2").css('background-image', 'url('+roundAtual.user2.foto+')');
+		$("#circuito_nome2, .circuito_nome2").html(roundAtual.user2.nome);
+
+		$("#circuito_placar, .circuito_placar").html(zeroFill(roundAtual.round.placar1) +" x "+ zeroFill(roundAtual.round.placar2));
+
+		$("#circuito_count").html("Circuito: " + (parseInt(roundAtual.round.circuito_count)+1) +" de "+ (parseInt(roundAtual.round.round_count)+1)*5 );
+
+		$(".ico_temas .on").removeClass('on');
+
+		if(roundAtual.round.area_cinema1=="s"){	$(".ico_temas1 .ico-cinema").addClass('on'); }
+		if(roundAtual.round.area_evento1=="s"){	$(".ico_temas1 .ico-evento").addClass('on'); }
+		if(roundAtual.round.area_musica1=="s"){	$(".ico_temas1 .ico-musica").addClass('on'); }
+		if(roundAtual.round.area_pintura1=="s"){ $(".ico_temas1 .ico-pintura").addClass('on'); }
+		if(roundAtual.round.area_teatro1=="s"){	$(".ico_temas1 .ico-teatro").addClass('on'); }
+		if(roundAtual.round.area_cinema2=="s"){	$(".ico_temas2 .ico-cinema").addClass('on'); }
+		if(roundAtual.round.area_evento2=="s"){	$(".ico_temas2 .ico-evento").addClass('on'); }
+		if(roundAtual.round.area_musica2=="s"){	$(".ico_temas2 .ico-musica").addClass('on'); }
+		if(roundAtual.round.area_pintura2=="s"){ $(".ico_temas2 .ico-pintura").addClass('on'); }
+		if(roundAtual.round.area_teatro2=="s"){	$(".ico_temas2 .ico-teatro").addClass('on'); }
+
+
+		iUser = roundAtual.user1.id==userLogado.id ? "1" : "2";
+
+		$("#swiperRoleta .swiper-wrapper").html("");
+
+		if( !$(".ico_temas"+iUser+" .ico-cinema").hasClass('on') ){
+			$("#swiperRoleta .swiper-wrapper").append('<div class="swiper-slide cinema" data-tipo="cinema" data-tipoid="11"></div>');
+		}
+
+		if( !$(".ico_temas"+iUser+" .ico-evento").hasClass('on') ){
+			$("#swiperRoleta .swiper-wrapper").append('<div class="swiper-slide eventos" data-tipo="eventos" data-tipoid="15"></div>');
+		}
+
+		if( !$(".ico_temas"+iUser+" .ico-musica").hasClass('on') ){
+			$("#swiperRoleta .swiper-wrapper").append('<div class="swiper-slide musica" data-tipo="musica" data-tipoid="13"></div>');
+		}
+
+		if( !$(".ico_temas"+iUser+" .ico-teatro").hasClass('on') ){
+			$("#swiperRoleta .swiper-wrapper").append('<div class="swiper-slide teatro" data-tipo="teatro" data-tipoid="12"></div>');
+		}
+
+		if( !$(".ico_temas"+iUser+" .ico-pintura").hasClass('on') ){
+			$("#swiperRoleta .swiper-wrapper").append('<div class="swiper-slide pintura" data-tipo="pintura" data-tipoid="14"></div>');
+		}
+		
+
+	});
+
+	trocaTela('sel_tema');
+}
+
 
 var roletaGirada = false;
 function initRoleta(){
 
 	roletaGirada = false;
 
-	
+	itens = $("#swiperRoleta .swiper-wrapper").html();
+
+	t = 100/$("#swiperRoleta .swiper-wrapper .swiper-slide").length;
+
+	for(i=0; i<t; i++){
+		$("#swiperRoleta .swiper-wrapper").append(itens);
+	}
 
 	swiperRoleta = new Swiper('#swiperRoleta', {
 		direction: 'vertical',
@@ -151,7 +432,8 @@ function initRoleta(){
 		onSlideChangeEnd: function(s){
 
 			if(s.activeIndex!=53){
-				trocaTela("jogo");
+				//trocaTela("jogo");
+				temaSelecionado( $(s.slides[s.activeIndex]).data('tipoid') );
 			}
 
 		}
@@ -177,12 +459,49 @@ function girarRoleta(direcao){
 
 	if(!roletaGirada){
 		$(".roleta .setas").hide();
-		i = 10+Math.round(Math.random()*35);
+		i = Math.round(Math.random()*45);
 		swiperRoleta.slideTo( 50 + (i*direcao) , 1000);
 		roletaGirada = true;
 	}
 
 
+}
+
+function temaSelecionado(tipo){
+
+	$arrAreas = new Array();
+	$arrAreas['11'] = "cinema";
+	$arrAreas['12'] = "teatro";
+	$arrAreas['13'] = "musica";
+	$arrAreas['14'] = "pintura";
+	$arrAreas['15'] = "evento";
+
+	c = $arrAreas[tipo];
+	$("#ico_tema_pergunta").removeClass().addClass('ico_atual '+c);
+	$("#overlay .ico-tema").removeClass().addClass('ico-tema '+c);
+
+	loadPerguntas(tipo);
+
+}
+
+var areaAtual;
+var perguntasAtual;
+var iPergunta = 0;
+function loadPerguntas(area){
+
+	areaAtual = area;
+
+	$.getJSON( apiURL+"getQuestions.php", {id_user: userLogado.id, area: area } ).done(function( data ) {
+
+		console.log("----- PERGUNTAS ------")
+		console.log(data);
+
+		perguntasAtual = data;
+		iPergunta = 0;
+
+		trocaTela("jogo");
+
+	});
 }
 
 
@@ -198,6 +517,22 @@ function initPergunta(){
 		mostraOverlay("errou", 0);
 	});
 
+	//ADICIONA PERGUNTA
+	$("#area_QA").html("");
+
+	$("#area_QA").append('<h2>'+ perguntasAtual[iPergunta].pergunta +'</h2>');
+
+	arr_respostas = new Array();
+	arr_respostas.push( '<a href="" class="resposta" data-certa="true">'+ perguntasAtual[iPergunta].certa +'</a>' );
+	arr_respostas.push( '<a href="" class="resposta" data-certa="false">'+ perguntasAtual[iPergunta].errada1 +'</a>' );
+	arr_respostas.push( '<a href="" class="resposta" data-certa="false">'+ perguntasAtual[iPergunta].errada2 +'</a>' );
+	arr_respostas.push( '<a href="" class="resposta" data-certa="false">'+ perguntasAtual[iPergunta].errada3 +'</a>' );
+
+	arr_respostas = shuffle(arr_respostas);
+
+	$("#area_QA").append( arr_respostas.join('') );
+
+
 	$(".box_jogo .resposta").removeClass('certa').removeClass('errada');
 
 	$(".box_jogo .resposta").on('click', function(event) {
@@ -205,6 +540,8 @@ function initPergunta(){
 		event.preventDefault();
 
 		if(!jogou){
+
+			iPergunta++;
 			
 
 			$(".tempo .cor").stop();
@@ -216,10 +553,18 @@ function initPergunta(){
 				if(jogadaAtual<2){
 					mostraOverlay("acertou", 500);
 				} else if(jogadaAtual==2){ 
-					mostraOverlay("acertou_tudo", 500);
-				} else if(jogadaAtual>2){ 
+
+					if(roundAtual.round.circuito_count==4){
+						mostraOverlay("ganhou_cultz_circuito", 500);
+					} else if(roundAtual.round.circuitos_24h>=4){
+						mostraOverlay("ganhou_5_circuitos", 500);
+					} else {
+						mostraOverlay("acertou_tudo", 500);
+					}
+
+				}/* else if(jogadaAtual>2){ 
 					mostraOverlay("ganhou_cultz", 500);
-				}
+				}*/
 
 			} else {
 				$(".box_jogo .resposta").each(function() {
@@ -242,6 +587,58 @@ function initPergunta(){
 
 }
 
+function finalizaCircuito(ganhou){
+	
+	$.getJSON( apiURL+"setCircuitEnd.php", {iUser: iUser, id_user: userLogado.id, id_round: roundAtual.round.id, area: areaAtual, ganhou: (ganhou ? 1 : 0) } ).done(function( data ) {
+
+		if(data.result == true){
+			console.log("------- setCircuitEnd --------");
+		} else {
+			alert(data.error);
+		}
+
+	}).fail(function( jqxhr, textStatus, error ) {
+		var err = textStatus + ", " + error;
+		console.log( "Request Failed: " + err );
+	});
+}
+
+function addCultz(info, qtd){
+
+	$.getJSON( apiURL+"setCultz.php", {id_user: userLogado.id, valor: qtd, info: info} ).done(function( data ) {
+
+		if(data.result == true){
+			console.log("------- setCultz --------");
+		} else {
+			alert(data.error);
+		}
+
+	}).fail(function( jqxhr, textStatus, error ) {
+		var err = textStatus + ", " + error;
+		console.log( "Request Failed: " + err );
+	});
+
+}
+
+var cultzCount = 0;
+function loadCults () {
+
+	$.getJSON( apiURL+"getCultz.php", {id_user: userLogado.id} ).done(function( data ) {
+
+		if(data.result == true){
+			console.log("------- getCultz --------");
+			cultzCount = data.qtd;
+			$("#cultzCount").html(data.qtd);
+		} else {
+			alert(data.error);
+		}
+
+	}).fail(function( jqxhr, textStatus, error ) {
+		var err = textStatus + ", " + error;
+		console.log( "Request Failed: " + err );
+	});
+}
+
 
 function ajustaAcertos(){
 	$(".parcial .item-certo").removeClass('item-certo');
@@ -250,4 +647,166 @@ function ajustaAcertos(){
 	for(i=0; i<jogadaAtual; i++){
 		$(".parcial .item-"+(i+1) ).addClass( acertos[i] ? 'item-certo' : 'item-errado' );
 	}
+}
+
+var business;
+var estLoaded = false;
+function initEstabelecimentos(){
+
+	if(!estLoaded){
+
+		swiperEstabelecimentos = new Swiper('#swiperEstabelecimentos', {
+			onSlideChangeEnd: function(s){
+				$("#estabelecimentos .guias .sel").removeClass('sel');
+				$("#estabelecimentos .guias li").eq(s.activeIndex).addClass('sel');
+			}
+		});
+
+
+		$("#estabelecimentos .guias li").click(function(event) {
+			swiperEstabelecimentos.slideTo( $(this).index() );
+		});
+
+
+		$.getJSON( apiURL+"getBusiness.php", {id_user: userLogado.id} ).done(function( data ) {
+
+			console.log("------- getBusiness --------");
+			business = data;
+			loadEstabelecimentos();
+
+		}).fail(function( jqxhr, textStatus, error ) {
+			var err = textStatus + ", " + error;
+			console.log( "Request Failed: " + err );
+		});
+
+		estLoaded = true;
+
+	}
+	
+	
+}
+
+
+function loadEstabelecimentos(){
+
+	$("#swiperEstabelecimentos .lista").html("");
+
+	for(i=0; i<business.length;i++){
+		d = business[i];
+		console.log(d);
+
+		html = "<li>";
+		html += '<div class="seta"><img src="images/seta.png" height="40" width="25" /></div>';
+		html += '<div class="foto"></div>';
+		html += '<div class="info">';
+		html += '<h2>'+d.nome+'</h2>';
+		html += '<p class="endereco">'+d.endereco+'</p>';
+		html += '<p class="premiacao">'+d.desc_pontos+'</p>';
+		html += '</div>';
+		html += '<div class="icos">';
+		html += '<a href="#"><img src="images/est_pin.png" height="63" width="46"></a>';
+		html += '<a href="javascript: selEstabelecimento('+d.id+')"><img src="images/est_ticket.png" height="71" width="80"></a>';
+		html += '</div>';
+		html += '<div class="clear"></div>';
+		html += '<div class="programacao">'+d.programacao+'</div>';
+		html += "</li>";
+
+		$("#est_"+d.tipo).append(html);
+
+	}
+
+	$("#swiperEstabelecimentos .seta").click(function(){
+		if( $(this).hasClass('open') ){
+			$(this).removeClass('open');
+			$(this).parent().find('.programacao').stop().slideUp();
+		} else {
+			$(this).addClass('open');
+			$(this).parent().find('.programacao').stop().slideDown();
+		}
+	});
+
+}
+
+var actualBusiness;
+function selEstabelecimento(id){
+	trocaTela("estabelecimento_info");
+
+	$.getJSON( apiURL+"getBusinessInfo.php", {id: id} ).done(function( data ) {
+
+		console.log("------- getBusinessInfo --------");
+		actualBusiness = data;
+		loadEstInfo();
+
+	}).fail(function( jqxhr, textStatus, error ) {
+		var err = textStatus + ", " + error;
+		console.log( "Request Failed: " + err );
+	});
+}
+
+var swiperEstInfo;
+function loadEstInfo(){
+
+	$("#estabelecimento_info .guias li").click(function(event) {
+		console.log($(this).index());
+		swiperEstInfo.slideTo( $(this).index() );
+	});
+	
+	$("#est_info, #est_reg").html("");
+
+
+	html = "<li class='est_info'>";
+
+	html += '<div class="foto"></div>';
+	html += '<div class="info">';
+	html += '<h2>'+actualBusiness.nome+'</h2>';
+	html += '<p class="endereco">'+actualBusiness.endereco+'</p>';
+	html += '<p class="premiacao">'+actualBusiness.desc_pontos+'</p>';
+	html += '</div>';
+
+	html += '<div class="clear"></div>';
+	html += '<hr />';
+
+	html += "<div class='texto'>"+actualBusiness.informacoes+"</div>";
+
+	html += "</li>";
+
+	$("#est_info").html( html );
+	$("#est_reg").html( "<li><div class='texto'>"+actualBusiness.regulamento+"</div></li>" );
+
+
+}
+
+
+function loadStats(){
+
+	$("#swiperStat .lista").html("");
+
+	$.getJSON( apiURL+"getStatsCultz.php", {id_user: userLogado.id} ).done(function( data ) {
+
+		console.log("------- getStatsCultz --------");
+		console.log(data);
+
+		for(i=0; i<data.length; i++){
+			d = data[i];
+
+			html = '<li class="stats">';
+
+			c = d.valor<0 ? "negativo" : "positivo";
+
+			html += '<p class="txt_valor '+c+'">'+d.valor+' <img src="images/coin.png" height="33" width="33"></p>';
+			html += '<p class="txt_info">'+d.info+'</p>';
+			html += '<p class="txt_data">'+d.data_cadastro+'</p>';
+
+			html += '</li>';
+
+
+			$("#stat_cultz").append(html);
+
+		}
+
+	}).fail(function( jqxhr, textStatus, error ) {
+		var err = textStatus + ", " + error;
+		console.log( "Request Failed: " + err );
+	});
+
 }

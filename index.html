@@ -16,9 +16,9 @@
 <script src="js/swiper.jquery.min.js"></script>
 <link href="js/swiper.min.css" rel="stylesheet" type="text/css" />
 
-
-
+<script src="js_lib.js"></script>
 <script src="scripts.js"></script>
+<script src="scripts_local.js"></script>
 
 <script src="monaca.viewport.js"></script>
 
@@ -30,10 +30,36 @@
 	}
 </script>
 
+<script>
+	
+
+	window.fbAsyncInit = function() {
+		FB.init({
+			appId      : '1908908612666620',
+			xfbml      : true,
+			version    : 'v2.4'
+		});
+
+		initFB = true;
+		checkInit();
+
+	};
+
+	(function(d, s, id){
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) {return;}
+		js = d.createElement(s); js.id = id;
+		js.src = "//connect.facebook.net/en_US/sdk.js";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+</script>
+
 
 </head>
 
 <body>
+
+	<div id="loading"><div class="logo"></div></div>
 
 	<div id="home"></div>
 
@@ -52,7 +78,7 @@
         </div>
 
         <div class="btns">
-        	<a href="javascript: trocaTela('login');" class="btn_seta laranja">Pular</a>
+        	<!-- <a href="javascript: trocaTela('login');" class="btn_seta laranja">Pular</a> -->
         	<a href="javascript: trocaTela('login');" class="btn_seta">Iniciar</a>
         </div>
 		
@@ -66,7 +92,7 @@
 		</div>
 
 		<div class="conteudo">
-			<a href="javascript: trocaTela('andamento');" class="btn_face"></a>
+			<a href="javascript: checkLoginState();" class="btn_face"></a>
 
 			<div class="separador"></div>
 
@@ -101,7 +127,7 @@
 
 			<i class="foto_perfil"><div class="foto"></div></i>
 
-			<p>danizette@gmail.com</p>
+			<p class="nome">{nome}</p>
 
 			<ul class="estrelas">
 				<li class="amarela"></li>
@@ -111,15 +137,15 @@
 				<li class="preta"></li>
 			</ul>
 	
-			<div class="pontos"><span>15</span><img src="images/ico_cultz.png" height="38" width="38"></div>
+			<div class="pontos"><span id="cultzCount">00</span><img src="images/ico_cultz.png" height="38" width="38"></div>
 
 		</div> <!-- FIM TOP ESCURO -->
 
 		<div class="topo_laranja">
 			<ul class="menu_topo">
 				<li class="add_user"><a href="javascript: trocaTela('andamento');"><i class="icon-user_add"></i></a></li>
-				<li class="pin"><a href="#"><i class="icon-pin"></i></a></li>
-				<li class="stats"><a href="#"><i class="icon-stats"></i></a></li>
+				<li class="pin"><a href="javascript: trocaTela('estabelecimentos');"><i class="icon-pin"></i></a></li>
+				<li class="stats"><a href="javascript: trocaTela('estatisticas');"><i class="icon-stats"></i></a></li>
 			</ul>
 		</div> <!-- FIM LARANJA -->
 
@@ -129,18 +155,18 @@
 	<div id="topo_circuito">
 		<div class="topo_escuro">
 
-			<i class="foto_perfil"><div class="foto"></div></i>
-			<p>Eu</p>
+			<i class="foto_perfil"><div id="circuito_foto1" class="foto"></div></i>
+			<p id="circuito_nome1">Eu</p>
 
-			<i class="foto_perfil amigo"><div class="foto"></div></i>
-			<p class="nome_amigo">Nome do Amigo</p>
+			<i class="foto_perfil amigo"><div id="circuito_foto2" class="foto"></div></i>
+			<p id="circuito_nome2" class="nome_amigo">Nome do Amigo</p>
 
 
 		</div> <!-- FIM TOP ESCURO -->
 
 		<div class="topo_laranja topo_vermelho">
-			<p>Circuito: 11 de 15</p>
-			<h2>08 x 11</h2>
+			<p id="circuito_count"></p>
+			<h2 id="circuito_placar"></h2>
 		</div> <!-- FIM LARANJA -->
 
 	</div> <!-- FIM TOPO FIXO -->
@@ -151,41 +177,11 @@
 		<a class="btn_novo_jogo" href="javascript: trocaTela('novo_jogo');">Iniciar jogo</a>
 
 		<div class="titulo">jogos em andamento</div>
-		<ul class="jogos_andamento">
+		<ul class="jogos_andamento" id="jogos_andamento">
 
 			<li>
 				<div class="foto"></div>
 				<div class="pontuacao">10x20</div>
-
-				<h2>Nome da pessoa</h2>
-				<p class="destaque">Sua vez</p>
-				<p>72 h</p>
-				<div class="clear"></div>
-			</li>
-
-			<li>
-				<div class="foto"></div>
-				<div class="pontuacao">1 x 0</div>
-
-				<h2>Nome da pessoa</h2>
-				<p class="destaque">Sua vez</p>
-				<p>72 h</p>
-				<div class="clear"></div>
-			</li>
-
-			<li>
-				<div class="foto"></div>
-				<div class="pontuacao">1 x 0</div>
-
-				<h2>Nome da pessoa</h2>
-				<p class="destaque">Sua vez</p>
-				<p>72 h</p>
-				<div class="clear"></div>
-			</li>
-
-			<li>
-				<div class="foto"></div>
-				<div class="pontuacao">1 x 0</div>
 
 				<h2>Nome da pessoa</h2>
 				<p class="destaque">Sua vez</p>
@@ -214,7 +210,7 @@
 			<div class="separador"></div>
 
 			<a href="javascript: trocaTela('add_amigos');" class="btn_cor">Convide um amigo</a>
-			<a href="#" class="btn_cor btn_vermelho">Aleatório</a>
+			<a href="javascript: enviaConvite('?');" class="btn_cor btn_vermelho">Aleatório</a>
 
 		</div> <!-- FIM COTNEUDO -->
 		
@@ -224,7 +220,7 @@
 			<a href="#"><img src="images/btn_info.png" height="110" width="177"></a>
 		</div>
 
-	</div> <!-- FIM ANDAMENTO -->
+	</div> <!-- FIM NOVO JOGO -->
 
 	<div id="add_amigos" class="area_conteudo_topo">
 
@@ -234,69 +230,80 @@
 		</ul>
 
 		<ul id="lista_fb" class="lista">
-
-			<li>
-				<div class="item" onclick="toggleCheck(this);">
-					<div class="check"> <i class="icon-uncheck"></i> </div>
-					<div class="foto"></div>
-					<h2>Nome da Pessoa</h2>
-					<div class="clear"></div>
-				</div>
-			</li>
-
-			<li>
-				<div class="item" onclick="toggleCheck(this);">
-					<div class="check"> <i class="icon-uncheck"></i> </div>
-					<div class="foto"></div>
-					<h2>Nome da Pessoa</h2>
-					<div class="clear"></div>
-				</div>
-			</li>
-
-			<li>
-				<div class="item" onclick="toggleCheck(this);">
-					<div class="check"> <i class="icon-uncheck"></i> </div>
-					<div class="foto"></div>
-					<h2>Nome da Pessoa</h2>
-					<div class="clear"></div>
-				</div>
-			</li>
-
-			<li>
-				<div class="item" onclick="toggleCheck(this);">
-					<div class="check"> <i class="icon-uncheck"></i> </div>
-					<div class="foto"></div>
-					<h2>Nome da Pessoa</h2>
-					<div class="clear"></div>
-				</div>
-			</li>
-
 		</ul>
 
 		<ul id="lista_ac" class="lista">
-
-			<li>
-				<div class="item" onclick="toggleCheck(this);">
-					<div class="check"> <i class="icon-uncheck"></i> </div>
-					<div class="foto"></div>
-					<h2>Nome da Pessoa</h2>
-					<div class="clear"></div>
-				</div>
-			</li>
-
 		</ul>
 
 
 		<ul class="btns">
 			<li><a href="javascript: trocaTela('andamento');">Voltar</a></li>
-			<li class="amarelo"><a href="javascript: trocaTela('andamento');">Convidar</a></li>
+			<li class="amarelo"><a href="javascript: convidaAmigos();">Convidar</a></li>
 		</ul>
 
 	</div> <!-- FIM ADD AMIGOS -->
 
+
+	<div id="estabelecimentos" class="area_conteudo_topo telas_guias">
+
+		<ul class="guias guias_resize">
+			<li class="sel"><a href="#cinemas">Cinemas</a></li>
+			<li><a href="#teatros">Teatros</a></li>
+			<li><a href="#museus">Museus</a></li>
+			<li><a href="#diversos">Diversos</a></li>				
+		</ul>
+
+		<div id="swiperEstabelecimentos" class="swiper-container">
+			<div class="swiper-wrapper">
+				<ul id="est_31" class="swiper-slide lista lista_estabelecimentos"></ul>
+				<ul id="est_32" class="swiper-slide lista lista_estabelecimentos"></ul>
+				<ul id="est_33" class="swiper-slide lista lista_estabelecimentos"></ul>
+				<ul id="est_34" class="swiper-slide lista lista_estabelecimentos"></ul>
+	        </div>
+        </div>
+
+	</div> <!-- FIM ESTABELECIMENTOS -->
+
+
+	<div id="estabelecimento_info" class="area_conteudo_topo telas_guias">
+
+		<ul class="guias guias_resize">
+			<li class="sel"><a href="#">Informações</a></li>
+			<li><a href="#">Regulamento</a></li>			
+		</ul>
+
+		<div id="swiperEstInfo" class="swiper-container">
+			<div class="swiper-wrapper">
+				<ul id="est_info" class="swiper-slide lista"></ul>
+				<ul id="est_reg" class="swiper-slide lista"></ul>
+				
+	        </div>
+        </div>
+
+	</div> <!-- FIM ESTABELECIMENTOS -->
+
+
+	<div id="estatisticas" class="area_conteudo_topo telas_guias">
+
+		<ul class="guias guias_resize">
+			<li class="sel"><a href="#">Cultz</a></li>
+			<li><a href="#">Vidas</a></li>			
+		</ul>
+
+		<div id="swiperStat" class="swiper-container">
+			<div class="swiper-wrapper">
+				<ul id="stat_cultz" class="swiper-slide lista"></ul>
+				<ul id="stat_vidas" class="swiper-slide lista"></ul>
+				
+	        </div>
+        </div>
+
+	</div> <!-- FIM ESTABELECIMENTOS -->
+
+
 	<div id="sel_tema" class="area_conteudo_topo">
 		
-		<ul class="ico_temas amigo">
+		<ul class="ico_temas amigo ico_temas2">
 			<li class="ico ico-cinema"></li>
 			<li class="ico ico-teatro"></li>
 			<li class="ico ico-musica"></li>
@@ -304,22 +311,22 @@
 			<li class="ico ico-evento"></li>
 		</ul>
 
-		<ul class="ico_temas">
-			<li class="ico ico-cinema off"></li>
-			<li class="ico ico-teatro off"></li>
-			<li class="ico ico-musica off"></li>
-			<li class="ico ico-pintura off"></li>
-			<li class="ico ico-evento off"></li>
+		<ul class="ico_temas ico_temas1">
+			<li class="ico ico-cinema"></li>
+			<li class="ico ico-teatro"></li>
+			<li class="ico ico-musica"></li>
+			<li class="ico ico-pintura"></li>
+			<li class="ico ico-evento"></li>
 		</ul>
 
 		<div class="roleta">
 			<div id="swiperRoleta" class="janela swiper-container">
 				<div class="swiper-wrapper">
-					<div class="swiper-slide cinema" data-tipo="cinema"></div>
-					<div class="swiper-slide musica" data-tipo="musica"></div>
-					<div class="swiper-slide teatro" data-tipo="teatro"></div>
-					<div class="swiper-slide pintura" data-tipo="pintura"></div>
-					<div class="swiper-slide eventos" data-tipo="eventos"></div>
+					<div class="swiper-slide cinema" data-tipo="cinema" data-tipoid="11"></div>
+					<div class="swiper-slide musica" data-tipo="musica" data-tipoid="13"></div>
+					<div class="swiper-slide teatro" data-tipo="teatro" data-tipoid="12"></div>
+					<div class="swiper-slide pintura" data-tipo="pintura" data-tipoid="14"></div>
+					<div class="swiper-slide eventos" data-tipo="eventos" data-tipoid="15"></div>
 				</div>
 			</div>
 
@@ -339,7 +346,7 @@
 
 	<div id="jogo" class="area_conteudo_topo">
 
-		<ul class="ico_temas amigo">
+		<ul class="ico_temas amigo ico_temas2">
 			<li class="ico ico-cinema"></li>
 			<li class="ico ico-teatro"></li>
 			<li class="ico ico-musica"></li>
@@ -347,20 +354,20 @@
 			<li class="ico ico-evento"></li>
 		</ul>
 
-		<ul class="ico_temas">
-			<li class="ico ico-cinema off"></li>
-			<li class="ico ico-teatro off"></li>
-			<li class="ico ico-musica off"></li>
-			<li class="ico ico-pintura off"></li>
-			<li class="ico ico-evento off"></li>
+		<ul class="ico_temas ico_temas1">
+			<li class="ico ico-cinema"></li>
+			<li class="ico ico-teatro"></li>
+			<li class="ico ico-musica"></li>
+			<li class="ico ico-pintura"></li>
+			<li class="ico ico-evento"></li>
 		</ul>
 
 		<div class="box_jogo">
 			<div class="topo">
-				<div class="ico_atual musica"></div>
+				<div id="ico_tema_pergunta" class="ico_atual musica"></div>
 				<div class="tempo"><div class="cor"></div></div>
 			</div>
-			<div class="meio">
+			<div id="area_QA" class="meio">
 				
 				<h2>Lorem ipsum dolor sit amet, adipiscing, Quisque suscipit leo vitae rhoncus. Sed rhoncus ultrices turpis?</h2>
 
@@ -393,8 +400,6 @@
 			<div class="faixa faixa-verde">
 				Acertou
 			</div>
-
-			<h2>Parabéns, você acaba de ganhar<br>uma MEDALHA deste tema.</h2>
 
 			<p>Continue jogando.<br>
 			Lembre-se que é preciso acertar <br>
@@ -491,16 +496,16 @@
 		</div> <!-- FIM ACERTOU 5 CIRCUITOS -->
 
 
-		<div class="msgs" id="ganhou_circuito">
+		<div class="msgs" id="ganhou_5_circuitos">
 
 			<div class="area_indicador">
 				
 				<div class="placar">
 
-					<div class="foto_perfil"><div class="foto"></div></div>
-					<div class="foto_perfil amigo"><div class="foto"></div></div>
+					<div class="foto_perfil"><div class="foto circuito_foto1"></div></div>
+					<div class="foto_perfil amigo"><div class="foto circuito_foto2"></div></div>
 
-					<p>12 x 09</p>
+					<p class="circuito_placar">00 x 00</p>
 
 				</div>
 
