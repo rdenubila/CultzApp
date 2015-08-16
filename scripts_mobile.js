@@ -28,6 +28,7 @@ function statusChangeCallback(response) {
 
 function getUserData(){
 	facebookConnectPlugin.api('/me?fields=id,name,email', [], function(response) {
+		alert("getUserData: "+JSON.stringify(response))
 		login( response );
 	}, function (response) { alert(JSON.stringify(response)) });
 }
