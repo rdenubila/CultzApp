@@ -57,6 +57,6 @@ function checkLoginState() {
 function loginFB(){
 	
 	facebookConnectPlugin.login( ["email", "user_friends"],
-        function (response) { alert(JSON.stringify(response)) },
+        function (response) { statusChangeCallback(response); },
         function (response) { alert(JSON.stringify(response)) });
 }

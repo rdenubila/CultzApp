@@ -71,14 +71,14 @@ body {
   display: none; }
   /* line 67, styles.scss */
   #loading .logo {
-    width: 30vw;
-    height: 30vw;
+    width: 10vw;
+    height: 10vw;
     background: url("images/loading.png") no-repeat center center;
     background-size: contain;
     position: absolute;
     left: 50%;
     top: 50%;
-    margin: -15vw 0 0 -15vw;
+    margin: -5vw 0 0 -5vw;
     animation-name: roda;
     animation-duration: 2s;
     animation-iteration-count: infinite; }
