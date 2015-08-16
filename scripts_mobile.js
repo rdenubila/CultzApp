@@ -1,4 +1,4 @@
-apiURL = "http://meatballs.com.vc/cultz";
+apiURL = "http://meatballs.com.vc/cultz/";
 
 
 document.addEventListener("deviceready", ready, false);
