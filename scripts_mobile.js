@@ -13,6 +13,7 @@ function ready(){
 
 
 function statusChangeCallback(response) {
+	alert("statusChangeCallback: "+JSON.stringify(response))
 	if (response.status === 'connected') {
 		getUserData();
 	} else if (response.status === 'not_authorized') {
