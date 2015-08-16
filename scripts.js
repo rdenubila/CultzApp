@@ -157,6 +157,22 @@ function fechaOverlay(){
 	}
 }
 
+
+function login(response){
+	$.getJSON( apiURL+"login.php", response).done(function( data ) {
+		console.log("----- USUARIO LOGADO ------")
+		console.log(data);
+
+		userLogado = data;
+		localStorage.user = JSON.stringify( data );
+
+		loginComplete();
+
+		trocaTela('andamento');
+		$("#loading").fadeOut("fast");
+	});
+}
+
 function loginComplete(){
 	$("#topo_fixo .foto").css('background-image', 'url('+userLogado.foto+')');
 
@@ -201,6 +217,19 @@ function initAddAmigos(){
 
 	$("#add_amigos .guias a").eq(0).click();
 
+}
+
+function getFriendsBD(response){
+	datas = response.data;
+
+	arr = new Array();
+	for(i=0; i<datas.length; i++){
+		d = datas[i];
+		arr.push(d.id);
+	}
+
+	AmigosLoadFB(arr.join(","));
+	
 }
 
 function AmigosLoadFB(ids){
