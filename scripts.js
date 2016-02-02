@@ -55,6 +55,9 @@ function initApp(){
 var telaAtual = "home";
 function trocaTela(novaTela){
 
+	$(".menu_topo li").removeClass('sel');
+	$(".menu_topo ."+novaTela).addClass('sel');
+
 	if(novaTela=="andamento"){
 		$("#topo_circuito").fadeOut();
 		$("#topo_fixo").fadeIn();
@@ -62,6 +65,11 @@ function trocaTela(novaTela){
 
 	if(novaTela=="sel_tema"){
 		$("#topo_circuito").fadeIn();
+		$("#topo_fixo").fadeOut();
+	}
+
+	if(novaTela=="instrucao"){
+		$("#topo_circuito").fadeOut();
 		$("#topo_fixo").fadeOut();
 	}
 
@@ -108,6 +116,7 @@ function trocaTela(novaTela){
 
 			if(telaAtual=="jogo"){
 				initPergunta();
+				trocaBanner();
 			}
 
 			if(telaAtual=="estabelecimentos"){
@@ -121,6 +130,15 @@ function trocaTela(novaTela){
 
 	telaAtual = novaTela;
 
+}
+
+function trocaBanner(){
+	$.getJSON( apiURL+"getBanner.php").done(function( data ) {
+		console.log("----- TROCA BANNER ------")
+		
+		$(".banner").html("<a href='"+data.link+"' target='_blank'><img src='"+apiURL+"/arquivos/"+data.img+"'' height='160' width='565'></a>")
+
+	});
 }
 
 var ultimaTelaOverlay;
@@ -157,6 +175,13 @@ function fechaOverlay(){
 	}
 }
 
+function fechaInstrucao(){
+	if(userLogado==null){
+		trocaTela('login');
+	} else {
+		trocaTela('andamento');
+	}
+}
 
 function login(response){
 	$.getJSON( apiURL+"login.php", response).done(function( data ) {
@@ -358,7 +383,7 @@ function LoadRounds(){
 				html += '	<p class="destaque">Vez do seu adversário</p>';
 			}
 
-			html += '	<p>72 h</p>';
+			html += '	<p>'+d.tempo+'</p>';
 			html += '	<div class="clear"></div>';
 
 			html += '</li>';
@@ -379,6 +404,8 @@ var roundAtual;
 var iUser;
 function selJogo(idRound){
 
+	$("#loading").fadeIn("fast");
+
 	$.getJSON( apiURL+"getRound.php", {id_user: userLogado.id, id: idRound}).done(function( data ) {
 		console.log("----- ROUND ------")
 		console.log(data);
@@ -396,6 +423,7 @@ function selJogo(idRound){
 		$("#circuito_count").html("Circuito: " + (parseInt(roundAtual.round.circuito_count)+1) +" de "+ (parseInt(roundAtual.round.round_count)+1)*5 );
 
 		$(".ico_temas .on").removeClass('on');
+		$(".ico_temas .off").removeClass('off');
 
 		if(roundAtual.round.area_cinema1=="s"){	$(".ico_temas1 .ico-cinema").addClass('on'); }
 		if(roundAtual.round.area_evento1=="s"){	$(".ico_temas1 .ico-evento").addClass('on'); }
@@ -408,35 +436,64 @@ function selJogo(idRound){
 		if(roundAtual.round.area_pintura2=="s"){ $(".ico_temas2 .ico-pintura").addClass('on'); }
 		if(roundAtual.round.area_teatro2=="s"){	$(".ico_temas2 .ico-teatro").addClass('on'); }
 
+		if(roundAtual.round.area_cinema1=="n"){	$(".ico_temas1 .ico-cinema").addClass('off'); }
+		if(roundAtual.round.area_evento1=="n"){	$(".ico_temas1 .ico-evento").addClass('off'); }
+		if(roundAtual.round.area_musica1=="n"){	$(".ico_temas1 .ico-musica").addClass('off'); }
+		if(roundAtual.round.area_pintura1=="n"){ $(".ico_temas1 .ico-pintura").addClass('off'); }
+		if(roundAtual.round.area_teatro1=="n"){	$(".ico_temas1 .ico-teatro").addClass('off'); }
+		if(roundAtual.round.area_cinema2=="n"){	$(".ico_temas2 .ico-cinema").addClass('off'); }
+		if(roundAtual.round.area_evento2=="n"){	$(".ico_temas2 .ico-evento").addClass('off'); }
+		if(roundAtual.round.area_musica2=="n"){	$(".ico_temas2 .ico-musica").addClass('off'); }
+		if(roundAtual.round.area_pintura2=="n"){ $(".ico_temas2 .ico-pintura").addClass('off'); }
+		if(roundAtual.round.area_teatro2=="n"){	$(".ico_temas2 .ico-teatro").addClass('off'); }
+
 
 		iUser = roundAtual.user1.id==userLogado.id ? "1" : "2";
 
 		$("#swiperRoleta .swiper-wrapper").html("");
 
-		if( !$(".ico_temas"+iUser+" .ico-cinema").hasClass('on') ){
+		count = 0;
+
+		if( $(".ico_temas"+iUser+" .ico-cinema").hasClass('off') ){
 			$("#swiperRoleta .swiper-wrapper").append('<div class="swiper-slide cinema" data-tipo="cinema" data-tipoid="11"></div>');
+			count++;
 		}
 
-		if( !$(".ico_temas"+iUser+" .ico-evento").hasClass('on') ){
+		if( $(".ico_temas"+iUser+" .ico-evento").hasClass('off') ){
 			$("#swiperRoleta .swiper-wrapper").append('<div class="swiper-slide eventos" data-tipo="eventos" data-tipoid="15"></div>');
+			count++;
 		}
 
-		if( !$(".ico_temas"+iUser+" .ico-musica").hasClass('on') ){
+		if( $(".ico_temas"+iUser+" .ico-musica").hasClass('off') ){
 			$("#swiperRoleta .swiper-wrapper").append('<div class="swiper-slide musica" data-tipo="musica" data-tipoid="13"></div>');
+			count++;
 		}
 
-		if( !$(".ico_temas"+iUser+" .ico-teatro").hasClass('on') ){
+		if( $(".ico_temas"+iUser+" .ico-teatro").hasClass('off') ){
 			$("#swiperRoleta .swiper-wrapper").append('<div class="swiper-slide teatro" data-tipo="teatro" data-tipoid="12"></div>');
+			count++;
 		}
 
-		if( !$(".ico_temas"+iUser+" .ico-pintura").hasClass('on') ){
+		if( $(".ico_temas"+iUser+" .ico-pintura").hasClass('off') ){
 			$("#swiperRoleta .swiper-wrapper").append('<div class="swiper-slide pintura" data-tipo="pintura" data-tipoid="14"></div>');
+			count++;
+		}
+
+		if(count>0){
+			trocaTela('sel_tema');
+		} else {
+			$.getJSON( apiURL+"pogRound.php", {id_round: idRound } ).done(function( data ) {
+				console.log(data);
+				trocaTela('andamento');
+			});
+			alert("Erro! Não foi possível conectar com o servidor. Tente novamente mais tarde.");
 		}
 		
+		$("#loading").fadeOut("fast");
 
 	});
 
-	trocaTela('sel_tema');
+	
 }
 
 
@@ -468,7 +525,7 @@ function initRoleta(){
 		}
 	});
 
-	$(".overlay").swipe({
+	$(".overlay_roleta").swipe({
 		swipe:function(event, direction, distance, duration, fingerCount) {
 			if(direction=="up"){
 				girarRoleta(1);

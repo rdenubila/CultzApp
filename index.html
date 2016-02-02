@@ -16,13 +16,21 @@
 <script src="js/swiper.jquery.min.js"></script>
 <link href="js/swiper.min.css" rel="stylesheet" type="text/css" />
 
-<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
-<script type="text/javascript" src="js/facebookConnectPlugin.js"></script>
+
 
 <script src="js_lib.js"></script>
 <script src="scripts.js"></script>
-<script src="scripts_mobile.js"></script>
 
+<!-- LOCAL -->
+
+<!-- <script src="scripts_local.js"></script> -->
+
+<!-- ONLINE -->
+
+<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+<script type="text/javascript" src="js/facebookConnectPlugin.js"></script>
+
+<script src="scripts_mobile.js"></script>
 
 <script src="monaca.viewport.js"></script>
 
@@ -33,6 +41,9 @@
 		monaca.viewport({width : 720});
 	}
 </script>
+
+
+
 
 
 </head>
@@ -59,7 +70,7 @@
 
         <div class="btns">
         	<!-- <a href="javascript: trocaTela('login');" class="btn_seta laranja">Pular</a> -->
-        	<a href="javascript: trocaTela('login');" class="btn_seta">Iniciar</a>
+        	<a href="javascript: fechaInstrucao();" class="btn_seta">Iniciar</a>
         </div>
 		
 	</div> <!-- FIM INSTRUCAO -->
@@ -123,9 +134,10 @@
 
 		<div class="topo_laranja">
 			<ul class="menu_topo">
-				<li class="add_user"><a href="javascript: trocaTela('andamento');"><i class="icon-user_add"></i></a></li>
-				<li class="pin"><a href="javascript: trocaTela('estabelecimentos');"><i class="icon-pin"></i></a></li>
-				<li class="stats"><a href="javascript: trocaTela('estatisticas');"><i class="icon-stats"></i></a></li>
+				<li class="home andamento"><a href="javascript: trocaTela('andamento');"><i class="icon-home"></i></a></li>
+				<li class="add_user novo_jogo"><a href="javascript: trocaTela('novo_jogo');"><i class="icon-user_add"></i></a></li>
+				<li class="pin estabelecimentos"><a href="javascript: trocaTela('estabelecimentos');"><i class="icon-pin"></i></a></li>
+				<li class="stats estatisticas"><a href="javascript: trocaTela('estatisticas');"><i class="icon-stats"></i></a></li>
 			</ul>
 		</div> <!-- FIM LARANJA -->
 
@@ -173,7 +185,7 @@
 		
 		<div class="rodape">
 			<div class="separador"></div>
-			<a href="#"><img src="images/btn_info.png" height="110" width="177"></a>
+			<a href="javascript: trocaTela('instrucao'); void(0);"><img src="images/btn_info.png" height="110" width="177"></a>
 		</div>
 
 	</div> <!-- FIM ANDAMENTO -->
@@ -197,7 +209,7 @@
 		
 		<div class="rodape">
 			<div class="separador"></div>
-			<a href="#"><img src="images/btn_info.png" height="110" width="177"></a>
+			<a href="javascript: trocaTela('instrucao'); void(0);"><img src="images/btn_info.png" height="110" width="177"></a>
 		</div>
 
 	</div> <!-- FIM NOVO JOGO -->
@@ -310,7 +322,7 @@
 				</div>
 			</div>
 
-			<div class="overlay">
+			<div class="overlay_roleta">
 				<div class="sombra_cima"></div>
 				<div class="sombra_baixo"></div>
 				<div class="setas"></div>
@@ -364,7 +376,8 @@
 
 
 	<div id="overlay">
-		<div class="banner"><img src="images/banner.png" height="160" width="565"></div>
+
+		<div class="banner"></div>
 
 		<div class="msgs" id="acertou">
 
