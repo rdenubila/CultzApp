@@ -32,7 +32,7 @@
     <preference name="permissions" value="none"/>
     <feature name="http://api.phonegap.com/1.0/network"/>
 
-    <gap:plugin name="org.apache.cordova.inappbrowser" version="0.5.2" />
+    <gap:plugin name="org.apache.cordova.inappbrowser" version="0.6.0" />
     <gap:plugin name="nl.kw.cordova.androidviewport" version="0.0.5" />
 
     <gap:plugin name="com.phonegap.plugins.facebookconnect" version="0.9.0">
