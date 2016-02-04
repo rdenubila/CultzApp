@@ -29,6 +29,8 @@
     <preference name="phonegap-version" value="cli-5.4.1" />
     <preference name="android-build-tool" value="gradle" />
 
+    <gap:plugin name="onesignal-cordova-plugin" source="npm" />
+
 
     <gap:plugin name="com.phonegap.plugin.statusbar" />
     <preference name="StatusBarBackgroundColor" value="#000000" />
@@ -45,7 +47,6 @@
     </gap:plugin>
 
 
-    <!-- <gap:plugin name="onesignal-cordova-plugin" source="npm" /> -->
 
     
 
