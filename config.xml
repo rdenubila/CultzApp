@@ -25,9 +25,6 @@
 
     <preference name="DisallowOverscroll" value="true" />
     <preference name="webviewbounce" value="false" />
-
-    <preference name="phonegap-version" value="cli-5.4.1" />
-    <preference name="android-build-tool" value="gradle" />
     
 
     <gap:plugin name="com.phonegap.plugin.statusbar" />
@@ -45,7 +42,6 @@
     </gap:plugin>
 
 
-    <gap:plugin name="onesignal-cordova-plugin" source="npm" />
 
     
 
