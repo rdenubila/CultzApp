@@ -12,6 +12,12 @@ var userLogado;
 var initReady = false;
 var initFB = false;
 
+if (localStorage.vidas == undefined) {
+	localStorage.vidas = 5;
+}
+
+var limiteTempoVidas = 1; // EM MINUTOS
+
 $( document ).ready(function() {
 
 	$("#swiperInstrucao .swiper-wrapper").load("instrucoes.html", function() {
@@ -35,6 +41,8 @@ $( document ).ready(function() {
 	//initApp();
 	initReady = true;
 	checkInit();
+
+	updateVidas();
 
 });
 
@@ -414,6 +422,11 @@ var roundAtual;
 var iUser;
 function selJogo(idRound){
 
+	if( parseInt(localStorage.vidas)==0){
+		alerta("Você não possui mais vidas para jogar. Você ganhará 3 vidas 24h após suas vidas terminarem.");
+		return;
+	}
+
 	$("#loading").fadeIn("fast");
 
 	$.getJSON( apiURL+"getRound.php", {id_user: userLogado.id, id: idRound}).done(function( data ) {
@@ -671,6 +684,7 @@ function initPergunta(){
 				$(this).addClass('errada');
 				mostraOverlay("errou", 1000);
 				acertos[jogadaAtual] = false;
+				updateVidas(-1);
 			}
 
 			jogadaAtual++;
@@ -905,4 +919,44 @@ function loadStats(){
 		console.log( "Request Failed: " + err );
 	});
 
+}
+
+
+
+function updateVidas(valor){
+
+	if (localStorage.tempoVida!=undefined) {
+		var tempo = (1000 * 60);
+		var agora = new Date();
+		var t = (agora.getTime()-parseInt(localStorage.tempoVida)) / tempo;
+
+		console.log("t: "+t);
+
+		if(t>limiteTempoVidas){
+			localStorage.removeItem("tempoVida");
+			localStorage.vidas = parseInt(localStorage.vidas) + 3;
+		}
+	}
+
+	if(valor!=null){
+		localStorage.vidas = parseInt(localStorage.vidas) + valor;
+	}
+
+	if(localStorage.tempoVida == undefined && localStorage.vidas==0){
+		localStorage.tempoVida = new Date().getTime();
+	}
+
+	$(".estrelas li").removeClass('amarela');
+
+	if(parseInt(localStorage.vidas)>5){
+		localStorage.vidas = 5;
+	}
+
+	if(parseInt(localStorage.vidas)<0){
+		localStorage.vidas = 0;
+	}
+
+	for(i=0; i<localStorage.vidas; i++){
+		$(".estrelas li").eq(i).addClass('amarela');
+	}
 }

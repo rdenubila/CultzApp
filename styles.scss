@@ -416,10 +416,10 @@ body {
 				display: inline-block;
 				width: 33px;
 				height: 31px;
-				background: url(images/estrela_amarela.png);
+				background: url(images/estrela_preta.png);
 
-				&.preta {
-					background: url(images/estrela_preta.png);
+				&.amarela {
+					background: url(images/estrela_amarela.png);
 				}
 			}
 		}
