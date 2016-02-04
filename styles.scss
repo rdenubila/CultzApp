@@ -24,6 +24,38 @@ body {
 	@include transform(translate(-50%, -50%));
 }
 
+#box_alerta {
+	display: none;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: rgba(black, .6);
+	z-index: 9999;
+
+	.btn_fechar {
+		position: absolute;
+		bottom: 0px;
+		right: 0px;
+	}
+
+	.conteudo {
+		color: #FFF;
+		width: 90%;
+		text-align: center;
+
+		.img {
+			
+			padding-bottom: 30px;
+			border-bottom: dotted 4px #FFF;
+		}
+
+		p {
+			text-transform: uppercase;
+			font-size: 35px;
+		}
+	}
+}
+
 
 .btn_seta {
 	background: url(images/btn_seta_azul.png) no-repeat right center;
@@ -770,38 +802,42 @@ body {
 	}
 
 
-	.btns {
+}
+
+
+.btns {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	font-size: 40px;
+	font-weight: bold;
+
+	li {
 		margin: 0;
 		padding: 0;
-		list-style: none;
-		font-size: 40px;
-		font-weight: bold;
+		float: left;
+		width: 50%;
+		background: url(images/alfinete_azul.png) repeat-y center center;
+		background-size: 100% auto;
+		text-align: center;
+		text-transform: uppercase;
+		
 
-		li {
-			margin: 0;
-			padding: 0;
-			float: left;
-			width: 50%;
-			background: url(images/alfinete_azul.png) repeat-y center center;
-			background-size: 100% auto;
-			text-align: center;
-			text-transform: uppercase;
-			
+		a {
+			color: #FFF;
+			display: block;
+			text-decoration: none;
+			padding: 20px;
+		}
 
-			a {
-				color: #FFF;
-				display: block;
-				text-decoration: none;
-				padding: 20px;
-			}
+		&.amarelo {
+			background-image: url("images/alfinete_amarelo.png")
+		}
 
-			&.amarelo {
-				background-image: url("images/alfinete_amarelo.png")
-			}
+		&.verde {
+			background-image: url("images/alfinete_verde.png")
 		}
 	}
-
-
 }
 
 
@@ -852,6 +888,10 @@ body {
 		width: 100%;
 
 		height: calc(100% - 68px );
+
+		&.com_btns {
+			height: calc(100% - 153px );
+		}
 
 		.swiper-wrapper, .swiper-slide {
 			width: 100%;

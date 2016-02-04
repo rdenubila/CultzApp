@@ -52,6 +52,16 @@ function initApp(){
 	}
 }
 
+
+function alerta(msg){
+	$("#box_alerta p").html(msg);
+	$("#box_alerta").fadeIn();
+}
+
+function fecha_alerta(){
+	$("#box_alerta").fadeOut();
+}
+
 var telaAtual = "home";
 function trocaTela(novaTela){
 
@@ -312,7 +322,7 @@ function AmigosLoadFB(ids){
 function convidaAmigos(){
 
 	if($("#add_amigos .icon-check").length==0){
-		alert("Selecione pelo menos um amigo para convidar");
+		alerta("Selecione pelo menos um amigo para convidar");
 	} else {
 
 		ids = new Array();
@@ -335,11 +345,11 @@ function enviaConvite(ids){
 		$("#loading").fadeOut("fast");
 		if(data.result == true){
 			if(data.qtd==0){
-				alert("Não há nenhum usuário para convidar. Convide seus amigos!");
+				alerta("Não há nenhum usuário para convidar. Convide seus amigos!");
 			}
 			trocaTela('andamento');
 		} else {
-			alert(data.error);
+			alerta(data.error);
 		}
 
 	}).fail(function( jqxhr, textStatus, error ) {
@@ -397,7 +407,7 @@ function LoadRounds(){
 }
 
 function vezAdversario(){
-	alert("Aguarde seu adversário jogar!");
+	alerta("Aguarde seu adversário jogar!");
 }
 
 var roundAtual;
@@ -486,7 +496,7 @@ function selJogo(idRound){
 				console.log(data);
 				trocaTela('andamento');
 			});
-			alert("Erro! Não foi possível conectar com o servidor. Tente novamente mais tarde.");
+			alerta("Erro! Não foi possível conectar com o servidor. Tente novamente mais tarde.");
 		}
 		
 		$("#loading").fadeOut("fast");
@@ -680,7 +690,7 @@ function finalizaCircuito(ganhou){
 		if(data.result == true){
 			console.log("------- setCircuitEnd --------");
 		} else {
-			alert(data.error);
+			alerta(data.error);
 		}
 
 	}).fail(function( jqxhr, textStatus, error ) {
@@ -696,7 +706,7 @@ function addCultz(info, qtd){
 		if(data.result == true){
 			console.log("------- setCultz --------");
 		} else {
-			alert(data.error);
+			alerta(data.error);
 		}
 
 	}).fail(function( jqxhr, textStatus, error ) {
@@ -716,7 +726,7 @@ function loadCults () {
 			cultzCount = data.qtd;
 			$("#cultzCount").html(data.qtd);
 		} else {
-			alert(data.error);
+			alerta(data.error);
 		}
 
 	}).fail(function( jqxhr, textStatus, error ) {
@@ -790,7 +800,7 @@ function loadEstabelecimentos(){
 		html += '<p class="premiacao">'+d.desc_pontos+'</p>';
 		html += '</div>';
 		html += '<div class="icos">';
-		html += '<a href="#"><img src="images/est_pin.png" height="63" width="46"></a>';
+		html += '<a href="maps://?q='+d.endereco+'" target="_blank"><img src="images/est_pin.png" height="63" width="46"></a>';
 		html += '<a href="javascript: selEstabelecimento('+d.id+')"><img src="images/est_ticket.png" height="71" width="80"></a>';
 		html += '</div>';
 		html += '<div class="clear"></div>';

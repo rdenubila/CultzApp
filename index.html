@@ -52,8 +52,19 @@
 
 	<div id="loading"><div class="logo"></div></div>
 
-	<div id="home"></div>
+	<div id="box_alerta">
+		<a class="btn_fechar" href="javascript: fecha_alerta();"><img src="images/btn_ok.png" height="109" width="331" alt="" /></a>
 
+		<div class="conteudo centraliza">
+			<div class="img">
+				<img src="images/alerta.png" height="237" width="237">
+			</div>
+			<p></p>
+		</div>
+	</div>
+
+	<div id="home"></div>
+ 
 	<div id="instrucao">
 		<div class="box">
 
@@ -264,13 +275,19 @@
 			<li><a href="#">Regulamento</a></li>			
 		</ul>
 
-		<div id="swiperEstInfo" class="swiper-container">
+		<div id="swiperEstInfo" class="swiper-container com_btns">
 			<div class="swiper-wrapper">
 				<ul id="est_info" class="swiper-slide lista"></ul>
 				<ul id="est_reg" class="swiper-slide lista"></ul>
 				
 	        </div>
         </div>
+
+
+        <ul class="btns">
+			<li><a href="javascript: trocaTela('estabelecimentos');">Voltar</a></li>
+			<li class="verde"><a href="javascript: void(0);">Convidar</a></li>
+		</ul>
 
 	</div> <!-- FIM ESTABELECIMENTOS -->
 

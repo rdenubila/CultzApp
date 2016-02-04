@@ -1,5 +1,10 @@
 apiURL = "http://meatballs.com.vc/cultz/";
 
+android = {
+	projectNumber: "1005283282385",
+	api: "AIzaSyCU_9YUa6RWC3DZPUOgQgx3VmRut4DldYA",
+	appId: "c960c2f2-d524-4ccf-bf5a-0b9385f1e8c4"
+}
 
 document.addEventListener("deviceready", ready, false);
 
@@ -9,6 +14,27 @@ function ready(){
 	initFB = true;
 	checkInit();
 
+
+	// Enable to debug issues.
+	// window.plugins.OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
+
+	var notificationOpenedCallback = function(jsonData) {
+	console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
+	};
+
+	window.plugins.OneSignal.init(
+		android.appId, {
+			googleProjectNumber: android.projectNumber},
+			notificationOpenedCallback);
+
+	// Show an alert box if a notification comes in when the user is in your app.
+	window.plugins.OneSignal.enableInAppAlertNotification(true);
+
+}
+
+
+function notificationOpenedCallback(data){
+	console.log(data);
 }
 
 
