@@ -90,6 +90,19 @@ function loginFB(){
 
 function getDeviceData(){
 	window.plugins.OneSignal.getIds(function(ids) {
+
+		console.log("---- SALVA TOKEN ----");
 		console.log(ids);
+		
+		$.getJSON( apiURL+"setPushToken.php", {id: userLogado.id, push_token: ids.pushToken, userid: ids.userId } ).done(function( data ) {
+
+			if(!data.result){
+				alerta(data.error);
+			}
+
+		}).fail(function( jqxhr, textStatus, error ) {
+			var err = textStatus + ", " + error;
+			console.log( "Request Failed: " + err );
+		});
 	});
 }
