@@ -93,6 +93,7 @@ function getDeviceData(){
 
 		console.log("---- SALVA TOKEN ----");
 		console.log(ids);
+		console.log(userLogado);
 		
 		$.getJSON( apiURL+"setPushToken.php", {id: userLogado.id, push_token: ids.pushToken, userid: ids.userId } ).done(function( data ) {
 
