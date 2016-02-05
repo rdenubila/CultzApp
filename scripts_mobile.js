@@ -97,6 +97,8 @@ function getDeviceData(){
 		
 		$.getJSON( apiURL+"setPushToken.php", {id: userLogado.id, push_token: ids.pushToken, userid: ids.userId } ).done(function( data ) {
 
+			console.log(data)
+
 			if(!data.result){
 				alerta(data.error);
 			}
