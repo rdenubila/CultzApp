@@ -657,6 +657,7 @@ function initPergunta(){
 			$(".tempo .cor").stop();
 
 			if($(this).data("certa")==true){
+				
 				$(this).addClass('certa');
 				acertos[jogadaAtual] = true;
 
@@ -704,6 +705,13 @@ function finalizaCircuito(ganhou){
 
 		if(data.result == true){
 			console.log("------- setCircuitEnd --------");
+
+			sendPushTo(
+				iUser == 1 ? roundAtual.user2 : roundAtual.user1, //PEGA ADVERSARIO OPOSTO
+				"Quiz Cultz",
+				"Sua vez de jogar!"
+				);
+
 		} else {
 			alerta(data.error);
 		}

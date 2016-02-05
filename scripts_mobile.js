@@ -109,3 +109,27 @@ function getDeviceData(){
 		});
 	});
 }
+
+
+function sendPushTo(user, titulo, msg){
+	console.log("---- ENVIAR MSG ----");
+	console.log(msg);
+	console.log(user);
+	if(user.userid)
+
+		var notificationObj = { 
+			headings: {en: titulo},
+			contents: {en: msg},
+			include_player_ids: [user.userid]
+		};
+
+		window.plugins.OneSignal.postNotification(notificationObj,
+	    function(successResponse) {
+	      console.log("Notification Post Success:", successResponse);
+	    },
+	    function (failedResponse) {
+	      console.log("Notification Post Failed: ", failedResponse);
+	      alert("Notification Post Failed:\n" + JSON.stringify(failedResponse));
+	    }
+	  );
+}

@@ -73,3 +73,9 @@ function getFriendsFB(){
 
 function getDeviceData(){
 }
+
+function sendPushTo(user, titulo, msg){
+	console.log("---- ENVIAR MSG ----");
+	console.log(msg);
+	console.log(user);
+}
