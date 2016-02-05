@@ -71,3 +71,5 @@ function getFriendsFB(){
 }
 
 
+function getDeviceData(){
+}

@@ -218,8 +218,9 @@ function login(response){
 
 function loginComplete(){
 	$("#topo_fixo .foto").css('background-image', 'url('+userLogado.foto+')');
-
 	$("#topo_fixo .nome").html(userLogado.nome);
+
+	getDeviceData();
 }
 
 function initAndamento(){

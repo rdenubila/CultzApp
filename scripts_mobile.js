@@ -86,3 +86,10 @@ function loginFB(){
         function (response) { statusChangeCallback(response); },
         function (response) { alert(JSON.stringify(response)) });
 }
+
+
+function getDeviceData(){
+	window.plugins.OneSignal.getIds(function(ids) {
+		console.log(ids);
+	});
+}
