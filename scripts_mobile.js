@@ -1,4 +1,4 @@
-apiURL = "http://meatballs.com.vc/cultz/";
+apiURL = "http://www.meatballs.com.vc/cultz/";
 
 android = {
 	projectNumber: "1005283282385",

@@ -1,5 +1,5 @@
 apiURL = "http://localhost/Cultz/sistema/";
-apiURL = "http://meatballs.com.vc/cultz/";
+apiURL = "http://www.meatballs.com.vc/cultz/";
 
 
 window.fbAsyncInit = function() {
