@@ -24,6 +24,12 @@ body {
 	@include transform(translate(-50%, -50%));
 }
 
+.pos_bl {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
 #box_alerta {
 	display: none;
 	position: absolute;
@@ -147,11 +153,11 @@ body {
 		color: white;
 	}
 	
-	.alerta {
+	.info {
 		width: 158px;
 		height: 158px;
 		display: block;
-		background: url(images/ico_alert.png) center center no-repeat;
+		background: url(images/ico_info.png) center center no-repeat;
 		position: absolute;
 		margin-left: -30px;
 		margin-top: -30px;
@@ -697,9 +703,21 @@ body {
 	}
 
 	.rodape {
-		width: 90%;
+		width: 100%;
 		margin: 0 auto;
-		text-align: right;
+		//text-align: right;
+
+		.btn_info {
+			position: absolute;
+			right: 50px;
+
+		}
+
+		.btn_voltar {
+			position: absolute;
+			left: 0px;
+		}
+
 	}
 
 }
@@ -796,8 +814,9 @@ body {
 		.aviso {
 			text-align: center;
 			font-size: 25px;
-			color: #6f6f6e;
-			font-style: italic;
+			color: #f39200;
+			//font-style: italic;
+			font-weight: bold;
 		}
 	}
 

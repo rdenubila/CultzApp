@@ -1,5 +1,5 @@
 apiURL = "http://localhost/Cultz/sistema/";
-apiURL = "http://www.meatballs.com.vc/cultz/";
+//apiURL = "http://www.meatballs.com.vc/cultz/";
 
 
 window.fbAsyncInit = function() {
@@ -67,6 +67,16 @@ function getFriendsFB(){
 
 	FB.api('me/friends?fields=id&limit=999', function(response) {
 		getFriendsBD( response );
+	});
+}
+
+function inviteFriends(){
+	FB.ui({
+	    method: 'apprequests', 
+	    message: 'Conheça o Quiz Cultz!', 
+	    function(response){
+		  console.log(response);
+		}
 	});
 }
 

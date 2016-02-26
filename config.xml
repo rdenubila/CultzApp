@@ -4,7 +4,7 @@
         xmlns:android = "http://schemas.android.com/apk/res/android"
         id            = "br.MeatBalls.cultz"
         versionCode   = "1" 
-        version       = "0.3" >
+        version       = "0.4" >
 
 
     <name>Cultz</name>
@@ -50,7 +50,7 @@
         <application android:debuggable="true" />
     </gap:config-file>
 
-
+    <gap:plugin name='org.crosswalk.engine' version='1.3.0' source='pgb' />
 
     <gap:plugin name="cordova-plugin-whitelist" source="npm" />
     <access origin="*" />

@@ -65,6 +65,14 @@ function getFriendsFB(){
 	}, function (response) { alert(JSON.stringify(response)) });
 }
 
+function inviteFriends(){
+	facebookConnectPluginfacebookConnectPlugin.ui({
+	    method: 'apprequests', 
+	    message: 'Conheça o Quiz Cultz!',
+	    data: 'tracking information for the user'
+	});
+}
+
 
 function checkLoginState() {
 	

@@ -20,8 +20,22 @@ var limiteTempoVidas = 1; // EM MINUTOS
 
 $( document ).ready(function() {
 
-	$("#swiperInstrucao .swiper-wrapper").load("instrucoes.html", function() {
-		
+	console.log(apiURL+"getTextByArea.php?area=instrucoes");;
+
+	$.getJSON( apiURL+"getTextByArea.php?area=instrucoes").done(function( data ) {
+		console.log("----- CARREGA TEXTO INSTRUCAO ------")
+
+		for(i=0; i<data.length; i++){
+
+			d = data[i];
+
+			html = '<div class="swiper-slide">';
+			html += d.texto;
+			html += '</div>';
+
+			$("#swiperInstrucao .swiper-wrapper").append(html);
+		}
+
 	});
 
 	$("#overlay").on('click', function(event) {
@@ -89,6 +103,10 @@ function trocaTela(novaTela){
 	if(novaTela=="instrucao"){
 		$("#topo_circuito").fadeOut();
 		$("#topo_fixo").fadeOut();
+
+		if(userLogado!=null){
+			$("#instrucao #btn_iniciar").html("FECHAR");
+		}
 	}
 
 	if(novaTela=="add_amigos"){
@@ -311,9 +329,11 @@ function AmigosLoadFB(ids){
 			}
 		}
 
+		$("#lista_fb").append("<li onclick='inviteFriends()'><p class='aviso'>Não encontrou quem você procurava? Toque aqui e chame seu amigo para jogar o Quiz Cultz.</p></li>")
+
 
 		if($("#lista_fb").html()==""){
-			$("#lista_fb").html("<li><p class='aviso'>Você não tem nenhum amigo para convidar.</p></li>")
+			//$("#lista_fb").html("<li><p class='aviso'>Você não tem nenhum amigo para convidar.</p></li>")
 		}
 
 		if($("#lista_ac").html()==""){

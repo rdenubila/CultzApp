@@ -28,9 +28,6 @@
 <!-- ONLINE -->
 
 <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
-<!-- <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
-<script type="text/javascript" charset="utf-8" src="cordova_plugins.js"></script> -->
-<!-- <script type="text/javascript" src="js/facebookConnectPlugin.js"></script> -->
 
 <script src="scripts_mobile.js"></script>
 
@@ -70,7 +67,7 @@
 	<div id="instrucao">
 		<div class="box">
 
-			<i class="alerta"></i>
+			<i class="info"></i>
 			<h2>Instruções do jogo em 3 passos</h2>
 			
 			<div id="swiperInstrucao" class="swiper-container">
@@ -83,7 +80,7 @@
 
         <div class="btns">
         	<!-- <a href="javascript: trocaTela('login');" class="btn_seta laranja">Pular</a> -->
-        	<a href="javascript: fechaInstrucao();" class="btn_seta">Iniciar</a>
+        	<a href="javascript: fechaInstrucao();" id="btn_iniciar" class="btn_seta">Iniciar</a>
         </div>
 		
 	</div> <!-- FIM INSTRUCAO -->
@@ -222,7 +219,10 @@
 		
 		<div class="rodape">
 			<div class="separador"></div>
-			<a href="javascript: trocaTela('instrucao'); void(0);"><img src="images/btn_info.png" height="110" width="177"></a>
+
+			<a class="btn_voltar" href="javascript: trocaTela('andamento'); void(0);"><img src="images/btn_voltar.png" height="107" width="194"></a>
+
+			<a class="btn_info" href="javascript: trocaTela('instrucao'); void(0);"><img src="images/btn_info.png" height="110" width="177"></a>
 		</div>
 
 	</div> <!-- FIM NOVO JOGO -->
@@ -288,7 +288,7 @@
 
         <ul class="btns">
 			<li><a href="javascript: trocaTela('estabelecimentos');">Voltar</a></li>
-			<li class="verde"><a href="javascript: void(0);">Convidar</a></li>
+			<li class="verde"><a href="javascript: void(0);">Confirmar</a></li>
 		</ul>
 
 	</div> <!-- FIM ESTABELECIMENTOS -->
@@ -630,6 +630,7 @@
 		</div> <!-- GANHOU GIRO CULTZ -->
 
 
+		<img src="images/btn_voltar.png" class="pos_bl">
 
 
 	</div> <!-- FIM OVERLAY -->
