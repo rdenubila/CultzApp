@@ -66,7 +66,7 @@ function getFriendsFB(){
 }
 
 function inviteFriends(){
-	facebookConnectPluginfacebookConnectPlugin.ui({
+	facebookConnectPlugin.ui({
 	    method: 'apprequests', 
 	    message: 'Conheça o Quiz Cultz!',
 	    data: 'tracking information for the user'
