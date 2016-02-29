@@ -66,10 +66,12 @@ function getFriendsFB(){
 }
 
 function inviteFriends(){
-	facebookConnectPlugin.ui({
+	facebookConnectPlugin.showDialog({
 	    method: 'apprequests', 
-	    message: 'Conheça o Quiz Cultz!',
-	    data: 'tracking information for the user'
+	    message: 'Conheça o Quiz Cultz!', 
+	    function(response){
+		  console.log(response);
+		}
 	});
 }
 
@@ -204,7 +206,7 @@ function geoLocation(){
         notificationTitle: 'Background tracking', // <-- android only, customize the title of the notification
         notificationText: 'ENABLED', // <-- android only, customize the text of the notification
         activityType: 'AutomotiveNavigation',
-        debug: true, // <-- enable this hear sounds for background-geolocation life-cycle.
+        debug: false, // <-- enable this hear sounds for background-geolocation life-cycle.
         stopOnTerminate: false // <-- enable this to clear background location settings when the app terminates
     });
 
