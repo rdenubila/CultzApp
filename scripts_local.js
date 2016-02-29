@@ -71,7 +71,7 @@ function getFriendsFB(){
 }
 
 function inviteFriends(){
-	FB.ui({
+	FB.showDialog({
 	    method: 'apprequests', 
 	    message: 'Conheça o Quiz Cultz!', 
 	    function(response){
