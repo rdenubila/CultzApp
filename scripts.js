@@ -6,6 +6,7 @@ if( $(window).width()<640 ){
 var swiperInstrucao;
 var swiperRoleta;
 var swiperEstabelecimentos;
+var swiperStat;
 
 var userLogado;
 
@@ -85,6 +86,7 @@ function fecha_alerta(){
 }
 
 var telaAtual = "home";
+var qtdVidaCultz;
 function trocaTela(novaTela){
 
 	$(".menu_topo li").removeClass('sel');
@@ -120,6 +122,35 @@ function trocaTela(novaTela){
 
 	if(novaTela=="estatisticas"){
 		loadStats();
+
+		$(".estrelas .estrela").hide();
+		for(i=0; i< 5-parseInt(localStorage.vidas); i++){
+			$(".estrelas .estrela_"+i).show();
+		}
+
+
+		$("#estatisticas .estrelas .estrela").click(function(){
+			trocaEstrelaCultz($(this).index()+1);
+		});
+
+		trocaEstrelaCultz(1);
+		$(".confirmar_compra_vida").hide();
+
+		swiperStat = new Swiper('#swiperStat', {
+			onSlideChangeEnd: function(s){
+				$("#estatisticas .guias .sel").removeClass('sel');
+				$("#estatisticas .guias li").eq(s.activeIndex).addClass('sel');
+				if(s.activeIndex==1){
+					$(".confirmar_compra_vida").show();
+				} else {
+					$(".confirmar_compra_vida").hide();
+				}
+			}
+		});
+
+		$("#estatisticas .guias li").click(function(event) {
+			swiperStat.slideTo( $(this).index() );
+		});
 	}
 
 	
@@ -167,6 +198,27 @@ function trocaTela(novaTela){
 	telaAtual = novaTela;
 
 }
+
+function trocaEstrelaCultz(qtd){
+	$("#estatisticas .estrelas .amarela").removeClass('amarela');
+	qtdVidaCultz = qtd;
+	for(i=0; i<qtd; i++){
+		$("#estatisticas .estrelas .estrela_"+i).addClass('amarela');
+	}
+
+	$(".info_vida_cultz").html(qtdVidaCultz+" vida = "+qtdVidaCultz+" Cultz");
+
+	$(".confirmar_compra_vida").show();
+}
+
+function comprarVida(){
+	updateVidas(qtdVidaCultz);
+	addCultz("Trocou "+qtdVidaCultz+" Cultz por "+qtdVidaCultz+" vida(s)", -qtdVidaCultz);
+	trocaTela("andamento");
+
+	loadCults();
+}
+
 
 function trocaBanner(){
 	$.getJSON( apiURL+"getBanner.php").done(function( data ) {
@@ -918,7 +970,7 @@ function loadEstInfo(){
 
 function loadStats(){
 
-	$("#swiperStat .lista").html("");
+	$("#swiperStat #stat_cultz").html("");
 
 	$.getJSON( apiURL+"getStatsCultz.php", {id_user: userLogado.id} ).done(function( data ) {
 

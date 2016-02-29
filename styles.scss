@@ -17,6 +17,10 @@ body {
 	clear: both;
 }
 
+.center {
+	text-align: center;
+}
+
 .centraliza {
 	position: absolute;
 	left: 50%;
@@ -422,10 +426,10 @@ body {
 				display: inline-block;
 				width: 33px;
 				height: 31px;
-				background: url(images/estrela_preta.png);
+				background: url(images/estrela_preta.png) no-repeat center center;
 
 				&.amarela {
-					background: url(images/estrela_amarela.png);
+					background: url(images/estrela_amarela.png) no-repeat center center;
 				}
 			}
 		}
@@ -658,6 +662,41 @@ body {
 		width: 90%;
 		margin: 0 auto;
 		text-align: right;
+	}
+}
+
+#stat_vidas {
+	@include box-sizing(border-box);
+	padding: 15px 30px;
+	font-weight: bold;
+
+	.laranja {
+		color: orange;
+	}
+
+	h2 {
+		text-align: center;
+		font-size: 30px;
+	}
+
+	.estrelas {
+
+		text-align: center;
+
+		.estrela {
+			display: inline-block;
+			width: 90px;
+			height: 86px;
+
+			margin: 0 0;
+			padding: 10px;
+
+			background: url(images/estrela_g_cinza.png) no-repeat center center;
+		}
+
+		.amarela {
+			background: url(images/estrela_g_amarela.png) no-repeat center center;
+		}
 	}
 }
 

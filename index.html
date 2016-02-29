@@ -301,15 +301,41 @@
 			<li><a href="#">Vidas</a></li>			
 		</ul>
 
-		<div id="swiperStat" class="swiper-container">
+		<div id="swiperStat" class="swiper-container com_btns">
 			<div class="swiper-wrapper">
 				<ul id="stat_cultz" class="swiper-slide lista"></ul>
-				<ul id="stat_vidas" class="swiper-slide lista"></ul>
-				
+				<ul id="stat_vidas" class="swiper-slide lista">
+					<p>Cada jogador ganha 3 vidas 24 horas após todas as suas vidas acabarem, mas é possível solicitar mais vidas. Cada vida equivale a 1 Cultz.</p>
+					<p class="laranja">Não é permitido trocar vidas por Cultz</p>
+					
+					<hr>
+
+					<h2>Solicitar Vidas</h2>
+
+					<ul class="estrelas">
+						<li class="estrela estrela_0"></li>
+						<li class="estrela estrela_1"></li>
+						<li class="estrela estrela_2"></li>
+						<li class="estrela estrela_3"></li>
+						<li class="estrela estrela_4"></li>
+					</ul>
+
+					<hr>
+
+					<p class="info_vida_cultz">1 vida = 1 Cultz</p>
+
+					<p>Estou ciente das regras do jogo e desejo confirmar a solicitação</p>
+
+				</ul>
 	        </div>
         </div>
 
-	</div> <!-- FIM ESTABELECIMENTOS -->
+        <ul class="btns">
+			<li><a href="javascript: trocaTela('andamento');">Voltar</a></li>
+			<li class="verde confirmar_compra_vida"><a href="javascript: comprarVida(); void(0);">Confirmar</a></li>
+		</ul>
+
+	</div> <!-- FIM ESTATISTICAS -->
 
 
 	<div id="sel_tema" class="area_conteudo_topo">
