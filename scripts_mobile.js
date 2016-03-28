@@ -148,9 +148,3 @@ function sendPushTo(user, titulo, msg){
 	    }
 	  );
 }
-
-
-
-function openMap(dest){
-	launchnavigator.navigate(dest);
-}

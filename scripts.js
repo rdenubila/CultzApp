@@ -1111,3 +1111,19 @@ function updateVidas(valor){
 		$(".estrelas li").eq(i).addClass('amarela');
 	}
 }
+
+
+
+function openMap(dest){
+
+	window.open('geo://0,0?q='+dest, '_system');
+
+	/*var platform = device.platform.toLowerCase();
+	if(platform == "android"){
+		window.open("maps://")
+	}else if(platform == "ios"){
+		platform = launchnavigator.PLATFORM.IOS;
+	}else if(platform.match(/win/)){
+		platform = launchnavigator.PLATFORM.WINDOWS;
+	}*/
+}

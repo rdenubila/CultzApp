@@ -93,7 +93,3 @@ function sendPushTo(user, titulo, msg){
 	console.log(msg);
 	console.log(user);
 }
-
-function openMap(dest){
-	window.open(dest);
-}
