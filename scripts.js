@@ -965,7 +965,7 @@ function loadEstabelecimentos(){
 		html += '<p class="premiacao">'+d.desc_pontos+'</p>';
 		html += '</div>';
 		html += '<div class="icos">';
-		html += '<a href="maps://?q='+d.endereco+'" target="_blank"><img src="images/est_pin.png" height="63" width="46"></a>';
+		html += '<a href="javascript: openMap(\''+d.endereco+'\')" ><img src="images/est_pin.png" height="63" width="46"></a>';
 		html += '<a href="javascript: selEstabelecimento('+d.id+')"><img src="images/est_ticket.png" height="71" width="80"></a>';
 		html += '</div>';
 		html += '<div class="clear"></div>';

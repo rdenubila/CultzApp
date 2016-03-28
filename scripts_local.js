@@ -34,7 +34,7 @@ function statusChangeCallback(response) {
 
 		localStorage.clear();
 		trocaTela("instrucao");
-		
+
 	} else {
 		loginFB();
 		$("#loading").fadeOut("fast");
@@ -92,4 +92,8 @@ function sendPushTo(user, titulo, msg){
 	console.log("---- ENVIAR MSG ----");
 	console.log(msg);
 	console.log(user);
+}
+
+function openMap(dest){
+	window.open(dest);
 }

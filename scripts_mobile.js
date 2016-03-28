@@ -44,6 +44,8 @@ function statusChangeCallback(response) {
 	} else if (response.status === 'not_authorized') {
 		//loginFB();
 		$("#loading").fadeOut("fast");
+		localStorage.clear();
+		trocaTela("instrucao");
 	} else {
 		loginFB();
 		$("#loading").fadeOut("fast");
@@ -147,3 +149,8 @@ function sendPushTo(user, titulo, msg){
 	  );
 }
 
+
+
+function openMap(dest){
+	launchnavigator.navigate(dest);
+}
