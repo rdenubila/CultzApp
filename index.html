@@ -220,6 +220,36 @@
 	</div> <!-- FIM ANDAMENTO -->
 
 
+	<div id="voucher_info" class="area_conteudo_topo telas_guias">
+
+
+		<div id="swiperVoucherInfo" class="swiper-container com_btns">
+			<ul class="swiper-slide lista">
+				<li>
+					<div class="foto"></div>
+					<div class="info">
+						<h2>Estabelecimento</h2>
+						<p class="endereco">Endereço</p>
+						<p class="premiacao">Premiação</p>
+					</div>
+					<div class="clear"></div>
+					<hr />
+					<div class="texto">
+						
+					</div>
+				</li>
+			</ul>
+        </div>
+
+
+        <ul class="btns">
+			<li><a href="javascript: trocaTela('estabelecimentos');">Voltar</a></li>
+			<li class="verde"><a href="javascript: generateVoucher(); void(0);">Confirmar</a></li>
+		</ul>
+
+	</div> <!-- FIM ESTABELECIMENTOS -->
+
+
 
 	<div id="novo_jogo" class="area_conteudo_topo">
 
@@ -298,6 +328,7 @@
 
 		<div id="swiperEstInfo" class="swiper-container com_btns">
 			<div class="swiper-wrapper">
+
 				<ul id="est_info" class="swiper-slide lista"></ul>
 				<ul id="est_reg" class="swiper-slide lista"></ul>
 				
@@ -307,7 +338,7 @@
 
         <ul class="btns">
 			<li><a href="javascript: trocaTela('estabelecimentos');">Voltar</a></li>
-			<li class="verde"><a href="javascript: void(0);">Confirmar</a></li>
+			<li class="verde"><a href="javascript: generateVoucher(); void(0);">Confirmar</a></li>
 		</ul>
 
 	</div> <!-- FIM ESTABELECIMENTOS -->
@@ -499,12 +530,11 @@
 
 			<h2>Parabéns, você acaba de ganhar<br>uma MEDALHA deste tema.</h2>
 
-			<p>Você acertou 3 respostas seguidas<br>
-			portanto, é a vez do seu adversário<br>
-			jogar caso ele erre, não responda<br>
+			<p>Você acertou 3 respostas seguidas portanto, é a vez do seu adversário jogar.<p>
+			<!--  caso ele erre, não responda<br>
 			a tempo ou também acerte 3 perguntas<br>
 			seguidas você poderá jogar novamente.<br>
-			Ele terá 72horas antes do jogo expirar.</p>
+			Ele terá 72horas antes do jogo expirar.</p> -->
 
 		</div> <!-- FIM ACERTOU TUDO -->
 

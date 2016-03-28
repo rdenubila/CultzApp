@@ -518,6 +518,13 @@ function LoadRounds(){
 		console.log("----- ROUNDS ------")
 		console.log(data);
 
+		if(data.length==0){
+			$("#andamento .titulo").html("nenhum jogo em andamento");
+		} else if(data.length==1){
+			$("#andamento .titulo").html("1 jogo em andamento");
+		} else {
+			$("#andamento .titulo").html(data.length+" jogos em andamento");
+		}
 
 		for(i=0; i<data.length; i++){
 			d = data[i];
@@ -1005,6 +1012,7 @@ function selEstabelecimento(id){
 }
 
 var swiperEstInfo;
+var scrollAlertReg = false;
 function loadEstInfo(){
 
 	$("#estabelecimento_info .guias li").click(function(event) {
@@ -1032,9 +1040,24 @@ function loadEstInfo(){
 	html += "</li>";
 
 	$("#est_info").html( html );
-	$("#est_reg").html( "<li><div class='texto'>"+actualBusiness.regulamento+"</div></li>" );
+	$("#est_reg").html( "<li><div class='texto'>"+actualBusiness.regulamento+"</div><div class='check'><input type='checkbox' id='check_regulamento' /> <label for='check_regulamento'>Aceito o regulamento</label></div></li>" );
 
+	scrollAlertReg = false;
 
+}
+
+function generateVoucher(){
+	if(!$("#check_regulamento").is(':checked')){
+		if(!scrollAlertReg){
+			swiperEstInfo.slideTo(1);
+			$("#est_reg").delay(300).animate({ scrollTop: $("#est_reg li").height() }, 'slow');
+			scrollAlertReg = true;
+		} else {
+			alerta("Aceite o regulamento para gerar o seu voucher!");
+		}
+	} else {
+		trocaTela("voucher_info");
+	}
 }
 
 

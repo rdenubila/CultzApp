@@ -465,7 +465,7 @@ body {
 
 		.pontos {
 			position: absolute;
-			right: 100px;
+			right: 70px;
 			top: 30px;
 			font-size: 76px;
 			font-weight: bold;
@@ -1109,6 +1109,35 @@ body {
 					padding: 20px;
 				}
 
+				.check {
+					font-size: 30px;
+					color: #B6C806;
+					font-weight: bold;
+
+					input[type=checkbox] {
+						visibility: hidden;
+					}
+
+					input[type=checkbox]:before { 
+						visibility: visible;
+						content:""; 
+						display:inline-block; 
+						width:40px; 
+						height:40px; 
+						background: url(images/check_unchecked.png); 
+
+						margin: -20px 0 0 15px;
+					}
+					
+					input[type=checkbox]:checked:before { 
+						background: url(images/check_checked.png); 
+					}
+
+					label {
+						margin-left: 45px;
+					}
+				}
+
 
 				&.stats {
 
@@ -1146,6 +1175,33 @@ body {
 	}
 
 
+}
+
+
+#voucher_info {
+	.foto {
+		width: 200px;
+		height: 200px;
+	}
+
+	.info {
+
+		width: calc(100% - 230px);
+
+		h2 {
+			font-size: 28px;
+		}
+
+		.endereco {
+			font-size: 21px;
+		}
+
+		.premiacao {
+			font-size: 39px;
+			margin-top: 15px;
+		}
+
+	}
 }
 
 #sel_tema, #jogo {
@@ -1497,7 +1553,7 @@ body {
 	}
 
 	.area_indicador {
-		height: 365px;
+		height: 300px;
 		position: relative;
 		background: url("images/separador.png") repeat-x bottom center;
 		width: 90%;
@@ -1622,6 +1678,6 @@ body {
 
 }
 
-#acertou, #errou, #acertou_tudo, #ganhou_cultz, #ganhou_5_circuitos, #ganhou_cultz_circuito, #empate, #giro_cultz, #ganhou_giro, #errou_giro, #estabelecimento_info, #estatisticas {
+#acertou, #errou, #acertou_tudo, #ganhou_cultz, #ganhou_5_circuitos, #ganhou_cultz_circuito, #empate, #giro_cultz, #ganhou_giro, #errou_giro, #estabelecimento_info, #estatisticas, #voucher_info {
 	display: none;
 }
