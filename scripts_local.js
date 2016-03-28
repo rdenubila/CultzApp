@@ -29,8 +29,12 @@ function statusChangeCallback(response) {
 	if (response.status === 'connected') {
 		getUserData();
 	} else if (response.status === 'not_authorized') {
-		loginFB();
+		//loginFB();
 		$("#loading").fadeOut("fast");
+
+		localStorage.clear();
+		trocaTela("instrucao");
+		
 	} else {
 		loginFB();
 		$("#loading").fadeOut("fast");

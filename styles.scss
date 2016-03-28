@@ -39,7 +39,7 @@ body {
 	position: absolute;
 	width: 100%;
 	height: 100%;
-	background: rgba(black, .6);
+	background: rgba(black, .8);
 	z-index: 9999;
 
 	.btn_fechar {
@@ -254,9 +254,10 @@ body {
 	background: url(images/separador.png) repeat-x center center;
 }
 
-#login {
+#login, #cadastro {
 
 	display: none;
+	background: $bg;
 
 	.ico_login {
 		width: 136px;
@@ -270,6 +271,11 @@ body {
 	.topo_escuro {
 		p {
 			margin-left: 170px;
+			&.maior {
+				font-size: 35px;
+				font-weight: bold;
+				margin-top: 30px;
+			}
 		}
 	}
 
@@ -341,7 +347,7 @@ body {
 			text-transform: uppercase;
 		}
 
-		.btn_entrar {
+		.btn_entrar, .btn_voltar {
 			background: url(images/btn_seta_azul_escuro.png) no-repeat left center;
 			padding-left: 35px;
 			font-size: 30px;
@@ -355,6 +361,11 @@ body {
 			float: right;
 			margin-top: 25px;
 			margin-right: 20px;
+
+			&.roxo {
+				color: #9b428e;
+				background-image: url("images/btn_seta_roxo.png")
+			}
 		}
 	}
 
@@ -381,6 +392,24 @@ body {
 			height: 175px;
 
 			background: url(images/logo_amigo_da_cultura.png) no-repeat left center;
+		}
+	}
+}
+
+#cadastro {
+	//display: block;
+
+	.conteudo {
+		margin-top: -300px;
+	}
+
+	.bg_login {
+		.btns {
+			margin-top: 130px;
+
+			.btn_voltar {
+				margin-top: 50px;
+			}
 		}
 	}
 }
@@ -689,7 +718,7 @@ body {
 			height: 86px;
 
 			margin: 0 0;
-			padding: 10px;
+			padding: 10px 5px;
 
 			background: url(images/estrela_g_cinza.png) no-repeat center center;
 		}

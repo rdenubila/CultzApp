@@ -23,11 +23,11 @@
 
 <!-- LOCAL -->
 
-<!-- <script src="scripts_local.js"></script> -->
+<script src="scripts_local.js"></script>
 
 <!-- ONLINE -->
 
-<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+<!-- <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
 
 <script src="scripts_mobile.js"></script>
 
@@ -39,7 +39,7 @@
 	if(Android){
 		monaca.viewport({width : 720});
 	}
-</script>
+</script> -->
 
 
 
@@ -93,31 +93,50 @@
 		</div>
 
 		<div class="conteudo">
-			<a href="javascript: checkLoginState();" class="btn_face"></a>
+			<a href="javascript: loginFB();" class="btn_face"></a>
 
 			<div class="separador"></div>
 
 			<div class="bg_login">
-				<p><input type="text" class="tf" placeholder="USUÁRIO" /></p>
-				<p><input type="text" class="tf" placeholder="SENHA" /></p>
+				<p><input type="email" class="tf" id="login_email" placeholder="E-MAIL" /></p>
+				<p><input type="password" class="tf" id="login_senha" placeholder="SENHA" /></p>
 				<p class="btns">
 					<a href="#" class="btn_esqueci">Esqueci</a>
-					<a href="javascript: trocaTela('andamento');" class="btn_entrar">Entrar</a>
+					<a href="javascript: loginComum();" class="btn_entrar">Entrar</a>
 				</p>
 			</div>
 
 			<div class="info_amigo">
 				<div class="txt">
-					<p>
-					Venha ser um<br>
-					amigo da cultura,<br>
-					A Economia Criativa<br>
-					sem limites!
-					</p>
-					<a href="#" class="btn_seta roxo">Cadastre-se</a>
+					<a href="javascript: trocaTela('cadastro');" class="btn_seta roxo">Cadastre-se</a>
 				</div>
 				<div class="logo"></div>
 			</div>
+
+		</div>
+	</div> <!-- FIM LOGIN -->
+
+
+	<div id="cadastro">
+
+		<div class="topo_escuro">
+			<i class="ico_login"></i>
+			<p class="maior">Cadastre-se</p>
+		</div>
+
+		<div class="conteudo">
+			
+			<div class="bg_login">
+				<p><input type="text" id="cadastro_nome" name="nome" class="tf" placeholder="NOME" /></p>
+				<p><input type="email" id="cadastro_email" name="email" class="tf" placeholder="E-MAIL" /></p>
+				<p><input type="password" id="cadastro_senha" name="senha" class="tf" placeholder="SENHA" /></p>
+
+				<p class="btns">
+					<a href="javascript: cadastrar();" class="btn_entrar">Cadastrar</a>
+					<a href="javascript: trocaTela('login');" class="btn_voltar roxo">Voltar</a>
+				</p>
+			</div>
+			
 
 		</div>
 	</div> <!-- FIM LOGIN -->
@@ -303,8 +322,8 @@
 
 		<div id="swiperStat" class="swiper-container com_btns">
 			<div class="swiper-wrapper">
-				<ul id="stat_cultz" class="swiper-slide lista"></ul>
-				<ul id="stat_vidas" class="swiper-slide lista">
+				<div id="stat_cultz" class="swiper-slide lista"></div>
+				<div id="stat_vidas" class="swiper-slide lista">
 					<p>Cada jogador ganha 3 vidas 24 horas após todas as suas vidas acabarem, mas é possível solicitar mais vidas. Cada vida equivale a 1 Cultz.</p>
 					<p class="laranja">Não é permitido trocar vidas por Cultz</p>
 					
@@ -326,7 +345,7 @@
 
 					<p>Estou ciente das regras do jogo e desejo confirmar a solicitação</p>
 
-				</ul>
+				</div>
 	        </div>
         </div>
 

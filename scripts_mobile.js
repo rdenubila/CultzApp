@@ -42,7 +42,7 @@ function statusChangeCallback(response) {
 	if (response.status === 'connected') {
 		getUserData();
 	} else if (response.status === 'not_authorized') {
-		loginFB();
+		//loginFB();
 		$("#loading").fadeOut("fast");
 	} else {
 		loginFB();
@@ -84,7 +84,9 @@ function checkLoginState() {
 		function(response) {
 			statusChangeCallback(response);
 		},
-        function (response) { alert(JSON.stringify(response)) }
+        function (response) { 
+        	console.log(JSON.stringify(response)) 
+        }
     );
 
 }

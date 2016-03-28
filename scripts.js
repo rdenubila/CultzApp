@@ -3,6 +3,10 @@ if( $(window).width()<640 ){
 	$('meta[name=viewport]').attr('content','width=device-width initial-scale=0.5, maximum-scale=0.5, minimum-scale=0.5, user-scalable=no, minimal-ui=1');
 }
 
+
+//localStorage.clear();
+
+
 var swiperInstrucao;
 var swiperRoleta;
 var swiperEstabelecimentos;
@@ -136,21 +140,26 @@ function trocaTela(novaTela){
 		trocaEstrelaCultz(1);
 		$(".confirmar_compra_vida").hide();
 
-		swiperStat = new Swiper('#swiperStat', {
-			onSlideChangeEnd: function(s){
-				$("#estatisticas .guias .sel").removeClass('sel');
-				$("#estatisticas .guias li").eq(s.activeIndex).addClass('sel');
-				if(s.activeIndex==1){
-					$(".confirmar_compra_vida").show();
-				} else {
-					$(".confirmar_compra_vida").hide();
-				}
-			}
-		});
+		setTimeout(function(){
 
-		$("#estatisticas .guias li").click(function(event) {
-			swiperStat.slideTo( $(this).index() );
-		});
+			console.log("TELA VIDAS");
+
+			swiperStat = new Swiper('#swiperStat', {
+				onSlideChangeEnd: function(s){
+					$("#estatisticas .guias .sel").removeClass('sel');
+					$("#estatisticas .guias li").eq(s.activeIndex).addClass('sel');
+					if(s.activeIndex==1){
+						$(".confirmar_compra_vida").show();
+					} else {
+						$(".confirmar_compra_vida").hide();
+					}
+				}
+			});
+
+			$("#estatisticas .guias li").click(function(event) {
+				swiperStat.slideTo( $(this).index() );
+			});
+		}, 1000);
 	}
 
 	
@@ -271,10 +280,68 @@ function fechaInstrucao(){
 	}
 }
 
+
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
+
+
+function cadastrar(){
+
+	data = {
+		nome: $("#cadastro_nome").val(),
+		email: $("#cadastro_email").val(),
+		senha: $("#cadastro_senha").val()
+	}
+
+	if(data.nome=="" || data.email=="" || data.senha==""){
+		alerta("Preencha todos os campos!");
+		return false;
+	}
+
+	if(!validateEmail(data.email)){
+		alerta("E-mail inválido!");
+		return false;
+	}
+
+	$.getJSON( apiURL+"setCadastro.php", data).done(function( data ) {
+		console.log("----- CADASTRAR USUARIO ------")
+		console.log(data);
+
+		if(!data.success){
+			alerta(data.erro);
+		} else {
+			alerta("Usuário cadastrado com sucesso!");
+			trocaTela("login");
+		}
+	});
+
+}
+
+function loginComum (){
+	$("#loading").fadeIn("fast");
+
+	data = {
+		email: $("#login_email").val(),
+		senha: $("#login_senha").val()
+	}
+
+	login(data);
+}
+
 function login(response){
+
 	$.getJSON( apiURL+"login.php", response).done(function( data ) {
 		console.log("----- USUARIO LOGADO ------")
 		console.log(data);
+
+		$("#loading").fadeOut("fast");
+
+		if(!data.success){
+			alerta("Usuário e/ou senha inválido!");
+			return false;
+		}
 
 		userLogado = data;
 		localStorage.user = JSON.stringify( data );
@@ -282,8 +349,11 @@ function login(response){
 		loginComplete();
 
 		trocaTela('andamento');
-		$("#loading").fadeOut("fast");
-	});
+		
+	}).error(function(jqXHR, textStatus, errorThrown) {
+        console.log("error " + textStatus);
+        console.log("incoming Text " + jqXHR.responseText);
+    })
 }
 
 function loginComplete(){
@@ -516,7 +586,7 @@ function selJogo(idRound){
 
 		$("#circuito_placar, .circuito_placar").html(zeroFill(roundAtual.round.placar1) +" x "+ zeroFill(roundAtual.round.placar2));
 
-		$("#circuito_count").html("Circuito: " + (parseInt(roundAtual.round.circuito_count)+1) +" de "+ (parseInt(roundAtual.round.round_count)+1)*5 );
+		$("#circuito_count").html("Circuito: " + (parseInt(Math.floor(roundAtual.round.circuito_count/2))+1) +" de "+ (parseInt(roundAtual.round.round_count)+1)*5 );
 
 		$(".ico_temas .on").removeClass('on');
 		$(".ico_temas .off").removeClass('off');
