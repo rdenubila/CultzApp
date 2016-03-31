@@ -497,6 +497,9 @@ function enviaConvite(ids){
 
 	$.getJSON( apiURL+"setInvite.php", {id: userLogado.id, ids: ids } ).done(function( data ) {
 
+		console.log("-- CONVIDA AMIGOS --");
+		console.log(data);
+
 		$("#loading").fadeOut("fast");
 		if(data.result == true){
 			if(data.qtd==0){
