@@ -223,7 +223,7 @@
 	<div id="voucher_info" class="area_conteudo_topo telas_guias">
 
 
-		<div id="swiperVoucherInfo" class="swiper-container com_btns">
+		<div id="swiperVoucherInfo" class="swiper-container sem_guia">
 			<ul class="swiper-slide lista">
 				<li>
 					<div class="foto"></div>
@@ -243,8 +243,7 @@
 
 
         <ul class="btns">
-			<li><a href="javascript: trocaTela('estabelecimentos');">Voltar</a></li>
-			<li class="verde"><a href="javascript: generateVoucher(); void(0);">Confirmar</a></li>
+			<li class="full"><a href="javascript: trocaTela('estatisticas');">Voltar</a></li>
 		</ul>
 
 	</div> <!-- FIM ESTABELECIMENTOS -->
@@ -347,12 +346,14 @@
 	<div id="estatisticas" class="area_conteudo_topo telas_guias">
 
 		<ul class="guias guias_resize">
-			<li class="sel"><a href="#">Cultz</a></li>
+			<li class="sel"><a href="#">Vouchers</a></li>
+			<li><a href="#">Cultz</a></li>
 			<li><a href="#">Vidas</a></li>			
 		</ul>
 
 		<div id="swiperStat" class="swiper-container com_btns">
 			<div class="swiper-wrapper">
+				<div id="stat_vouchers" class="swiper-slide lista"></div>
 				<div id="stat_cultz" class="swiper-slide lista"></div>
 				<div id="stat_vidas" class="swiper-slide lista">
 					<p>Cada jogador ganha 3 vidas 24 horas após todas as suas vidas acabarem, mas é possível solicitar mais vidas. Cada vida equivale a 1 Cultz.</p>

@@ -908,6 +908,10 @@ body {
 		background-size: 100% auto;
 		text-align: center;
 		text-transform: uppercase;
+
+		&.full {
+			width: 100%;
+		}
 		
 
 		a {
@@ -978,6 +982,10 @@ body {
 
 		&.com_btns {
 			height: calc(100% - 153px );
+		}
+
+		&.sem_guia {
+			height: calc(100% - 85px );
 		}
 
 		.swiper-wrapper, .swiper-slide {
@@ -1065,6 +1073,8 @@ body {
 					.foto {
 						width: 200px;
 						height: 200px;
+						background: url(images/ico_ingresso.png) no-repeat center center;
+						background-size: contain;
 					}
 
 					.info {
@@ -1163,6 +1173,29 @@ body {
 						margin: 0;
 						color: #b6c805;
 					}
+
+					.txt_data {
+						margin: 0;
+						font-weight: bold;
+
+						&.valido {
+							color: #B6C806;
+						}
+
+						&.expirado {
+							color: #E64759;
+						}
+
+						&.utilizado {
+							color: #0F70B8;
+						}
+					}					
+
+					.txt_desc {
+						margin: 0;
+						font-weight: bold;
+						color: #b6c805;
+					}
 				}
 
 			}
@@ -1182,6 +1215,8 @@ body {
 	.foto {
 		width: 200px;
 		height: 200px;
+		background: url(images/ico_ingresso.png) no-repeat center center;
+		background-size: contain;
 	}
 
 	.info {
@@ -1202,6 +1237,35 @@ body {
 		}
 
 	}
+
+	.texto {
+
+		font-size: 18px;
+
+		.codigo {
+			font-size: 90px;
+			font-weight: bold;
+			text-align: center;
+			margin: 0;
+		}
+
+		.valido span {
+			color: #B6C806;
+			font-weight: bold;
+		}
+
+		.expirado span {
+			color: #E64759;
+			font-weight: bold;
+		}
+
+		.utilizado span {
+			color: #0F70B8;
+			font-weight: bold;
+		}
+	}
+
+
 }
 
 #sel_tema, #jogo {

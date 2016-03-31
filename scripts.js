@@ -148,7 +148,7 @@ function trocaTela(novaTela){
 				onSlideChangeEnd: function(s){
 					$("#estatisticas .guias .sel").removeClass('sel');
 					$("#estatisticas .guias li").eq(s.activeIndex).addClass('sel');
-					if(s.activeIndex==1){
+					if(s.activeIndex==2){
 						$(".confirmar_compra_vida").show();
 					} else {
 						$(".confirmar_compra_vida").hide();
@@ -1047,6 +1047,12 @@ function loadEstInfo(){
 }
 
 function generateVoucher(){
+
+	if(cultzCount<actualBusiness.qtd_pontos){
+		alerta("Você não tem Cultz suficiente para adquirir esse voucher!");
+		return false;
+	}
+
 	if(!$("#check_regulamento").is(':checked')){
 		if(!scrollAlertReg){
 			swiperEstInfo.slideTo(1);
@@ -1056,22 +1062,94 @@ function generateVoucher(){
 			alerta("Aceite o regulamento para gerar o seu voucher!");
 		}
 	} else {
-		trocaTela("voucher_info");
+		$("#loading").fadeIn("fast");
+
+		//trocaTela("voucher_info");
+		console.log(actualBusiness);
+		data = {
+			id_est: actualBusiness.id,
+			id_user: userLogado.id,
+			programacao: actualBusiness.programacao,
+			descricao: actualBusiness.desc_pontos
+		};
+
+		$.getJSON( apiURL+"setVoucher.php", data ).done(function( data ) {
+
+			console.log("------- generateVoucher --------");
+			console.log(data);
+
+			if(data.success){
+				addCultz("Troca de voucher em: "+actualBusiness.nome, -actualBusiness.qtd_pontos);
+				openVoucher(data.id);
+			} else {
+				alerta("Não foi possível gerar o voucher, tente novamente mais tarde");
+			}
+
+		}).fail(function( jqxhr, textStatus, error ) {
+			var err = textStatus + ", " + error;
+			console.log( "Request Failed: " + err );
+		});
+
 	}
+}
+
+function openVoucher(id){
+
+	$("#loading").fadeIn("fast");
+
+	$.getJSON( apiURL+"getVoucher.php", {id: id} ).done(function( data ) {
+
+		console.log("------- getVoucher --------");
+		console.log(data);
+
+		$("#voucher_info .info h2").html(data.est_nome);
+		$("#voucher_info .info .endereco").html(data.est_endereco);
+		$("#voucher_info .info .premiacao").html(data.descricao);
+
+		html = "";
+
+		html += "<p class='codigo'>"+data.codigo+"</p>";
+
+		if(data.status=="valido"){
+			html += "<p class='valido'><span>VALIDADE:</span> "+data.validade+"</p>";
+		} else if(data.status=="expirado"){
+			html += "<p class='expirado'><span>EXPIROU!</span>";
+			html += "<br>Validade: "+data.validade+"</p>";
+		} else if(data.status=="utilizado"){
+			html += "<p class='utilizado'><span>UTILIZADO!</span>";
+			html += "<br>"+data.validade+"</p>";
+		}
+
+		html += "<p><strong>Para a seguinte programação: </strong></p>";
+		html += data.programacao;
+
+
+		$("#voucher_info .texto").html(html);
+
+		$("#loading").fadeOut("fast");
+
+		trocaTela("voucher_info");
+
+	}).fail(function( jqxhr, textStatus, error ) {
+		var err = textStatus + ", " + error;
+		console.log( "Request Failed: " + err );
+	});
 }
 
 
 function loadStats(){
 
-	$("#swiperStat #stat_cultz").html("");
 
-	$.getJSON( apiURL+"getStatsCultz.php", {id_user: userLogado.id} ).done(function( data ) {
+	$("#swiperStat #stat_cultz").html("");
+	$("#swiperStat #stat_vouchers").html("");
+
+	$.getJSON( apiURL+"getStats.php", {id_user: userLogado.id} ).done(function( data ) {
 
 		console.log("------- getStatsCultz --------");
 		console.log(data);
 
-		for(i=0; i<data.length; i++){
-			d = data[i];
+		for(i=0; i<data.cultz.length; i++){
+			d = data.cultz[i];
 
 			html = '<li class="stats">';
 
@@ -1088,10 +1166,41 @@ function loadStats(){
 
 		}
 
+
+		for(i=0; i<data.voucher.length; i++){
+			d = data.voucher[i];
+
+			html = '<li class="stats">';
+
+			html += '<a href="javascript: openVoucher('+d.id+')" class="txt_valor"><img src="images/ico_lupa.png" height="66" width="66"></a>';
+			html += '<p class="txt_info">'+d.est+'</p>';
+
+			if(d.status=="valido"){
+				html += '<p class="txt_data valido">validade: '+d.data+'</p>';
+			} else if(d.status=="expirado"){
+				html += '<p class="txt_data expirado">expirado: '+d.data+'</p>';
+			} else if(d.status=="utilizado"){
+				html += '<p class="txt_data utilizado">utilizado: '+d.data+'</p>';
+			}
+			
+
+			html += '<p class="txt_desc">'+d.desc+'</p>';
+
+			html += '</li>';
+
+
+			$("#stat_vouchers").append(html);
+
+		}
+
 	}).fail(function( jqxhr, textStatus, error ) {
 		var err = textStatus + ", " + error;
 		console.log( "Request Failed: " + err );
 	});
+
+
+
+
 
 }
 
