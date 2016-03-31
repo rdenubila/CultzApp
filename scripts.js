@@ -4,7 +4,7 @@ if( $(window).width()<640 ){
 }
 
 
-localStorage.clear();
+//localStorage.clear();
 
 
 var swiperInstrucao;
@@ -332,7 +332,7 @@ function loginComum (){
 
 function login(response){
 
-	if(response.name!=null{
+	if(response.name!=null) {
 		response.name = encodeURI(response.name);
 	}
 
