@@ -4,7 +4,7 @@ if( $(window).width()<640 ){
 }
 
 
-//localStorage.clear();
+localStorage.clear();
 
 
 var swiperInstrucao;
@@ -331,6 +331,10 @@ function loginComum (){
 }
 
 function login(response){
+
+	if(response.name!=null{
+		response.name = encodeURI(response.name);
+	}
 
 	$.getJSON( apiURL+"login.php", response).done(function( data ) {
 		console.log("----- USUARIO LOGADO ------")
