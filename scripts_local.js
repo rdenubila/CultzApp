@@ -69,16 +69,16 @@ function getFriendsFB(){
 	$("#loading").fadeIn("fast");
 
 	FB.api('me/permissions', function(response) {
-		console.log(response);
+		console.log(response.data);
 
 		var canGetFriends = false;
-		for(i=0; i<response.length; i++){
-			d = response[i];
-			if(d.permission=="user_friends" && d.status=="status"){
+		for(i=0; i<response.data.length; i++){
+			d = response.data[i];
+			if(d.permission=="user_friends" && d.status=="granted"){
 				FB.api('me/friends?fields=id&limit=999', function(response) {
 					getFriendsBD( response );
-					canGetFriends = true;
 				});
+				canGetFriends = true;
 			}
 		}
 

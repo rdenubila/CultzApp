@@ -74,8 +74,8 @@ function getFriendsFB(){
 		console.log(response);
 
 		var canGetFriends = false;
-		for(i=0; i<response.length; i++){
-			d = response[i];
+		for(i=0; i<response.data.length; i++){
+			d = response.data[i];
 			if(d.permission=="user_friends" && d.status=="status"){
 				
 				facebookConnectPlugin.api('me/friends?fields=id&limit=999', ["user_friends"], function(response) {
