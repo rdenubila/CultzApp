@@ -69,29 +69,9 @@ function getUserData(){
 function getFriendsFB(){
 	$("#loading").fadeIn("fast");
 
-
-	facebookConnectPlugin.api('me/permissions', function(response) {
-		console.log(response);
-
-		var canGetFriends = false;
-		for(i=0; i<response.data.length; i++){
-			d = response.data[i];
-			if(d.permission=="user_friends" && d.status=="status"){
-				
-				facebookConnectPlugin.api('me/friends?fields=id&limit=999', ["user_friends"], function(response) {
-					getFriendsBD( response );
-				}, function (response) { alert(JSON.stringify(response)) });
-			}
-		}
-
-		if(!canGetFriends){
-			facebookConnectPlugin.login( ["email", "user_friends"],
-	        function (response) { getFriendsFB(); },
-	        function (response) { alert(JSON.stringify(response)) });
-
-			
-		}
-	});
+	facebookConnectPlugin.api('me/friends?fields=id&limit=999', ["user_friends"], function(response) {
+		getFriendsBD( response );
+	}, function (response) { alert(JSON.stringify(response)) });
 
 }
 
