@@ -306,7 +306,11 @@ function trocaBanner(){
 }
 
 var ultimaTelaOverlay;
-function mostraOverlay(id, d=0){
+function mostraOverlay(id, d){
+
+	if(d==undefined){
+		d = 0;
+	}
 
 	switch(id){
 		case "errou": finalizaCircuito(false); break;
