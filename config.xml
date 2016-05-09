@@ -51,6 +51,7 @@
         <param name="APP_NAME" value="Cultz" />
     </gap:plugin>
 
+    <plugin name="org.apache.cordova.geolocation" spec="0.3.12" source="pgb" />
     <gap:plugin name="onesignal-cordova-plugin-pgb-compat" source="npm" />
     <gap:plugin name="cordova-plugin-googleplayservices" source="npm" />
 

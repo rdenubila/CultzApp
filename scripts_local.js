@@ -1,5 +1,4 @@
 apiURL = "http://localhost/Cultz/sistema/";
-//apiURL = "http://www.meatballs.com.vc/cultz/";
 
 
 window.fbAsyncInit = function() {
@@ -69,9 +68,27 @@ function loginFB(){
 function getFriendsFB(){
 	$("#loading").fadeIn("fast");
 
-	FB.api('me/friends?fields=id&limit=999', function(response) {
-		getFriendsBD( response );
+	FB.api('me/permissions', function(response) {
+		console.log(response);
+
+		var canGetFriends = false;
+		for(i=0; i<response.length; i++){
+			d = response[i];
+			if(d.permission=="user_friends" && d.status=="status"){
+				FB.api('me/friends?fields=id&limit=999', function(response) {
+					getFriendsBD( response );
+					canGetFriends = true;
+				});
+			}
+		}
+
+		if(!canGetFriends){
+			FB.login(function(response) {
+				getFriendsFB();
+			}, {scope: 'email, user_friends'});
+		}
 	});
+
 }
 
 function inviteFriends(){

@@ -1,5 +1,6 @@
-
-if( $(window).width()<640 ){
+if( $(window).width()<350 ){
+	$('meta[name=viewport]').attr('content','width=device-width initial-scale=0.4, maximum-scale=0.4, minimum-scale=0.4, user-scalable=no, minimal-ui=1');
+} else if( $(window).width()<640 ){
 	$('meta[name=viewport]').attr('content','width=device-width initial-scale=0.5, maximum-scale=0.5, minimum-scale=0.5, user-scalable=no, minimal-ui=1');
 }
 
@@ -21,7 +22,8 @@ if (localStorage.vidas == undefined) {
 	localStorage.vidas = 5;
 }
 
-var limiteTempoVidas = 1; // EM MINUTOS
+var limiteTempoVidas = 3 * 60; // EM MINUTOS
+var limiteTempoGiro = 24 * 60; // EM MINUTOS
 
 $( document ).ready(function() {
 
@@ -79,6 +81,57 @@ function initApp(){
 	}
 }
 
+
+function checkGiroCultz(){
+
+	if (localStorage.tempoGiro==undefined) {
+		localStorage.tempoGiro = new Date().getTime();
+	}
+
+	var tempo = (1000 * 60);
+	var agora = new Date();
+	var t = (agora.getTime()-parseInt(localStorage.tempoGiro)) / tempo;
+
+	console.log("t: "+t);
+
+	if(t>limiteTempoGiro){
+		getLocation();
+
+		localStorage.tempoGiro = new Date().getTime();
+	}
+
+}
+
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        console.log("Geolocation is not supported by this browser.");
+    }
+}
+
+var currentGiroEst;
+function showPosition(position) {
+    console.log(position.coords);
+
+    var url =  apiURL+"getBusinessDistance.php?lat="+position.coords.latitude+"&long="+position.coords.longitude+"&dist=2";
+    console.log(url);
+    $.getJSON(url).done(function( data ) {
+		console.log("----- GPS ------")
+		console.log(data);
+
+		if(data.length>0){
+			currentGiroEst = data[0];
+			trocaBanner();
+			mostraOverlay("giro_cultz");
+		}
+
+	}).fail(function( jqxhr, textStatus, error ) {
+		var err = textStatus + ", " + error;
+		console.log( "Request Failed: " + err );
+	});
+}
 
 function alerta(msg){
 	$("#box_alerta p").html(msg);
@@ -208,6 +261,15 @@ function trocaTela(novaTela){
 
 }
 
+function vaiParaVidas(){
+
+
+	trocaTela('estatisticas');
+	setTimeout(function(){
+		swiperStat.slideTo( 2 );
+	}, 1250);
+}
+
 function trocaEstrelaCultz(qtd){
 	$("#estatisticas .estrelas .amarela").removeClass('amarela');
 	qtdVidaCultz = qtd;
@@ -221,11 +283,16 @@ function trocaEstrelaCultz(qtd){
 }
 
 function comprarVida(){
-	updateVidas(qtdVidaCultz);
-	addCultz("Trocou "+qtdVidaCultz+" Cultz por "+qtdVidaCultz+" vida(s)", -qtdVidaCultz);
-	trocaTela("andamento");
 
-	loadCults();
+	if(cultzCount>=qtdVidaCultz){
+		updateVidas(qtdVidaCultz);
+		addCultz("Trocou "+qtdVidaCultz+" Cultz por "+qtdVidaCultz+" vida(s)", -qtdVidaCultz);
+		trocaTela("andamento");
+
+		loadCults();
+	} else {
+		alerta("Você não possui Cultz suficientes para comprar a quantidade de vidas selecionada.");
+	}
 }
 
 
@@ -239,14 +306,17 @@ function trocaBanner(){
 }
 
 var ultimaTelaOverlay;
-function mostraOverlay(id, d){
+function mostraOverlay(id, d=0){
 
 	switch(id){
 		case "errou": finalizaCircuito(false); break;
 		case "acertou_tudo": finalizaCircuito(true); break;
 		case "ganhou_cultz": finalizaCircuito(true); addCultz("Acertou todas as perguntas do circuito", 1); break;
 		case "ganhou_cultz_circuito": finalizaCircuito(true); addCultz("Acertou todas as perguntas do circuito", 1); break;
+
 		case "ganhou_5_circuitos": addCultz("Ganhou 5 circuitos", 1); finalizaCircuito(true); break;
+
+		case "ganhou_giro": addCultz("Acertou o Giro Cultz", 1); break;
 	}
 
 	$("#overlay .msgs").hide();
@@ -263,6 +333,9 @@ function fechaOverlay(){
 	$("#overlay").fadeOut();
 
 	switch(ultimaTelaOverlay){
+		case "giro_cultz":
+			loadPerguntasGiro(currentGiroEst.id);
+			break;
 		case "acertou":
 			initPergunta();
 			break;
@@ -519,6 +592,8 @@ function enviaConvite(ids){
 
 function LoadRounds(){
 
+	checkGiroCultz();
+
 	$("#jogos_andamento").html("");
 
 	$.getJSON( apiURL+"getRounds.php", {id: userLogado.id}).done(function( data ) {
@@ -580,7 +655,7 @@ var iUser;
 function selJogo(idRound){
 
 	if( parseInt(localStorage.vidas)==0){
-		alerta("Você não possui mais vidas para jogar. Você ganhará 3 vidas 24h após suas vidas terminarem.");
+		alerta("Você não possui mais vidas para jogar. Você ganhará 3 vidas 3h após suas vidas terminarem.");
 		return;
 	}
 
@@ -754,10 +829,20 @@ var areaAtual;
 var perguntasAtual;
 var iPergunta = 0;
 function loadPerguntas(area){
-
 	areaAtual = area;
+	data = {id_user: userLogado.id, area: area };
+	loadPerguntasData(data);
+}
 
-	$.getJSON( apiURL+"getQuestions.php", {id_user: userLogado.id, area: area } ).done(function( data ) {
+function loadPerguntasGiro(id_est){
+	areaAtual = "giro";
+	data = {id_user: userLogado.id, estabelecimento: id_est };
+	loadPerguntasData(data);
+}
+
+function loadPerguntasData(_d){
+
+	$.getJSON( apiURL+"getQuestions.php", _d).done(function( data ) {
 
 		console.log("----- PERGUNTAS ------")
 		console.log(data);
@@ -770,7 +855,6 @@ function loadPerguntas(area){
 	});
 }
 
-
 var jogadaAtual = 0;
 var jogou = false;
 var acertos = new Array();
@@ -778,8 +862,10 @@ function initPergunta(){
 
 	jogou = false;
 
+	t = areaAtual=="giro" ? 15000 : 30000;
+
 	$(".tempo .cor").css('margin-left', '-100%');
-	$(".tempo .cor").animate({"margin-left": "0%"}, 30000, function(){
+	$(".tempo .cor").animate({"margin-left": "0%"}, t, function(){
 		mostraOverlay("errou", 0);
 	});
 
@@ -813,8 +899,14 @@ function initPergunta(){
 			$(".tempo .cor").stop();
 
 			if($(this).data("certa")==true){
-				
+
 				$(this).addClass('certa');
+
+				if(areaAtual=="giro"){
+					mostraOverlay("ganhou_giro", 500);
+					return;
+				}
+				
 				acertos[jogadaAtual] = true;
 
 				if(jogadaAtual<2){
@@ -834,12 +926,20 @@ function initPergunta(){
 				}*/
 
 			} else {
+
+
 				$(".box_jogo .resposta").each(function() {
 					if($(this).data("certa")) {
 						$(this).addClass('certa');
 					}
 				});
 				$(this).addClass('errada');
+
+				if(areaAtual=="giro"){
+					mostraOverlay("errou_giro", 500);
+					return;
+				}
+
 				mostraOverlay("errou", 1000);
 				acertos[jogadaAtual] = false;
 				updateVidas(-1);
@@ -1253,16 +1353,15 @@ function updateVidas(valor){
 
 
 
-function openMap(dest){
+function openMap(dest){	
 
-	window.open('geo://0,0?q='+dest, '_system');
-
-	/*var platform = device.platform.toLowerCase();
+	var platform = device.platform.toLowerCase();
 	if(platform == "android"){
-		window.open("maps://")
+		window.open('geo://0,0?q='+dest, '_system');
 	}else if(platform == "ios"){
-		platform = launchnavigator.PLATFORM.IOS;
-	}else if(platform.match(/win/)){
-		platform = launchnavigator.PLATFORM.WINDOWS;
-	}*/
+		window.open('maps://0,0?q='+dest, '_system');
+	}else {
+		window.open('geo://0,0?q='+dest, '_system');
+	}
+
 }

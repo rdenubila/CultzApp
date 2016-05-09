@@ -8,6 +8,13 @@ android = {
 
 document.addEventListener("deviceready", ready, false);
 
+document.addEventListener("resume", onResume, false);
+
+function onResume() {
+    console.log("RESUME");
+    trocaTela('andamento');
+}
+
 
 function ready(){
 
@@ -62,9 +69,30 @@ function getUserData(){
 function getFriendsFB(){
 	$("#loading").fadeIn("fast");
 
-	facebookConnectPlugin.api('me/friends?fields=id&limit=999', ["user_friends"], function(response) {
-		getFriendsBD( response );
-	}, function (response) { alert(JSON.stringify(response)) });
+
+	facebookConnectPlugin.api('me/permissions', function(response) {
+		console.log(response);
+
+		var canGetFriends = false;
+		for(i=0; i<response.length; i++){
+			d = response[i];
+			if(d.permission=="user_friends" && d.status=="status"){
+				
+				facebookConnectPlugin.api('me/friends?fields=id&limit=999', ["user_friends"], function(response) {
+					getFriendsBD( response );
+				}, function (response) { alert(JSON.stringify(response)) });
+			}
+		}
+
+		if(!canGetFriends){
+			facebookConnectPlugin.login( ["email", "user_friends"],
+	        function (response) { getFriendsFB(); },
+	        function (response) { alert(JSON.stringify(response)) });
+
+			
+		}
+	});
+
 }
 
 function inviteFriends(){
