@@ -47,7 +47,7 @@
     <!-- <gap:plugin name="nl.kw.cordova.androidviewport" version="0.0.5" /> -->
     <!-- <plugin name="com.jamiestarke.webviewdebug" source="pgb" /> -->
 
-    <gap:plugin name="cordova-plugin-facebookconnect-orlando" spec="0.11.0" source="npm">
+    <gap:plugin name="cordova-plugin-facebookconnect-orlando" source="npm">
         <param name="APP_ID" value="1908908612666620" />
         <param name="APP_NAME" value="Cultz" />
     </gap:plugin>
