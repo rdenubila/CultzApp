@@ -17,7 +17,7 @@
         Lazuli Studio
     </author>
 
-    <preference name="phonegap-version" value="cli-6.3.1" />
+    <preference name="phonegap-version" value="cli-6.5.0" />
 
     <icon src="icon.png" />
 
@@ -27,6 +27,25 @@
     <icon src="images/icones/mipmap-xhdpi/ic_launcher.png" platform="android" qualifier="xhdpi" />
     <icon src="images/icones/mipmap-xxhdpi/ic_launcher.png" platform="android" qualifier="xxhdpi" />
     <icon src="images/icones/mipmap-xxxhdpi/ic_launcher.png" platform="android" qualifier="fr-xxhdpi" />
+
+    <platform name="ios">
+        <icon height="29" src="images/ios/icons/icon-29.png" width="29" />
+        <icon height="40" src="images/ios/icons/icon-40.png" width="40" />
+        <icon height="50" src="images/ios/icons/icon-50.png" width="50" />
+        <icon height="57" src="images/ios/icons/icon-57.png" width="57" />
+        <icon height="58" src="images/ios/icons/icon-58.png" width="58" />
+        <icon height="72" src="images/ios/icons/icon-72.png" width="72" />
+        <icon height="76" src="images/ios/icons/icon-76.png" width="76" />
+        <icon height="80" src="images/ios/icons/icon-80.png" width="80" />
+        <icon height="87" src="images/ios/icons/icon-87.png" width="87" />
+        <icon height="100" src="images/ios/icons/icon-100.png" width="100" />
+        <icon height="114" src="images/ios/icons/icon-114.png" width="114" />
+        <icon height="120" src="images/ios/icons/icon-120.png" width="120" />
+        <icon height="144" src="images/ios/icons/icon-144.png" width="144" />
+        <icon height="152" src="images/ios/icons/icon-152.png" width="152" />
+        <icon height="167" src="images/ios/icons/icon-167.png" width="167" />
+        <icon height="180" src="images/ios/icons/icon-180.png" width="180" />
+    </platform>
 
 
     <preference name="android-minSdkVersion" value="14" />
