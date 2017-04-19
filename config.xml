@@ -21,12 +21,14 @@
 
     <icon src="icon.png" />
 
-    <icon src="images/icones/mipmap-ldpi/ic_launcher.png" platform="android" qualifier="ldpi" />
-    <icon src="images/icones/mipmap-mdpi/ic_launcher.png" platform="android" qualifier="mdpi" />
-    <icon src="images/icones/mipmap-hdpi/ic_launcher.png" platform="android" qualifier="hdpi" />
-    <icon src="images/icones/mipmap-xhdpi/ic_launcher.png" platform="android" qualifier="xhdpi" />
-    <icon src="images/icones/mipmap-xxhdpi/ic_launcher.png" platform="android" qualifier="xxhdpi" />
-    <icon src="images/icones/mipmap-xxxhdpi/ic_launcher.png" platform="android" qualifier="fr-xxhdpi" />
+    <platform name="android">
+        <icon src="images/icones/mipmap-ldpi/ic_launcher.png" platform="android" qualifier="ldpi" />
+        <icon src="images/icones/mipmap-mdpi/ic_launcher.png" platform="android" qualifier="mdpi" />
+        <icon src="images/icones/mipmap-hdpi/ic_launcher.png" platform="android" qualifier="hdpi" />
+        <icon src="images/icones/mipmap-xhdpi/ic_launcher.png" platform="android" qualifier="xhdpi" />
+        <icon src="images/icones/mipmap-xxhdpi/ic_launcher.png" platform="android" qualifier="xxhdpi" />
+        <icon src="images/icones/mipmap-xxxhdpi/ic_launcher.png" platform="android" qualifier="fr-xxhdpi" />
+    </platform>
 
     <platform name="ios">
         <icon height="29" src="images/ios/icons/icon-29.png" width="29" />
