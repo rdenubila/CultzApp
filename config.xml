@@ -17,7 +17,7 @@
         Lazuli Studio
     </author>
 
-    <preference name="phonegap-version" value="cli-5.4.1" />
+    <preference name="phonegap-version" value="cli-6.5.0" />
 
     <icon src="icon.png" />
 
