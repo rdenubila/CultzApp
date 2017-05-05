@@ -29,13 +29,19 @@ function ready(){
 	console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
 	};
 
+	/* OLD
 	window.plugins.OneSignal.init(
 		android.appId, {
 			googleProjectNumber: android.projectNumber},
-			notificationOpenedCallback);
+			notificationOpenedCallback);*/
+	
+	window.plugins.OneSignal
+		.startInit(android.appId)
+		.handleNotificationOpened(notificationOpenedCallback)
+		.endInit();
 
 	// Show an alert box if a notification comes in when the user is in your app.
-	window.plugins.OneSignal.enableInAppAlertNotification(true);
+	//window.plugins.OneSignal.enableInAppAlertNotification(true);
 
 }
 
