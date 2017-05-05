@@ -25,6 +25,16 @@ if (localStorage.vidas == undefined) {
 var limiteTempoVidas = 3 * 60; // EM MINUTOS
 var limiteTempoGiro = 24 * 60; // EM MINUTOS
 
+document.addEventListener("deviceready", onDeviceReady, false);
+
+function onDeviceReady() {
+	initAddAmigos();
+
+	initApp();
+	initReady = true;
+	checkInit();
+}
+
 $( document ).ready(function() {
 
 	console.log(apiURL+"getTextByArea.php?area=instrucoes");;
@@ -56,15 +66,9 @@ $( document ).ready(function() {
 		$(this).find('li').width( 100/qtd+"%" );
 	});
     
-    //initAndamento();
-	//initAddAmigos();
-
-	initApp();
-	initReady = true;
-	checkInit();
+    initAndamento();
 
 	updateVidas();
-
 });
 
 function checkInit(){
@@ -439,7 +443,7 @@ function login(response){
 
 function loginComplete(){
 	$("#topo_fixo .foto").css('background-image', 'url('+userLogado.foto+')');
-	$("#topo_fixo .nome").html(userLogado.nome);
+	$("#topo_fixo .nome").html(decodeURI(userLogado.nome));
 
 	getDeviceData();
 }
@@ -1355,8 +1359,6 @@ function updateVidas(valor){
 	}
 }
 
-
-
 function openMap(dest){	
 
 	var platform = device.platform.toLowerCase();
@@ -1368,4 +1370,8 @@ function openMap(dest){
 		window.open('geo://0,0?q='+dest, '_system');
 	}
 
+}
+
+function decodeURI(str) {
+   return decodeURIComponent((str+'').replace(/\+/g, '%20'));
 }

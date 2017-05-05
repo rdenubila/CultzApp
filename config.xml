@@ -80,10 +80,6 @@
     <!-- <gap:plugin name="nl.kw.cordova.androidviewport" version="0.0.5" /> -->
     <!-- <plugin name="com.jamiestarke.webviewdebug" source="pgb" /> -->
 
-    <!--<gap:plugin name="cordova-plugin-facebookconnect-orlando" source="npm">
-        <param name="APP_ID" value="1908908612666620" />
-        <param name="APP_NAME" value="Cultz" />
-    </gap:plugin>-->
     <plugin name="cordova-plugin-facebook4" spec="~1.7.4">
         <variable name="APP_ID" value="1908908612666620" />
         <variable name="APP_NAME" value="Cultz" />
