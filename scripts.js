@@ -59,7 +59,7 @@ $( document ).ready(function() {
     //initAndamento();
 	//initAddAmigos();
 
-	//initApp();
+	initApp();
 	initReady = true;
 	checkInit();
 

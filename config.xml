@@ -84,7 +84,7 @@
         <param name="APP_ID" value="1908908612666620" />
         <param name="APP_NAME" value="Cultz" />
     </gap:plugin>-->
-    <plugin name="cordova-plugin-facebook4" spec="~1.7.4" source="npm">
+    <plugin name="cordova-plugin-facebook4" spec="~1.7.4">
         <variable name="APP_ID" value="1908908612666620" />
         <variable name="APP_NAME" value="Cultz" />
     </plugin>
