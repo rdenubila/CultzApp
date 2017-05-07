@@ -37,10 +37,13 @@ function onDeviceReady() {
 
 $( document ).ready(function() {
 
-	console.log(apiURL+"getTextByArea.php?area=instrucoes");;
+	console.log(apiURL+"getTextByArea.php?area=instrucoes");
 
 	$.getJSON( apiURL+"getTextByArea.php?area=instrucoes").done(function( data ) {
-		console.log("----- CARREGA TEXTO INSTRUCAO ------")
+		console.log("----- CARREGA TEXTO INSTRUCAO ------");
+		console.log("----- fadeOut START ------");
+		$("#loading").fadeOut("fast");
+		console.log("----- fadeOut END ------");
 
 		for(i=0; i<data.length; i++){
 
@@ -52,8 +55,6 @@ $( document ).ready(function() {
 
 			$("#swiperInstrucao .swiper-wrapper").append(html);
 		}
-
-		$("#loading").fadeOut("fast");
 	});
 
 	$("#overlay").on('click', function(event) {
@@ -123,7 +124,7 @@ function showPosition(position) {
     var url =  apiURL+"getBusinessDistance.php?lat="+position.coords.latitude+"&long="+position.coords.longitude+"&dist=2";
     console.log(url);
     $.getJSON(url).done(function( data ) {
-		console.log("----- GPS ------")
+		console.log("----- GPS ------");
 		console.log(data);
 
 		if(data.length>0){
@@ -303,7 +304,7 @@ function comprarVida(){
 
 function trocaBanner(){
 	$.getJSON( apiURL+"getBanner.php").done(function( data ) {
-		console.log("----- TROCA BANNER ------")
+		console.log("----- TROCA BANNER ------");
 		
 		$(".banner").html("<a href='"+data.link+"' target='_blank'><img src='"+apiURL+"/arquivos/"+data.img+"'' height='160' width='565'></a>")
 
@@ -388,7 +389,7 @@ function cadastrar(){
 	}
 
 	$.getJSON( apiURL+"setCadastro.php", data).done(function( data ) {
-		console.log("----- CADASTRAR USUARIO ------")
+		console.log("----- CADASTRAR USUARIO ------");
 		console.log(data);
 
 		if(!data.success){
@@ -419,7 +420,7 @@ function login(response){
 	}
 
 	$.getJSON( apiURL+"login.php", response).done(function( data ) {
-		console.log("----- USUARIO LOGADO ------")
+		console.log("----- USUARIO LOGADO ------");
 		console.log(data);
 
 		$("#loading").fadeOut("fast");
@@ -510,7 +511,7 @@ function AmigosLoadFB(ids){
 	$("#lista_ac").html("");
 
 	$.getJSON( apiURL+"getFriends.php", {id: userLogado.id, ids: ids, tipo: 'fb'}).done(function( data ) {
-		console.log("----- FRIENDS ------")
+		console.log("----- FRIENDS ------");
 		console.log(data);
 
 		for(i=0; i<data.length; i++){
@@ -610,7 +611,7 @@ function LoadRounds(){
 	if (userLogado)
 	{
 		$.getJSON( apiURL+"getRounds.php", {id: userLogado.id}).done(function( data ) {
-			console.log("----- ROUNDS ------")
+			console.log("----- ROUNDS ------");
 			console.log(data);
 
 			if(data.length==0){
@@ -676,7 +677,7 @@ function selJogo(idRound){
 	$("#loading").fadeIn("fast");
 
 	$.getJSON( apiURL+"getRound.php", {id_user: userLogado.id, id: idRound}).done(function( data ) {
-		console.log("----- ROUND ------")
+		console.log("----- ROUND ------");
 		console.log(data);
 
 		roundAtual = data;
@@ -858,7 +859,7 @@ function loadPerguntasData(_d){
 
 	$.getJSON( apiURL+"getQuestions.php", _d).done(function( data ) {
 
-		console.log("----- PERGUNTAS ------")
+		console.log("----- PERGUNTAS ------");
 		console.log(data);
 
 		perguntasAtual = data;
