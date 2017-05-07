@@ -1,3 +1,5 @@
+var apiURL = "http://www.quizcultz.com.br/webservice/";
+
 if( $(window).width()<350 ){
 	$('meta[name=viewport]').attr('content','width=device-width initial-scale=0.4, maximum-scale=0.4, minimum-scale=0.4, user-scalable=no, minimal-ui=1');
 } else if( $(window).width()<640 ){

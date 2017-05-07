@@ -1,6 +1,6 @@
-apiURL = "http://www.quizcultz.com.br/webservice/";
+var apiURL = "http://www.quizcultz.com.br/webservice/";
 
-android = {
+var android = {
 	projectNumber: "1005283282385",
 	api: "AIzaSyCU_9YUa6RWC3DZPUOgQgx3VmRut4DldYA",
 	appId: "c960c2f2-d524-4ccf-bf5a-0b9385f1e8c4"
@@ -84,13 +84,15 @@ function getFriendsFB(){
 function inviteFriends(){
 	facebookConnectPlugin.showDialog({
 	    method: 'apprequests', 
-	    message: 'Conheça o Quiz Cultz!', 
+	    message: 'Conheça o Quiz Cultz!'},
 	    function(response){
-		  console.log(response);
+			console.log(response);
+		},
+		function(response){
+			console.log(response);
 		}
-	});
+	);
 }
-
 
 function checkLoginState() {
 	
