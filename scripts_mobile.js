@@ -18,8 +18,8 @@ function onResume() {
 
 function ready(){
 
-	initFB = true;
-	checkInit();
+	//initFB = true;
+	//checkInit();
 
 
 	// Enable to debug issues.

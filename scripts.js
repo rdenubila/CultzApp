@@ -15,8 +15,8 @@ var swiperStat;
 
 var userLogado;
 
-var initReady = false;
-var initFB = false;
+//var initReady = false;
+//var initFB = false;
 
 if (localStorage.vidas == undefined) {
 	localStorage.vidas = 5;
@@ -28,11 +28,11 @@ var limiteTempoGiro = 24 * 60; // EM MINUTOS
 document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
-	initAddAmigos();
+	//initAddAmigos();
 
 	initApp();
-	initReady = true;
-	checkInit();
+	//initReady = true;
+	//checkInit();
 }
 
 $( document ).ready(function() {
@@ -71,11 +71,11 @@ $( document ).ready(function() {
 	updateVidas();
 });
 
-function checkInit(){
+/*function checkInit(){
 	if(initReady && initFB){
 		initApp();
 	}
-}
+}*/
 
 function initApp(){
 	if (localStorage.user) {
@@ -431,6 +431,8 @@ function login(response){
 		userLogado = data;
 		localStorage.user = JSON.stringify( data );
 
+		loadCults();
+		LoadRounds();
 		loginComplete();
 
 		trocaTela('andamento');
@@ -604,54 +606,57 @@ function LoadRounds(){
 
 	$("#jogos_andamento").html("");
 
-	$.getJSON( apiURL+"getRounds.php", {id: userLogado.id}).done(function( data ) {
-		console.log("----- ROUNDS ------")
-		console.log(data);
+	if (userLogado)
+	{
+		$.getJSON( apiURL+"getRounds.php", {id: userLogado.id}).done(function( data ) {
+			console.log("----- ROUNDS ------")
+			console.log(data);
 
-		if(data.length==0){
-			$("#andamento .titulo").html("nenhum jogo em andamento");
-		} else if(data.length==1){
-			$("#andamento .titulo").html("1 jogo em andamento");
-		} else {
-			$("#andamento .titulo").html(data.length+" jogos em andamento");
-		}
-
-		for(i=0; i<data.length; i++){
-			d = data[i];
-
-			if(d.vez==userLogado.id){
-				html = '<li onclick="selJogo('+d.id+')">';
+			if(data.length==0){
+				$("#andamento .titulo").html("nenhum jogo em andamento");
+			} else if(data.length==1){
+				$("#andamento .titulo").html("1 jogo em andamento");
 			} else {
-				html = '<li onclick="vezAdversario()">';
+				$("#andamento .titulo").html(data.length+" jogos em andamento");
 			}
 
-			if(d.foto!=""){
-				html += '		<div class="foto" style="background-image: url(\''+d.foto+'\')"></div>';
-			} else {
-				html += '		<div class="foto" style="background-image: url(images/profile.png)"></div>';
+			for(i=0; i<data.length; i++){
+				d = data[i];
+
+				if(d.vez==userLogado.id){
+					html = '<li onclick="selJogo('+d.id+')">';
+				} else {
+					html = '<li onclick="vezAdversario()">';
+				}
+
+				if(d.foto!=""){
+					html += '		<div class="foto" style="background-image: url(\''+d.foto+'\')"></div>';
+				} else {
+					html += '		<div class="foto" style="background-image: url(images/profile.png)"></div>';
+				}
+
+				html += '	<div class="pontuacao">'+d.placar1+'x'+d.placar2+'</div>';
+
+				html += '	<h2>'+d.nome+'</h2>';
+
+				if(d.vez==userLogado.id){
+					html += '	<p class="destaque">Sua vez</p>';
+				} else {
+					html += '	<p class="destaque">Vez do seu adversário</p>';
+				}
+
+				html += '	<p>'+d.tempo+'</p>';
+				html += '	<div class="clear"></div>';
+
+				html += '</li>';
+
+				
+				$("#jogos_andamento").append(html);
+				
 			}
 
-			html += '	<div class="pontuacao">'+d.placar1+'x'+d.placar2+'</div>';
-
-			html += '	<h2>'+d.nome+'</h2>';
-
-			if(d.vez==userLogado.id){
-				html += '	<p class="destaque">Sua vez</p>';
-			} else {
-				html += '	<p class="destaque">Vez do seu adversário</p>';
-			}
-
-			html += '	<p>'+d.tempo+'</p>';
-			html += '	<div class="clear"></div>';
-
-			html += '</li>';
-
-			
-			$("#jogos_andamento").append(html);
-			
-		}
-
-	});
+		});
+	}
 }
 
 function vezAdversario(){
@@ -1005,21 +1010,23 @@ function addCultz(info, qtd){
 
 var cultzCount = 0;
 function loadCults () {
+	if (userLogado)
+	{
+		$.getJSON( apiURL+"getCultz.php", {id_user: userLogado.id} ).done(function( data ) {
 
-	$.getJSON( apiURL+"getCultz.php", {id_user: userLogado.id} ).done(function( data ) {
+			if(data.result == true){
+				console.log("------- getCultz --------");
+				cultzCount = data.qtd;
+				$("#cultzCount").html(data.qtd);
+			} else {
+				alerta(data.error);
+			}
 
-		if(data.result == true){
-			console.log("------- getCultz --------");
-			cultzCount = data.qtd;
-			$("#cultzCount").html(data.qtd);
-		} else {
-			alerta(data.error);
-		}
-
-	}).fail(function( jqxhr, textStatus, error ) {
-		var err = textStatus + ", " + error;
-		console.log( "Request Failed: " + err );
-	});
+		}).fail(function( jqxhr, textStatus, error ) {
+			var err = textStatus + ", " + error;
+			console.log( "Request Failed: " + err );
+		});
+	}
 }
 
 
