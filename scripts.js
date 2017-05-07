@@ -41,9 +41,6 @@ $( document ).ready(function() {
 
 	$.getJSON( apiURL+"getTextByArea.php?area=instrucoes").done(function( data ) {
 		console.log("----- CARREGA TEXTO INSTRUCAO ------");
-		console.log("----- fadeOut START ------");
-		$("#loading").fadeOut("fast");
-		console.log("----- fadeOut END ------");
 
 		for(i=0; i<data.length; i++){
 
