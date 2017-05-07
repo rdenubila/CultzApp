@@ -53,6 +53,7 @@ $( document ).ready(function() {
 			$("#swiperInstrucao .swiper-wrapper").append(html);
 		}
 
+		$("#loading").fadeOut("fast");
 	});
 
 	$("#overlay").on('click', function(event) {
