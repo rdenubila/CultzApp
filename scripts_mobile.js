@@ -82,13 +82,16 @@ function getUserData(){
 }
 
 function getFriendsFB(){
-	$("#loading").fadeIn("fast");
-
 	if (is_userLoggedInFB)
 	{
+		$("#loading").fadeIn("fast");
 		facebookConnectPlugin.api('me/friends?fields=id&limit=999', ["user_friends"], function(response) {
+			$("#loading").fadeOut("fast");
 			getFriendsBD( response );
-		}, function (response) { alert(JSON.stringify(response)) });
+		}, function (response) {
+			$("#loading").fadeOut("fast");
+			alert(JSON.stringify(response));
+		});
 	}
 	else
 		$("#lista_fb").append("<li onclick='inviteFriendsLoginFB()'><p class='aviso'>Não encontrou quem você procurava? Toque aqui e chame seu amigo para jogar o Quiz Cultz.</p></li>")
