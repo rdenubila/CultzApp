@@ -80,7 +80,7 @@ $( document ).ready(function() {
 
 function initApp(){
 	if (localStorage.user) {
-		checkLoginState();
+		checkLoginState(statusChangeCallback);
 	} else {
 		trocaTela("instrucao");
 	}

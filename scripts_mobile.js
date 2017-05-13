@@ -94,14 +94,12 @@ function inviteFriends(){
 	);
 }
 
-function checkLoginState() {
+function checkLoginState(successCallback) {
 	
 	$("#loading").fadeIn("fast");
 
 	facebookConnectPlugin.getLoginStatus( 
-		function(response) {
-			statusChangeCallback(response);
-		},
+		successCallback,
         function (response) { 
         	console.log(JSON.stringify(response)) 
         }
