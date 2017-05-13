@@ -641,7 +641,7 @@ function LoadRounds(){
 
 				html += '	<div class="pontuacao">'+d.placar1+'x'+d.placar2+'</div>';
 
-				html += '	<h2>'+d.nome+'</h2>';
+				html += '	<h2>'+decodeURI(d.nome)+'</h2>';
 
 				if(d.vez==userLogado.id){
 					html += '	<p class="destaque">Sua vez</p>';
