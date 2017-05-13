@@ -450,7 +450,7 @@ function login(response, goTo = ''){
 function loginComplete(){
 	$("#topo_fixo .foto").css('background-image', 'url('+userLogado.foto+')');
 	$("#topo_fixo .nome").html(decodeURI(userLogado.nome));
-
+console.log(userLogado.foto);
 	getDeviceData();
 }
 
@@ -686,10 +686,10 @@ function selJogo(idRound){
 		roundAtual = data;
 
 		$("#circuito_foto1, .circuito_foto1").css('background-image', 'url('+roundAtual.user1.foto+')');
-		$("#circuito_nome1, .circuito_nome1").html(roundAtual.user1.nome);
+		$("#circuito_nome1, .circuito_nome1").html(decodeURI(roundAtual.user1.nome));
 
 		$("#circuito_foto2, .circuito_foto2").css('background-image', 'url('+roundAtual.user2.foto+')');
-		$("#circuito_nome2, .circuito_nome2").html(roundAtual.user2.nome);
+		$("#circuito_nome2, .circuito_nome2").html(decodeURI(roundAtual.user2.nome));
 
 		$("#circuito_placar, .circuito_placar").html(zeroFill(roundAtual.round.placar1) +" x "+ zeroFill(roundAtual.round.placar2));
 
@@ -1094,7 +1094,7 @@ function loadEstabelecimentos(){
 		html += '<div class="seta"><img src="images/seta.png" height="40" width="25" /></div>';
 		html += '<div class="foto"></div>';
 		html += '<div class="info">';
-		html += '<h2>'+d.nome+'</h2>';
+		html += '<h2>'+decodeURI(d.nome)+'</h2>';
 		html += '<p class="endereco">'+d.endereco+'</p>';
 		html += '<p class="premiacao">'+d.desc_pontos+'</p>';
 		html += '</div>';
