@@ -524,7 +524,7 @@ function AmigosLoadFB(ids){
 			html += '		<div class="check"> <i class="icon-uncheck"></i> </div>';
 			
 			if(d.foto!=""){
-				html += '		<div class="foto" style="background-image: url(\''+d.foto+'\')"></div>';
+				html += '		<div class="foto" style="background-image: url(\''+d.foto.replace('http://', 'https://')+'\')"></div>';
 			} else {
 				html += '		<div class="foto" style="background-image: url(images/profile.png)"></div>';
 			}
@@ -635,7 +635,7 @@ function LoadRounds(){
 				}
 
 				if(d.foto!=""){
-					html += '		<div class="foto" style="background-image: url(\''+d.foto+'\')"></div>';
+					html += '		<div class="foto" style="background-image: url(\''+d.foto.replace('http://', 'https://')+'\')"></div>';
 				} else {
 					html += '		<div class="foto" style="background-image: url(images/profile.png)"></div>';
 				}
@@ -685,10 +685,10 @@ function selJogo(idRound){
 
 		roundAtual = data;
 
-		$("#circuito_foto1, .circuito_foto1").css('background-image', 'url('+roundAtual.user1.foto+')');
+		$("#circuito_foto1, .circuito_foto1").css('background-image', 'url('+roundAtual.user1.foto.replace('http://', 'https://')+')');
 		$("#circuito_nome1, .circuito_nome1").html(decodeURI(roundAtual.user1.nome));
 
-		$("#circuito_foto2, .circuito_foto2").css('background-image', 'url('+roundAtual.user2.foto+')');
+		$("#circuito_foto2, .circuito_foto2").css('background-image', 'url('+roundAtual.user2.foto.replace('http://', 'https://')+')');
 		$("#circuito_nome2, .circuito_nome2").html(decodeURI(roundAtual.user2.nome));
 
 		$("#circuito_placar, .circuito_placar").html(zeroFill(roundAtual.round.placar1) +" x "+ zeroFill(roundAtual.round.placar2));
