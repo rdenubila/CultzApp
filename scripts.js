@@ -624,6 +624,7 @@ function LoadRounds(){
 				$("#andamento .titulo").html(data.length+" jogos em andamento");
 			}
 
+			$("#jogos_andamento").html('');
 			for(i=0; i<data.length; i++){
 				d = data[i];
 
