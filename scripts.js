@@ -16,6 +16,7 @@ var swiperEstabelecimentos;
 var swiperStat;
 
 var userLogado;
+var is_userLoggedInFB;
 
 //var initReady = false;
 //var initFB = false;
@@ -82,6 +83,7 @@ function initApp(){
 	if (localStorage.user) {
 		checkLoginState(statusChangeCallback);
 	} else {
+		is_userLoggedInFB = false;
 		trocaTela("instrucao");
 	}
 }
@@ -409,10 +411,10 @@ function loginComum (){
 		senha: $("#login_senha").val()
 	}
 
-	login(data);
+	login(data, 'andamento');
 }
 
-function login(response){
+function login(response, goTo = ''){
 
 	if(response.name!=null) {
 		response.name = encodeURI(response.name);
@@ -436,7 +438,8 @@ function login(response){
 		LoadRounds();
 		loginComplete();
 
-		trocaTela('andamento');
+		if (goTo != '')
+			trocaTela(goTo);
 		
 	}).error(function(jqXHR, textStatus, errorThrown) {
         console.log("error " + textStatus);
@@ -527,7 +530,7 @@ function AmigosLoadFB(ids){
 			}
 
 
-			html += '		<h2>'+d.nome+'</h2>';
+			html += '		<h2>'+decodeURI(d.nome)+'</h2>';
 			html += '		<div class="clear"></div>';
 			html += '	</div>';
 			html += '</li>';

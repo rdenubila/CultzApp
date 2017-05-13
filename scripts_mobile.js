@@ -53,32 +53,60 @@ function notificationOpenedCallback(data){
 
 function statusChangeCallback(response) {
 	if (response.status === 'connected') {
-		getUserData();
+		is_userLoggedInFB = true;
+		getUserData_goToAndamento();
 	} else if (response.status === 'not_authorized') {
-		//loginFB();
+		//loginFB(statusChangeCallback);
 		$("#loading").fadeOut("fast");
 		localStorage.clear();
 		trocaTela("instrucao");
 	} else {
-		loginFB();
+		loginFB(statusChangeCallback);
 		$("#loading").fadeOut("fast");
 	}
 }
 
 
+function getUserData_goToAndamento(){
+	facebookConnectPlugin.api('/me?fields=id,name,email', [],
+		function (response) { login(response, 'andamento'); },
+		function (response) { alert(JSON.stringify(response)); }
+	);
+}
+
 function getUserData(){
-	facebookConnectPlugin.api('/me?fields=id,name,email', [], function(response) {
-		login( response );
-	}, function (response) { alert(JSON.stringify(response)) });
+	facebookConnectPlugin.api('/me?fields=id,name,email', [],
+		function (response) { login(response); },
+		function (response) { alert(JSON.stringify(response)); }
+	);
 }
 
 function getFriendsFB(){
 	$("#loading").fadeIn("fast");
 
-	facebookConnectPlugin.api('me/friends?fields=id&limit=999', ["user_friends"], function(response) {
-		getFriendsBD( response );
-	}, function (response) { alert(JSON.stringify(response)) });
+	if (is_userLoggedInFB)
+	{
+		facebookConnectPlugin.api('me/friends?fields=id&limit=999', ["user_friends"], function(response) {
+			getFriendsBD( response );
+		}, function (response) { alert(JSON.stringify(response)) });
+	}
+	else
+		$("#lista_fb").append("<li onclick='inviteFriendsLoginFB()'><p class='aviso'>Não encontrou quem você procurava? Toque aqui e chame seu amigo para jogar o Quiz Cultz.</p></li>")
+}
 
+function inviteFriendsLoginFB()
+{
+	loginFB(inviteFriendsLoginFB_success);
+}
+
+function inviteFriendsLoginFB_success(response)
+{
+	if (response.status === 'connected') {
+		is_userLoggedInFB = true;
+		getUserData();
+	} else {
+		$("#loading").fadeOut("fast");
+	}
 }
 
 function inviteFriends(){
@@ -108,9 +136,9 @@ function checkLoginState(successCallback) {
 }
 
 
-function loginFB(){
+function loginFB(successCallback){
 	facebookConnectPlugin.login( ["email", "user_friends"],
-        function (response) { statusChangeCallback(response); },
+        successCallback,
         function (response) { alert(JSON.stringify(response)) });
 }
 
