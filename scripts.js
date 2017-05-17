@@ -99,7 +99,7 @@ function checkGiroCultz(){
 	var tempo = (1000 * 60);
 	var agora = new Date();
 	var t = (agora.getTime()-parseInt(localStorage.tempoGiro)) / tempo;
-t = 15000;
+
 	console.log("t: "+t);
 
 	if(t>limiteTempoGiro){
