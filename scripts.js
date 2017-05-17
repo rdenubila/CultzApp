@@ -91,6 +91,7 @@ function initApp(){
 
 function checkGiroCultz(){
 
+	console.log("----- checkGiroCultz() ------");
 	if (localStorage.tempoGiro==undefined) {
 		localStorage.tempoGiro = new Date().getTime();
 	}
@@ -106,6 +107,8 @@ function checkGiroCultz(){
 
 		localStorage.tempoGiro = new Date().getTime();
 	}
+	else
+		console.log('Localização não atualizada pois t = ' + t + ' < limiteTempoGiro = ' + limiteTempoGiro);
 
 }
 
