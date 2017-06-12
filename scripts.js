@@ -55,6 +55,10 @@ $( document ).ready(function() {
 
 			$("#swiperInstrucao .swiper-wrapper").append(html);
 		}
+	})
+	.error(function(data) {
+		console.log(data);
+		fechaInstrucao();
 	});
 
 	$("#overlay").on('click', function(event) {
@@ -81,13 +85,18 @@ $( document ).ready(function() {
 
 function initApp(){
 	if (localStorage.user) {
-		checkLoginState(statusChangeCallback);
+		checkLoginState(statusChangeCallback, statusChangeFailCallback);
 	} else {
 		is_userLoggedInFB = false;
 		trocaTela("instrucao");
 	}
 }
 
+function statusChangeFailCallback(response) {
+	console.log(JSON.stringify(response));
+	is_userLoggedInFB = false;
+	trocaTela("instrucao");
+}
 
 function checkGiroCultz(){
 

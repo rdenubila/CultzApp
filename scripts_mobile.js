@@ -66,7 +66,6 @@ function statusChangeCallback(response) {
 	}
 }
 
-
 function getUserData_goToAndamento(){
 	facebookConnectPlugin.api('/me?fields=id,name,email', [],
 		function (response) { login(response, 'andamento'); },
@@ -125,15 +124,13 @@ function inviteFriends(){
 	);
 }
 
-function checkLoginState(successCallback) {
+function checkLoginState(successCallback, failCallback) {
 	
 	$("#loading").fadeIn("fast");
 
 	facebookConnectPlugin.getLoginStatus( 
 		successCallback,
-        function (response) { 
-        	console.log(JSON.stringify(response)) 
-        }
+		failCallback
     );
 
 }
