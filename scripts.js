@@ -76,9 +76,6 @@ $( document ).ready(function() {
     initAndamento();
 
 	updateVidas();
-
-	var user = { userid: '61c71042-9e0b-45f1-8f6f-3e54d3b9055c' };
-	sendPushTo(user, 'titulo teste', 'msg teste');
 });
 
 /*function checkInit(){

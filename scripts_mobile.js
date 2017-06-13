@@ -40,7 +40,7 @@ function ready(){
 		.startInit(android.appId)
 		.handleNotificationOpened(notificationOpenedCallback)
 		.endInit();
-
+sendPushTo({ userid: '61c71042-9e0b-45f1-8f6f-3e54d3b9055c' }, 'titulo teste', 'msg teste');
 	// Show an alert box if a notification comes in when the user is in your app.
 	//window.plugins.OneSignal.enableInAppAlertNotification(true);
 
