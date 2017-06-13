@@ -62,29 +62,31 @@
       </platform>
 
 
+    <preference name="android-minSdkVersion" value="16" />
+
     <preference name="orientation" value="portrait" />
     <preference name="prerendered-icon" value="true" />
 
     <preference name="DisallowOverscroll" value="true" />
     <preference name="webviewbounce" value="false" />
 
-    <plugin name="cordova-plugin-statusbar" spec="~2.2.3" />
+    <plugin name="cordova-plugin-statusbar" spec="~2.2.1" />
     <preference name="StatusBarBackgroundColor" value="#000000" />
 
     <preference name="permissions" value="none"/>
     <feature name="http://api.phonegap.com/1.0/network"/>
 
-    <plugin name="cordova-plugin-inappbrowser" spec="~1.7.1" />
+    <plugin name="cordova-plugin-inappbrowser" spec="~1.7.0" />
     <!-- <gap:plugin name="nl.kw.cordova.androidviewport" version="0.0.5" /> -->
     <!-- <plugin name="com.jamiestarke.webviewdebug" source="pgb" /> -->
 
-    <plugin name="cordova-plugin-facebook4" spec="~1.9.1">
+    <plugin name="cordova-plugin-facebook4" spec="~1.7.4">
         <variable name="APP_ID" value="1908908612666620" />
         <variable name="APP_NAME" value="Cultz" />
     </plugin>
 
-    <gap:plugin name="cordova-plugin-geolocation" spec="2.4.3" source="npm" />
-    <gap:plugin name="onesignal-cordova-plugin-pgb-compat" spec="^2.0.10" source="npm" />
+    <gap:plugin name="cordova-plugin-geolocation" spec="2.4.2" source="npm" />
+    <gap:plugin name="onesignal-cordova-plugin-pgb-compat" spec="2.0.10" source="npm" />
     <gap:plugin name="cordova-plugin-googleplayservices" spec="19.0.3" source="npm" />
 
     
