@@ -62,8 +62,6 @@
       </platform>
 
 
-    <preference name="android-minSdkVersion" value="16" />
-
     <preference name="orientation" value="portrait" />
     <preference name="prerendered-icon" value="true" />
 
