@@ -26,7 +26,7 @@ function ready(){
 	// window.plugins.OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
 
 	var notificationOpenedCallback = function(jsonData) {
-	console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
+		console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
 	};
 
 	/* OLD
@@ -171,8 +171,7 @@ function sendPushTo(user, titulo, msg){
 	console.log("---- ENVIAR MSG ----");
 	console.log(msg);
 	console.log(user);
-	if(user.userid)
-
+	if(user.userid) {
 		var notificationObj = { 
 			headings: {en: titulo},
 			contents: {en: msg},
@@ -180,11 +179,12 @@ function sendPushTo(user, titulo, msg){
 		};
 
 		window.plugins.OneSignal.postNotification(notificationObj,
-	    function(successResponse) {
-	      console.log("Notification Post Success:", successResponse);
-	    },
-	    function (failedResponse) {
-	      console.log("Notification Post Failed: ", failedResponse);
-	    }
+			function(successResponse) {
+				console.log("Notification Post Success:", successResponse);
+			},
+			function (failedResponse) {
+				console.log("Notification Post Failed: ", failedResponse);
+			}
 	  );
+	}
 }
