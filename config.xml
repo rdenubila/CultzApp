@@ -71,13 +71,13 @@
     <preference name="DisallowOverscroll" value="true" />
     <preference name="webviewbounce" value="false" />
 
-    <plugin name="cordova-plugin-statusbar" spec="~2.2.1" />
+    <plugin name="cordova-plugin-statusbar" spec="~2.2.3" />
     <preference name="StatusBarBackgroundColor" value="#000000" />
 
     <preference name="permissions" value="none"/>
     <feature name="http://api.phonegap.com/1.0/network"/>
 
-    <plugin name="cordova-plugin-inappbrowser" spec="~1.7.0" />
+    <plugin name="cordova-plugin-inappbrowser" spec="~1.7.1" />
     <!-- <gap:plugin name="nl.kw.cordova.androidviewport" version="0.0.5" /> -->
     <!-- <plugin name="com.jamiestarke.webviewdebug" source="pgb" /> -->
 
