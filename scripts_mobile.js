@@ -34,7 +34,8 @@ function ready(){
 		android.appId, {
 			googleProjectNumber: android.projectNumber},
 			notificationOpenedCallback);*/
-	
+
+	console.log(android.appId);
 	window.plugins.OneSignal
 		.startInit(android.appId)
 		.handleNotificationOpened(notificationOpenedCallback)
