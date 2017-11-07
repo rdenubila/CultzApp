@@ -82,7 +82,7 @@
 
     <plugin name="cordova-plugin-facebook4" spec="~1.7.4">
         <variable name="APP_ID" value="1908908612666620" />
-        <variable name="APP_NAME" value="Cultz" />
+        <variable name="APP_NAME" value="Quiz Cultz" />
     </plugin>
 
     <gap:plugin name="cordova-plugin-geolocation" spec="2.4.2" source="npm" />
