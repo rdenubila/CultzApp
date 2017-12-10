@@ -52,6 +52,8 @@ $( document ).ready(function() {
 
 			$("#swiperInstrucao .swiper-wrapper").append(html);
 		}
+
+		trocaTela("instrucao");
 	})
 	.error(function(jqXHR, textStatus, errorThrown) {
 		console.log("----- ERRO: getTextByArea.php?area=instrucoes ------");
