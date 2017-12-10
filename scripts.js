@@ -39,9 +39,6 @@ function onDeviceReady() {
 }
 
 $( document ).ready(function() {
-
-	console.log(apiURL+"getTextByArea.php?area=instrucoes");
-
 	$.getJSON( apiURL+"getTextByArea.php?area=instrucoes").done(function( data ) {
 		console.log("----- CARREGA TEXTO INSTRUCAO ------");
 
@@ -56,8 +53,9 @@ $( document ).ready(function() {
 			$("#swiperInstrucao .swiper-wrapper").append(html);
 		}
 	})
-	.error(function(data) {
-		console.log(data);
+	.error(function(jqXHR, textStatus, errorThrown) {
+		console.log("----- ERRO: getTextByArea.php?area=instrucoes ------");
+		console.log(errorThrown);
 		$("#instrucao").fadeOut();
 		fechaInstrucao();
 	});
@@ -165,7 +163,6 @@ function fecha_alerta(){
 var telaAtual = "home";
 var qtdVidaCultz;
 function trocaTela(novaTela){
-
 	$(".menu_topo li").removeClass('sel');
 	$(".menu_topo ."+novaTela).addClass('sel');
 
@@ -235,47 +232,45 @@ function trocaTela(novaTela){
 		}, 1000);
 	}
 
-	
+	if (telaAtual=="home")
+		$("#"+telaAtual).delay(1000).fadeOut('fast');
+	else {
+		$("#"+telaAtual).fadeOut('fast', function() {
+			$("#"+novaTela).fadeIn("fast", function(){
+				if(telaAtual=="instrucao"){
+					swiperInstrucao = new Swiper('#swiperInstrucao', {
+						pagination: "#swiperInstrucaoPag"
+					});
+				}
 
-	$("#"+telaAtual).delay(telaAtual=="home" ? 1000 : 0).fadeOut('fast', function() {
-		$("#"+novaTela).fadeIn("fast", function(){
+				if(telaAtual=="estabelecimento_info"){
+					swiperEstInfo = new Swiper('#swiperEstInfo', {
+						onSlideChangeEnd: function(s){
+							$("#estabelecimento_info .guias .sel").removeClass('sel');
+							$("#estabelecimento_info .guias li").eq(s.activeIndex).addClass('sel');
+						}
+					});
+				}
+				
 
-			//console.log(telaAtual);
+				if(telaAtual=="sel_tema"){
+					initRoleta();
+				}
 
+				if(telaAtual=="jogo"){
+					initPergunta();
+					trocaBanner();
+				}
 
-			if(telaAtual=="instrucao"){
-				swiperInstrucao = new Swiper('#swiperInstrucao', {
-					pagination: "#swiperInstrucaoPag"
-				});
-			}
+				if(telaAtual=="estabelecimentos"){
+					initEstabelecimentos();
+				}
 
-			if(telaAtual=="estabelecimento_info"){
-				swiperEstInfo = new Swiper('#swiperEstInfo', {
-					onSlideChangeEnd: function(s){
-						$("#estabelecimento_info .guias .sel").removeClass('sel');
-						$("#estabelecimento_info .guias li").eq(s.activeIndex).addClass('sel');
-					}
-				});
-			}
-			
+				
 
-			if(telaAtual=="sel_tema"){
-				initRoleta();
-			}
-
-			if(telaAtual=="jogo"){
-				initPergunta();
-				trocaBanner();
-			}
-
-			if(telaAtual=="estabelecimentos"){
-				initEstabelecimentos();
-			}
-
-			
-
+			});
 		});
-	});
+	}
 
 	telaAtual = novaTela;
 
@@ -410,7 +405,7 @@ function cadastrar(){
 			alerta(data.erro);
 		} else {
 			alerta("Usuário cadastrado com sucesso!");
-			trocaTela("login");
+			trocaTela('login');
 		}
 	});
 
@@ -428,11 +423,6 @@ function loginComum (){
 }
 
 function login(response, goTo = ''){
-
-	if(response.name!=null) {
-		response.name = encodeURI(response.name);
-	}
-
 	$.getJSON( apiURL+"login.php", response).done(function( data ) {
 		console.log("----- USUARIO LOGADO ------");
 		console.log(data);
@@ -455,9 +445,11 @@ function login(response, goTo = ''){
 			trocaTela(goTo);
 		
 	}).error(function(jqXHR, textStatus, errorThrown) {
-        console.log("error " + textStatus);
-        console.log("incoming Text " + jqXHR.responseText);
-    })
+		console.log('---- getJSON login.php ----');
+		console.log("error " + textStatus);
+		console.log("incoming Text " + jqXHR.responseText);
+		console.log(errorThrown);
+    });
 }
 
 function loginComplete(){
