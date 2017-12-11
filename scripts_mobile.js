@@ -12,7 +12,7 @@ document.addEventListener("resume", onResume, false);
 
 function onResume() {
     console.log("RESUME");
-    trocaTela('andamento');
+	initApp();
 }
 
 
@@ -152,19 +152,23 @@ function getDeviceData(){
 		console.log("---- SALVA TOKEN ----");
 		console.log(ids);
 		console.log(userLogado);
-		
-		$.getJSON( apiURL+"setPushToken.php", {id: userLogado.id, push_token: ids.pushToken, userid: ids.userId } ).done(function( data ) {
 
-			console.log(data)
-
-			if(!data.result){
-				alerta(data.error);
-			}
-
-		}).fail(function( jqxhr, textStatus, error ) {
-			var err = textStatus + ", " + error;
-			console.log( "Request Failed: " + err );
-		});
+		if (ids) {
+			$.getJSON(apiURL+"setPushToken.php", {id: userLogado.id, push_token: ids.pushToken, userid: ids.userId } ).done(function( data ) {
+				
+								console.log(data)
+				
+								if(!data.result){
+									alerta(data.error);
+								}
+				
+							}).fail(function( jqxhr, textStatus, error ) {
+								var err = textStatus + ", " + error;
+								console.log( "Request Failed: " + err );
+							});
+		}
+		else
+			console.log('Variável "ids" vazia em window.plugins.OneSignal.getIds()');
 	});
 
 }

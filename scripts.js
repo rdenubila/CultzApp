@@ -7,7 +7,7 @@ if( $(window).width()<350 ){
 }
 
 
-//localStorage.clear();
+localStorage.clear();
 
 
 var swiperInstrucao;
@@ -417,15 +417,15 @@ function loginComum (){
 	$("#loading").fadeIn("fast");
 
 	data = {
-		email: $("#login_email").val(),
-		senha: $("#login_senha").val()
+		email: encodeURI($("#login_email").val()),
+		senha: encodeURI($("#login_senha").val())
 	}
 
 	login(data, 'andamento');
 }
 
 function login(response, goTo = ''){
-	$.getJSON( apiURL+"login.php", response).done(function( data ) {
+	$.getJSON(apiURL+"login.php", response).done(function( data ) {
 		console.log("----- USUARIO LOGADO ------");
 		console.log(data);
 
