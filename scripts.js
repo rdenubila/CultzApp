@@ -651,7 +651,14 @@ function LoadRounds(){
 
 				html += '	<h2>'+decodeURI(d.nome)+'</h2>';
 
-				if(d.vez==userLogado.id){
+				if (d.finalizado == 1) {
+					html += '	<p class="destaque">Jogo finalizado. ';
+					if (d.venceu == 1)
+						html += 'Você venceu!';
+					else
+						html += 'O seu adversário venceu.';
+					html += '</p>';
+				} else if (d.vez==userLogado.id) {
 					html += '	<p class="destaque">Sua vez</p>';
 				} else {
 					html += '	<p class="destaque">Vez do seu adversário</p>';
