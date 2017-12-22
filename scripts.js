@@ -7,7 +7,7 @@ if( $(window).width()<350 ){
 }
 
 
-localStorage.clear();
+//localStorage.clear();
 
 
 var swiperInstrucao;
