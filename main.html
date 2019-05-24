@@ -2,10 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
+<meta http-equiv="Content-Security-Policy" content="default-src *; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *; img-src * data:">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Cultz</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1 " />
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
 
 <link href="styles.css" rel="stylesheet" type="text/css" />
 <link href="fonts/style.css" rel="stylesheet" type="text/css" />
@@ -16,8 +17,6 @@
 <script src="js/swiper.jquery.min.js"></script>
 <link href="js/swiper.min.css" rel="stylesheet" type="text/css" />
 
-
-
 <script src="js_lib.js"></script>
 <script src="scripts.js"></script>
 
@@ -26,7 +25,7 @@
 <!-- <script src="scripts_local.js"></script> -->
 
 <!-- ONLINE -->
-<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
 
 <script src="scripts_mobile.js"></script>
 
@@ -47,8 +46,7 @@
 </head>
 
 <body>
-
-	<div id="loading"><div class="logo"></div></div>
+	<div id="loading" style="display:none"><div class="logo"></div></div>
 
 	<div id="box_alerta">
 		<a class="btn_fechar" href="javascript: fecha_alerta();"><img src="images/btn_ok.png" height="109" width="331" alt="" /></a>
@@ -92,7 +90,7 @@
 		</div>
 
 		<div class="conteudo">
-			<a href="javascript: loginFB();" class="btn_face"></a>
+			<a href="javascript: loginFB(statusChangeCallback);" class="btn_face"></a>
 
 			<div class="separador"></div>
 
@@ -278,14 +276,14 @@
 
 		<ul class="guias">
 			<li><a href="#lista_fb">Facebook</a></li>
-			<li><a href="#lista_ac">Amigos da Cultura</a></li>
+			<!--<li><a href="#lista_ac">Amigos da Cultura</a></li>-->
 		</ul>
 
 		<ul id="lista_fb" class="lista">
 		</ul>
 
-		<ul id="lista_ac" class="lista">
-		</ul>
+		<!--<ul id="lista_ac" class="lista">
+		</ul>-->
 
 
 		<ul class="btns">

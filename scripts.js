@@ -1,3 +1,5 @@
+var apiURL = "http://www.quizcultz.com.br/webservice/";
+
 if( $(window).width()<350 ){
 	$('meta[name=viewport]').attr('content','width=device-width initial-scale=0.4, maximum-scale=0.4, minimum-scale=0.4, user-scalable=no, minimal-ui=1');
 } else if( $(window).width()<640 ){
@@ -14,9 +16,10 @@ var swiperEstabelecimentos;
 var swiperStat;
 
 var userLogado;
+var is_userLoggedInFB;
 
-var initReady = false;
-var initFB = false;
+//var initReady = false;
+//var initFB = false;
 
 if (localStorage.vidas == undefined) {
 	localStorage.vidas = 5;
@@ -25,12 +28,19 @@ if (localStorage.vidas == undefined) {
 var limiteTempoVidas = 3 * 60; // EM MINUTOS
 var limiteTempoGiro = 24 * 60; // EM MINUTOS
 
+document.addEventListener("deviceready", onDeviceReady, false);
+
+function onDeviceReady() {
+	//initAddAmigos();
+
+	initApp();
+	//initReady = true;
+	//checkInit();
+}
+
 $( document ).ready(function() {
-
-	console.log(apiURL+"getTextByArea.php?area=instrucoes");;
-
 	$.getJSON( apiURL+"getTextByArea.php?area=instrucoes").done(function( data ) {
-		console.log("----- CARREGA TEXTO INSTRUCAO ------")
+		console.log("----- CARREGA TEXTO INSTRUCAO ------");
 
 		for(i=0; i<data.length; i++){
 
@@ -43,6 +53,13 @@ $( document ).ready(function() {
 			$("#swiperInstrucao .swiper-wrapper").append(html);
 		}
 
+		trocaTela("instrucao");
+	})
+	.error(function(jqXHR, textStatus, errorThrown) {
+		console.log("----- ERRO: getTextByArea.php?area=instrucoes ------");
+		console.log(errorThrown);
+		$("#instrucao").fadeOut();
+		fechaInstrucao();
 	});
 
 	$("#overlay").on('click', function(event) {
@@ -56,34 +73,35 @@ $( document ).ready(function() {
 		$(this).find('li').width( 100/qtd+"%" );
 	});
     
-    //initAndamento();
-	//initAddAmigos();
-
-	//initApp();
-	initReady = true;
-	checkInit();
+    initAndamento();
 
 	updateVidas();
-
 });
 
-function checkInit(){
+/*function checkInit(){
 	if(initReady && initFB){
 		initApp();
 	}
-}
+}*/
 
 function initApp(){
 	if (localStorage.user) {
-		checkLoginState();
+		checkLoginState(statusChangeCallback, statusChangeFailCallback);
 	} else {
+		is_userLoggedInFB = false;
 		trocaTela("instrucao");
 	}
 }
 
+function statusChangeFailCallback(response) {
+	console.log(JSON.stringify(response));
+	is_userLoggedInFB = false;
+	trocaTela("instrucao");
+}
 
 function checkGiroCultz(){
 
+	console.log("----- checkGiroCultz() ------");
 	if (localStorage.tempoGiro==undefined) {
 		localStorage.tempoGiro = new Date().getTime();
 	}
@@ -99,6 +117,8 @@ function checkGiroCultz(){
 
 		localStorage.tempoGiro = new Date().getTime();
 	}
+	else
+		console.log('Localização não atualizada pois t = ' + t + ' < limiteTempoGiro = ' + limiteTempoGiro);
 
 }
 
@@ -118,7 +138,7 @@ function showPosition(position) {
     var url =  apiURL+"getBusinessDistance.php?lat="+position.coords.latitude+"&long="+position.coords.longitude+"&dist=2";
     console.log(url);
     $.getJSON(url).done(function( data ) {
-		console.log("----- GPS ------")
+		console.log("----- GPS ------");
 		console.log(data);
 
 		if(data.length>0){
@@ -145,7 +165,6 @@ function fecha_alerta(){
 var telaAtual = "home";
 var qtdVidaCultz;
 function trocaTela(novaTela){
-
 	$(".menu_topo li").removeClass('sel');
 	$(".menu_topo ."+novaTela).addClass('sel');
 
@@ -215,47 +234,45 @@ function trocaTela(novaTela){
 		}, 1000);
 	}
 
-	
+	if (telaAtual=="home")
+		$("#"+telaAtual).delay(1000).fadeOut('fast');
+	else {
+		$("#"+telaAtual).fadeOut('fast', function() {
+			$("#"+novaTela).fadeIn("fast", function(){
+				if(telaAtual=="instrucao"){
+					swiperInstrucao = new Swiper('#swiperInstrucao', {
+						pagination: "#swiperInstrucaoPag"
+					});
+				}
 
-	$("#"+telaAtual).delay(telaAtual=="home" ? 1000 : 0).fadeOut('fast', function() {
-		$("#"+novaTela).fadeIn("fast", function(){
+				if(telaAtual=="estabelecimento_info"){
+					swiperEstInfo = new Swiper('#swiperEstInfo', {
+						onSlideChangeEnd: function(s){
+							$("#estabelecimento_info .guias .sel").removeClass('sel');
+							$("#estabelecimento_info .guias li").eq(s.activeIndex).addClass('sel');
+						}
+					});
+				}
+				
 
-			//console.log(telaAtual);
+				if(telaAtual=="sel_tema"){
+					initRoleta();
+				}
 
+				if(telaAtual=="jogo"){
+					initPergunta();
+					trocaBanner();
+				}
 
-			if(telaAtual=="instrucao"){
-				swiperInstrucao = new Swiper('#swiperInstrucao', {
-					pagination: "#swiperInstrucaoPag"
-				});
-			}
+				if(telaAtual=="estabelecimentos"){
+					initEstabelecimentos();
+				}
 
-			if(telaAtual=="estabelecimento_info"){
-				swiperEstInfo = new Swiper('#swiperEstInfo', {
-					onSlideChangeEnd: function(s){
-						$("#estabelecimento_info .guias .sel").removeClass('sel');
-						$("#estabelecimento_info .guias li").eq(s.activeIndex).addClass('sel');
-					}
-				});
-			}
-			
+				
 
-			if(telaAtual=="sel_tema"){
-				initRoleta();
-			}
-
-			if(telaAtual=="jogo"){
-				initPergunta();
-				trocaBanner();
-			}
-
-			if(telaAtual=="estabelecimentos"){
-				initEstabelecimentos();
-			}
-
-			
-
+			});
 		});
-	});
+	}
 
 	telaAtual = novaTela;
 
@@ -298,7 +315,7 @@ function comprarVida(){
 
 function trocaBanner(){
 	$.getJSON( apiURL+"getBanner.php").done(function( data ) {
-		console.log("----- TROCA BANNER ------")
+		console.log("----- TROCA BANNER ------");
 		
 		$(".banner").html("<a href='"+data.link+"' target='_blank'><img src='"+apiURL+"/arquivos/"+data.img+"'' height='160' width='565'></a>")
 
@@ -383,14 +400,14 @@ function cadastrar(){
 	}
 
 	$.getJSON( apiURL+"setCadastro.php", data).done(function( data ) {
-		console.log("----- CADASTRAR USUARIO ------")
+		console.log("----- CADASTRAR USUARIO ------");
 		console.log(data);
 
 		if(!data.success){
 			alerta(data.erro);
 		} else {
 			alerta("Usuário cadastrado com sucesso!");
-			trocaTela("login");
+			trocaTela('login');
 		}
 	});
 
@@ -400,21 +417,16 @@ function loginComum (){
 	$("#loading").fadeIn("fast");
 
 	data = {
-		email: $("#login_email").val(),
-		senha: $("#login_senha").val()
+		email: encodeURI($("#login_email").val()),
+		senha: encodeURI($("#login_senha").val())
 	}
 
-	login(data);
+	login(data, 'andamento');
 }
 
-function login(response){
-
-	if(response.name!=null) {
-		response.name = encodeURI(response.name);
-	}
-
-	$.getJSON( apiURL+"login.php", response).done(function( data ) {
-		console.log("----- USUARIO LOGADO ------")
+function login(response, goTo = ''){
+	$.getJSON(apiURL+"login.php", response).done(function( data ) {
+		console.log("----- USUARIO LOGADO ------");
 		console.log(data);
 
 		$("#loading").fadeOut("fast");
@@ -427,19 +439,24 @@ function login(response){
 		userLogado = data;
 		localStorage.user = JSON.stringify( data );
 
+		loadCults();
+		LoadRounds();
 		loginComplete();
 
-		trocaTela('andamento');
+		if (goTo != '')
+			trocaTela(goTo);
 		
 	}).error(function(jqXHR, textStatus, errorThrown) {
-        console.log("error " + textStatus);
-        console.log("incoming Text " + jqXHR.responseText);
-    })
+		console.log('---- getJSON login.php ----');
+		console.log("error " + textStatus);
+		console.log("incoming Text " + jqXHR.responseText);
+		console.log(errorThrown);
+    });
 }
 
 function loginComplete(){
-	$("#topo_fixo .foto").css('background-image', 'url('+userLogado.foto+')');
-	$("#topo_fixo .nome").html(userLogado.nome);
+	$("#topo_fixo .foto").css('background-image', 'url('+userLogado.foto.replace('http://', 'https://')+')');
+	$("#topo_fixo .nome").html(decodeURI(userLogado.nome));
 
 	getDeviceData();
 }
@@ -503,7 +520,7 @@ function AmigosLoadFB(ids){
 	$("#lista_ac").html("");
 
 	$.getJSON( apiURL+"getFriends.php", {id: userLogado.id, ids: ids, tipo: 'fb'}).done(function( data ) {
-		console.log("----- FRIENDS ------")
+		console.log("----- FRIENDS ------");
 		console.log(data);
 
 		for(i=0; i<data.length; i++){
@@ -514,13 +531,13 @@ function AmigosLoadFB(ids){
 			html += '		<div class="check"> <i class="icon-uncheck"></i> </div>';
 			
 			if(d.foto!=""){
-				html += '		<div class="foto" style="background-image: url(\''+d.foto+'\')"></div>';
+				html += '		<div class="foto" style="background-image: url(\''+d.foto.replace('http://', 'https://')+'\')"></div>';
 			} else {
 				html += '		<div class="foto" style="background-image: url(images/profile.png)"></div>';
 			}
 
 
-			html += '		<h2>'+d.nome+'</h2>';
+			html += '		<h2>'+decodeURI(d.nome)+'</h2>';
 			html += '		<div class="clear"></div>';
 			html += '	</div>';
 			html += '</li>';
@@ -600,54 +617,65 @@ function LoadRounds(){
 
 	$("#jogos_andamento").html("");
 
-	$.getJSON( apiURL+"getRounds.php", {id: userLogado.id}).done(function( data ) {
-		console.log("----- ROUNDS ------")
-		console.log(data);
+	if (userLogado)
+	{
+		$.getJSON( apiURL+"getRounds.php", {id: userLogado.id}).done(function( data ) {
+			console.log("----- ROUNDS ------");
+			console.log(data);
 
-		if(data.length==0){
-			$("#andamento .titulo").html("nenhum jogo em andamento");
-		} else if(data.length==1){
-			$("#andamento .titulo").html("1 jogo em andamento");
-		} else {
-			$("#andamento .titulo").html(data.length+" jogos em andamento");
-		}
-
-		for(i=0; i<data.length; i++){
-			d = data[i];
-
-			if(d.vez==userLogado.id){
-				html = '<li onclick="selJogo('+d.id+')">';
+			if(data.length==0){
+				$("#andamento .titulo").html("nenhum jogo em andamento");
+			} else if(data.length==1){
+				$("#andamento .titulo").html("1 jogo em andamento");
 			} else {
-				html = '<li onclick="vezAdversario()">';
+				$("#andamento .titulo").html(data.length+" jogos em andamento");
 			}
 
-			if(d.foto!=""){
-				html += '		<div class="foto" style="background-image: url(\''+d.foto+'\')"></div>';
-			} else {
-				html += '		<div class="foto" style="background-image: url(images/profile.png)"></div>';
+			$("#jogos_andamento").html('');
+			for(i=0; i<data.length; i++){
+				d = data[i];
+
+				if(d.vez==userLogado.id){
+					html = '<li onclick="selJogo('+d.id+')">';
+				} else {
+					html = '<li onclick="vezAdversario()">';
+				}
+
+				if(d.foto!=""){
+					html += '		<div class="foto" style="background-image: url(\''+d.foto.replace('http://', 'https://')+'\')"></div>';
+				} else {
+					html += '		<div class="foto" style="background-image: url(images/profile.png)"></div>';
+				}
+
+				html += '	<div class="pontuacao">'+d.placar1+'x'+d.placar2+'</div>';
+
+				html += '	<h2>'+decodeURI(d.nome)+'</h2>';
+
+				if (d.finalizado == 1) {
+					html += '	<p class="destaque">Jogo finalizado. ';
+					if (d.venceu == 1)
+						html += 'Você venceu!';
+					else
+						html += 'O seu adversário venceu.';
+					html += '</p>';
+				} else if (d.vez==userLogado.id) {
+					html += '	<p class="destaque">Sua vez</p>';
+				} else {
+					html += '	<p class="destaque">Vez do seu adversário</p>';
+				}
+
+				html += '	<p>'+d.tempo+'</p>';
+				html += '	<div class="clear"></div>';
+
+				html += '</li>';
+
+				
+				$("#jogos_andamento").append(html);
+				
 			}
 
-			html += '	<div class="pontuacao">'+d.placar1+'x'+d.placar2+'</div>';
-
-			html += '	<h2>'+d.nome+'</h2>';
-
-			if(d.vez==userLogado.id){
-				html += '	<p class="destaque">Sua vez</p>';
-			} else {
-				html += '	<p class="destaque">Vez do seu adversário</p>';
-			}
-
-			html += '	<p>'+d.tempo+'</p>';
-			html += '	<div class="clear"></div>';
-
-			html += '</li>';
-
-			
-			$("#jogos_andamento").append(html);
-			
-		}
-
-	});
+		});
+	}
 }
 
 function vezAdversario(){
@@ -666,16 +694,16 @@ function selJogo(idRound){
 	$("#loading").fadeIn("fast");
 
 	$.getJSON( apiURL+"getRound.php", {id_user: userLogado.id, id: idRound}).done(function( data ) {
-		console.log("----- ROUND ------")
+		console.log("----- ROUND ------");
 		console.log(data);
 
 		roundAtual = data;
 
-		$("#circuito_foto1, .circuito_foto1").css('background-image', 'url('+roundAtual.user1.foto+')');
-		$("#circuito_nome1, .circuito_nome1").html(roundAtual.user1.nome);
+		$("#circuito_foto1, .circuito_foto1").css('background-image', 'url('+roundAtual.user1.foto.replace('http://', 'https://')+')');
+		$("#circuito_nome1, .circuito_nome1").html(decodeURI(roundAtual.user1.nome));
 
-		$("#circuito_foto2, .circuito_foto2").css('background-image', 'url('+roundAtual.user2.foto+')');
-		$("#circuito_nome2, .circuito_nome2").html(roundAtual.user2.nome);
+		$("#circuito_foto2, .circuito_foto2").css('background-image', 'url('+roundAtual.user2.foto.replace('http://', 'https://')+')');
+		$("#circuito_nome2, .circuito_nome2").html(decodeURI(roundAtual.user2.nome));
 
 		$("#circuito_placar, .circuito_placar").html(zeroFill(roundAtual.round.placar1) +" x "+ zeroFill(roundAtual.round.placar2));
 
@@ -848,7 +876,7 @@ function loadPerguntasData(_d){
 
 	$.getJSON( apiURL+"getQuestions.php", _d).done(function( data ) {
 
-		console.log("----- PERGUNTAS ------")
+		console.log("----- PERGUNTAS ------");
 		console.log(data);
 
 		perguntasAtual = data;
@@ -1001,21 +1029,23 @@ function addCultz(info, qtd){
 
 var cultzCount = 0;
 function loadCults () {
+	if (userLogado)
+	{
+		$.getJSON( apiURL+"getCultz.php", {id_user: userLogado.id} ).done(function( data ) {
 
-	$.getJSON( apiURL+"getCultz.php", {id_user: userLogado.id} ).done(function( data ) {
+			if(data.result == true){
+				console.log("------- getCultz --------");
+				cultzCount = data.qtd;
+				$("#cultzCount").html(data.qtd);
+			} else {
+				alerta(data.error);
+			}
 
-		if(data.result == true){
-			console.log("------- getCultz --------");
-			cultzCount = data.qtd;
-			$("#cultzCount").html(data.qtd);
-		} else {
-			alerta(data.error);
-		}
-
-	}).fail(function( jqxhr, textStatus, error ) {
-		var err = textStatus + ", " + error;
-		console.log( "Request Failed: " + err );
-	});
+		}).fail(function( jqxhr, textStatus, error ) {
+			var err = textStatus + ", " + error;
+			console.log( "Request Failed: " + err );
+		});
+	}
 }
 
 
@@ -1078,7 +1108,7 @@ function loadEstabelecimentos(){
 		html += '<div class="seta"><img src="images/seta.png" height="40" width="25" /></div>';
 		html += '<div class="foto"></div>';
 		html += '<div class="info">';
-		html += '<h2>'+d.nome+'</h2>';
+		html += '<h2>'+decodeURI(d.nome)+'</h2>';
 		html += '<p class="endereco">'+d.endereco+'</p>';
 		html += '<p class="premiacao">'+d.desc_pontos+'</p>';
 		html += '</div>';
@@ -1355,8 +1385,6 @@ function updateVidas(valor){
 	}
 }
 
-
-
 function openMap(dest){	
 
 	var platform = device.platform.toLowerCase();
@@ -1368,4 +1396,8 @@ function openMap(dest){
 		window.open('geo://0,0?q='+dest, '_system');
 	}
 
+}
+
+function decodeURI(str) {
+   return decodeURIComponent((str+'').replace(/\+/g, '%20'));
 }
